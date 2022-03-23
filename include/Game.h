@@ -11,17 +11,19 @@
 
 class Game {
 private:
-    int MAP_HEIGHT = 10;
-    int MAP_WIDTH = 10;
+    int MAP_HEIGHT;
+    int MAP_WIDTH;
+    vector<vector<int>> map;
 
-    vector<vector<int>> map(int MAP_HEIGHT, vector<int> (MAP_WIDTH, 0));
 
 
 //    string state;
 //    vector<Player*> players;
 //    vector<Enemy*> enemies;
 public:
-    void Draw();
+    Game();
+    vector<vector<int>> setMap();
+    void draw();
 };
 
 

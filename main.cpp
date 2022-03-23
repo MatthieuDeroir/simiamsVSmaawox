@@ -13,7 +13,7 @@
 int main() {
     cout << "Bienvenue sur Maawox versus Simsim : le retour du Roi de la coline d'à côté de la montagne verte" << endl;
 
-    Game *game = new Game();
+    Game* game = new Game();
 
     Player* playerG = new Player("Guigz", 200, 12, 20, 100, '|', 0);
     Player* playerM = new Player("Nirma", 200, 12, 20, 100, '!', 0);
@@ -28,7 +28,8 @@ int main() {
     enemyS->toString();
     enemyM->toString();
 
-    game->Draw();
+    game->setMap();
+    game->draw();
     return 0;
 }
 
