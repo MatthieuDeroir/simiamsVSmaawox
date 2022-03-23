@@ -2,69 +2,42 @@
 // Created by Matthieu Deroir on 23/03/2022.
 //
 
-#include "../include/header.h"
-
-//
-// Created by Matthieu Deroir on 23/03/2022.
-//
-
-#include "../include/header.h"
-class Player {
-private:
-    string name;
-    char sprite;
-    int hp;
-    int att;
-    int def;
-    int money;
-
-public:
-    Player(string name, int hp, int att, int def, int money, char sprite){
-        this->name = name;
-        this->hp = hp;
-        this->att = att;
-        this->def = def;
-        this->money = money;
-        this->sprite = sprite;
-    }
+#include "../include/Enemy.h"
 
 
-    // Getter & Setter
-    string getName(){
-        return this->name;
-    }
-    void setName(string name){
-        this->name = name;
-    }
+Enemy::Enemy(char sprite) {
+    this->hp = 10;
+    this->att = 10;
+    this->sprite = sprite;
+}
 
-    int getHp(){
-        return this->hp;
-    }
-    void setHp(int hp){
-        this->hp = hp;
-    }
+// Getter & Setter
+int Enemy::getHp() {
+    return this->hp;
+}
 
-    int getAtt(){
-        return this->att;
-    }
-    void setAtt(int att){
-        this->att = att;
-    }
+void Enemy::setHp(int hp) {
+    this->hp = hp;
+}
 
-    int getDef(){
-        return this->def;
-    }
-    void setDef(int def){
-        this->def = def;
-    }
+int Enemy::getAtt() {
+    return this->att;
+}
 
-    int getMoney(){
-        return this->money;
-    }
-    void setMoney(int att){
-        this->money = money;
-    }
-    // Methods
+void Enemy::setAtt(int att) {
+    this->att = att;
+}
 
-};
+char Enemy::getSprite() {
+    return this->sprite;
+}
+
+char Enemy::setSprite(char sprite) {
+    this->sprite = sprite;
+}
+
+// Methods
+void Enemy::toString() {
+    cout << "HP: " << this->hp << "; ATT: " << this->att << "// SPRITE: " << this->sprite << endl;
+}
 

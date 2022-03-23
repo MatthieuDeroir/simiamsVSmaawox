@@ -1,3 +1,6 @@
 # ninja log v5
-0	1801	1648027993596478196	CMakeFiles/simiamsVSmaawox.dir/main.cpp.o	16a95e36754d4284
-1804	2034	1648027993824450320	simiamsVSmaawox	4b7fbfaccb30630f
+2090	2287	1648035687711957611	simiamsVSmaawox	d6d8aa53e11dae8f
+3	2063	1648035687480122057	CMakeFiles/simiamsVSmaawox.dir/src/Enemy.cpp.o	439cb02b0a6d25b2
+2	2062	1648035687477750975	CMakeFiles/simiamsVSmaawox.dir/main.cpp.o	16a95e36754d4284
+3	2090	1648035687512700077	CMakeFiles/simiamsVSmaawox.dir/src/Player.cpp.o	4be07aa66e14f47e
+0	355	1648035938993478091	build.ninja	c9d01ab7fb3fd6d6
