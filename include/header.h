@@ -5,4 +5,12 @@
 #ifndef SIMIAMSVSMAAWOX_HEADER_H
 #define SIMIAMSVSMAAWOX_HEADER_H
 
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+
+
+
 #endif //SIMIAMSVSMAAWOX_HEADER_H
