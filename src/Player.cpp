@@ -3,12 +3,6 @@
 //
 
 #include "../include/header.h"
-
-//
-// Created by Matthieu Deroir on 23/03/2022.
-//
-
-#include "../include/header.h"
 class Player {
 private:
     string name;
@@ -64,7 +58,20 @@ public:
     void setMoney(int att){
         this->money = money;
     }
+
+    char getSprite(){
+        return this->sprite;
+    }
+    void setSprite(char sprite){
+        this->sprite = sprite;
+    }
+
+
+
+
+
     // Methods
 
-};
 
+
+};
