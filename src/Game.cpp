@@ -11,14 +11,24 @@ Game::Game(){
 
 vector<vector<int>> Game::setMap(){
     vector<vector<int>> map(this->MAP_HEIGHT, vector<int> (this->MAP_WIDTH, 0));
-    this->map = map;
+    return this->map = map;
 }
 
-void Game::draw(){
-    cout << this->map.size() << endl;
+void Game::init(){
 
-    for (int i = 0; i < this->map.size(); i++){
-        cout << "yo" << endl;
+}
+
+void Game::update(){
+
+}
+
+
+void Game::draw(){
+    for (int i = 0; i < this->map.size(); i++) {
+        for (int j = 0; j < this->map[i].size(); j++){
+            cout << map[i][j] << " ";
+    }
+        cout << endl;
     }
 
 }

@@ -22,8 +22,14 @@ private:
 //    vector<Enemy*> enemies;
 public:
     Game();
+
     vector<vector<int>> setMap();
+
     void draw();
+
+    void init();
+
+    void update();
 };
 
 

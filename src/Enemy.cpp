@@ -46,7 +46,7 @@ int Enemy::setX(int x) {
 }
 
 int Enemy::getY() {
-    return this->x;
+    return this->y;
 }
 int Enemy::setY(int y) {
     this->y = y;
