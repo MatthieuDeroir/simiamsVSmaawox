@@ -5,10 +5,12 @@
 #include "../include/Enemy.h"
 
 
-Enemy::Enemy(char sprite) {
+Enemy::Enemy(char sprite, int x, int y) {
     this->hp = 10;
     this->att = 10;
     this->sprite = sprite;
+    this->x = x;
+    this->y = y;
 }
 
 // Getter & Setter
@@ -34,6 +36,20 @@ char Enemy::getSprite() {
 
 char Enemy::setSprite(char sprite) {
     this->sprite = sprite;
+}
+
+int Enemy::getX() {
+    return this->x;
+}
+int Enemy::setX(int x) {
+    this->x = x;
+}
+
+int Enemy::getY() {
+    return this->x;
+}
+int Enemy::setY(int y) {
+    this->y = y;
 }
 
 // Methods

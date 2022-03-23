@@ -143,12 +143,12 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/Gqme.cpp",
+			"path" : "src/Game.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "src/Gqme.h",
+			"path" : "include/Game.h",
 			"sourceGroupIndex" : 1
 		}
 	],

@@ -1,6 +1,12 @@
 # ninja log v5
-2090	2287	1648035687711957611	simiamsVSmaawox	d6d8aa53e11dae8f
-3	2063	1648035687480122057	CMakeFiles/simiamsVSmaawox.dir/src/Enemy.cpp.o	439cb02b0a6d25b2
-2	2062	1648035687477750975	CMakeFiles/simiamsVSmaawox.dir/main.cpp.o	16a95e36754d4284
+0	355	1648037476238681590	build.ninja	c9d01ab7fb3fd6d6
 3	2090	1648035687512700077	CMakeFiles/simiamsVSmaawox.dir/src/Player.cpp.o	4be07aa66e14f47e
-0	355	1648035938993478091	build.ninja	c9d01ab7fb3fd6d6
+2	2062	1648035687477750975	CMakeFiles/simiamsVSmaawox.dir/main.cpp.o	16a95e36754d4284
+3	2063	1648035687480122057	CMakeFiles/simiamsVSmaawox.dir/src/Enemy.cpp.o	439cb02b0a6d25b2
+2090	2287	1648035687711957611	simiamsVSmaawox	d6d8aa53e11dae8f
+5	412	1648037476238681590	build.ninja	c9d01ab7fb3fd6d6
+11	7408	1648037483708532474	CMakeFiles/simiamsVSmaawox.dir/src/Game.cpp.o	a03d59ae982087d7
+6	7785	1648037484082991706	CMakeFiles/simiamsVSmaawox.dir/main.cpp.o	16a95e36754d4284
+15	2886	1648037519325777116	CMakeFiles/simiamsVSmaawox.dir/src/Enemy.cpp.o	439cb02b0a6d25b2
+13	2926	1648037519368250774	CMakeFiles/simiamsVSmaawox.dir/src/Player.cpp.o	4be07aa66e14f47e
+2926	3228	1648037519678459905	simiamsVSmaawox	7fd4b7f7ad3f819a
