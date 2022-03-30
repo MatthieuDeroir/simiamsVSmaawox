@@ -4,6 +4,7 @@
 
 #include "../include/Enemy.h"
 
+// TODO: Obsolete class (transition toward level selector)
 
 Enemy::Enemy(char sprite, int x, int y) {
     this->hp = 10;
@@ -34,21 +35,21 @@ char Enemy::getSprite() {
     return this->sprite;
 }
 
-char Enemy::setSprite(char sprite) {
+void Enemy::setSprite(char sprite) {
     this->sprite = sprite;
 }
 
 int Enemy::getX() {
     return this->x;
 }
-int Enemy::setX(int x) {
+void Enemy::setX(int x) {
     this->x = x;
 }
 
 int Enemy::getY() {
     return this->y;
 }
-int Enemy::setY(int y) {
+void Enemy::setY(int y) {
     this->y = y;
 }
 

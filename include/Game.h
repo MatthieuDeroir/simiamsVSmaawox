@@ -13,23 +13,40 @@ class Game {
 private:
     int MAP_HEIGHT;
     int MAP_WIDTH;
+    int round;
     vector<vector<int>> map;
-
 
 
 //    string state;
 //    vector<Player*> players;
 //    vector<Enemy*> enemies;
 public:
-    Game();
+    Game(int w, int h);
 
-    vector<vector<int>> setMap();
-
+    //main game loop functionalities
     void draw();
 
     void init();
 
     void update();
+
+    //support func
+    int dmg_to_player(vector<vector<int>> map);
+
+    vector<vector<int>> push_row(vector<vector<int>> vec);
+
+    vector<vector<int>> spawner(vector<vector<int>> vec, int round);
+
+    //game spec
+    void setMap(vector<vector<int>> map);
+
+    vector<vector<int>> getMap();
+
+    int getRound();
+
+    void setRound(int round);
+
+
 };
 
 

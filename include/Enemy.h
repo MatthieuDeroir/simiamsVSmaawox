@@ -28,13 +28,13 @@ public:
     void setAtt(int att);
 
     char getSprite();
-    char setSprite(char sprite);
+    void setSprite(char sprite);
 
     int getX();
-    int setX(int x);
+    void setX(int x);
 
     int getY();
-    int setY(int y);
+    void setY(int y);
     //toString
     void toString();
     // Methods
