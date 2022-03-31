@@ -5,7 +5,7 @@
 #include "../include/Player.h"
 
 
-Player::Player(string name, int hp = 100, int att = 1, int def = 1, int money = 0, char sprite = '.', int score = 0) {
+Player::Player(string name, int hp = 100, int money = 0, int score = 0) {
     this->name = name;
     this->hp = hp;
     this->money = money;

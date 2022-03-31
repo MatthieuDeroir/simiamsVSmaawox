@@ -8,9 +8,11 @@
 #include "include/Player.h"
 #include "include/Enemy.h"
 #include "include/Game.h"
+#include "include/Spell.h"
 
 
 int main() {
+
 
     srand(time(NULL));
 
@@ -21,12 +23,17 @@ int main() {
 
     Game* game = new Game(9, 15);
 
-    Player* playerG = new Player("Guigz", 200, 12, 20, 100, '|', 0);
-    Player* playerM = new Player("Nirma", 200, 12, 20, 100, '!', 0);
+
+    vector<vector<int> > sort1(10, vector<int>(10, 10));
+    Spell* spell = new Spell("MAGIE DE FEU", 100, 5, sort1);
+    spell->getRange();
+
+//    Player* playerG = new Player("Guigz", 200, 12, 20, 100, '|', 0);
+//    Player* playerM = new Player("Nirma", 200, 12, 20, 100, '!', 0);
 
 
-    Enemy* enemyS = new Enemy(48, 0, 2);
-    Enemy* enemyM = new Enemy('&', 0, 4);
+//    Enemy* enemyS = new Enemy(48, 0, 2);
+//    Enemy* enemyM = new Enemy('&', 0, 4);
 
 
 //    playerG->toString();
@@ -44,13 +51,11 @@ int main() {
         system("clear");
         //system("pause");
         //system("cls");
-
-
         game->update();
         game->draw();
-
-
     }
+
+
     return 0;
 }
 

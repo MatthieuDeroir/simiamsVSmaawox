@@ -9,37 +9,39 @@
 // (difficulty, terrain type, enemy type etc...)
 // this would allow us to create a level selector, or even a campaign;
 
-Game::Game(int w, int h){
+Game::Game(int w, int h) {
     this->MAP_WIDTH = w;
     this->MAP_HEIGHT = h;
-    this->MAX_ENEMY = 9;
+    this->MAX_ENEMY = 61;
+
+
 }
 
 //main func
 
-void Game::init(){
-    vector<vector<int> > map(this->MAP_HEIGHT, vector<int> (this->MAP_WIDTH, 0));
+void Game::init() {
+    vector<vector<int> > map(this->MAP_HEIGHT, vector<int>(this->MAP_WIDTH, 0));
     setMap(map);
 }
 
-void Game::update(){
-    vector<int> tmp_map = getMap()[0];
+void Game::update() {
+    vector<int> tmp_map = getMap()[getMap().size() - 1];
     count_line(tmp_map);
     setMap(push_row(getMap()));
-    setRound((getRound())+1);
+    setRound((getRound()) + 1);
+    //spawn les enemies
     setMap(spawner(getMap(), getRound()));
 }
 
-void Game::draw(){
+void Game::draw() {
 
     displayHUI();
     system("tput setaf 6");
-    for (int i = 0; i < this->map.size() - 1; i++) {
-            cout << "    ";
-        for (int j = 0; j < this->map[i].size() - 1; j++){
-            cout << map[i][j] << " ";
-    }
-
+    for (int i = 0; i < this->map.size(); i++) {
+        cout << "      ";
+        for (int j = 0; j < this->map[i].size(); j++) {
+            cout << enemy_dict[map[i][j]] << " ";
+        }
         cout << endl;
     }
     displayFUI();
@@ -66,28 +68,21 @@ vector<vector<int> > Game::push_row(vector<vector<int> > vec) {
     while (i >= 0) {
         while (j >= 0) {
             vec[i + 1][j] = vec[i][j];
+            vec[i][j] = 0;
             j--;
         }
         j = vec[i].size() - 1;
         i--;
     }
-    i = 0;
-    j = 0;
-    while (j < this->MAP_WIDTH - 1){
-        vec[i][j] = 0;
-        j++;
-    }
     return vec;
 }
 
 vector<vector<int> > Game::spawner(vector<vector<int> > vec, int round) {
-    int en_nb = rand()% (1 + round/10); // growing ennemy nb mecanic in functions of round nb =
-
-    if (en_nb > MAP_WIDTH * 8)
-        en_nb = MAP_WIDTH * 8;
+    int en_nb = rand() % 1 + round; // growing ennemy nb mecanic in functions of round nb =
+    if (en_nb > MAP_WIDTH * 60)
+        en_nb = MAP_WIDTH * 60;
     while (en_nb) {
-        int rnb = rand() % this->MAP_WIDTH - 1;
-
+        int rnb = rand() % this->MAP_WIDTH;
         if (vec[0][rnb] < this->MAX_ENEMY) {
             vec[0][rnb]++;
             en_nb--;
@@ -101,11 +96,11 @@ vector<vector<int> > Game::spawner(vector<vector<int> > vec, int round) {
 
 //getters and setters
 
-vector<vector<int> > Game::getMap(){
+vector<vector<int> > Game::getMap() {
     return this->map;
 }
 
-void Game::setMap(vector<vector<int> > map){
+void Game::setMap(vector<vector<int> > map) {
     this->map = map;
 }
 
@@ -113,24 +108,67 @@ int Game::getRound() {
     return this->round;
 }
 
-void Game::setRound(int round){
+void Game::setRound(int round) {
     this->round = round;
 }
 
 //Game UI
-
-void Game::displayHUI(){
+void Game::displayHUI() {
     system("tput setaf 5");
-    cout << "##### ROUND N. : " << getRound() << " #####" << endl;
-    system("tput setaf 2");
-    cout << "HP : 30" << endl;
-    system("tput setaf 3");
-    cout << "MONEY : 0" << endl;
+    cout << "######## ROUND N. : " << getRound() << " ########" << endl;
 }
 
-void Game::displayFUI(){
+void Game::displayFUI() {
+    system("tput setaf 5");
+    cout << "      " << "  " << "@" << "     " << "#" << "     " << "%" << endl;
 
+    system("tput setaf 2");
+    cout << "##############################" << endl;
+    cout << "#                            #" << endl;
+    cout << "#      HitPoint : 30/30      #" << endl;
+    cout << "#                            #" << endl;
 
+    system("tput setaf 4");
+    cout << "#      Manawox : 0/100       #" << endl;
+    cout << "#                            #" << endl;
+
+    system("tput setaf 3");
+    cout << "#      $imiam$ : 0           #" << endl;
+    cout << "#                            #" << endl;
+    cout << "##############################" << endl;
+
+}
+
+// vector comparison
+
+void Game::drawRange(vector<vector<int> > map, vector<vector<int> > range) {
+    for (int i = 0; i < range.size(); i++) {
+        cout << "      ";
+        for (int j = 0; j < range[i].size(); j++) {
+            if (range[i][j] > 0) {
+                system("tput setaf 6");
+                cout << map[i][j] << " ";
+            } else {
+                system("tput setaf 4");
+                cout << map[i][j] << " ";
+            }
+        }
+        cout << endl;
+    }
+}
+
+vector<vector<int> > Game::applyDamage(vector<vector<int> > map, vector<vector<int> > range) {
+    for (int i = 0; i < range.size(); i++) {
+        cout << "      ";
+        for (int j = 0; j < range[i].size(); j++) {
+            if (range[i][j] > 0)
+                map[i][j] -= range[i][j];
+            if (map[i][j] < 0)
+                map[i][j] = 0;
+        }
+        cout << endl;
+    }
+    return map;
 }
 
 

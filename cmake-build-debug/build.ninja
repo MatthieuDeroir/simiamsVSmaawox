@@ -108,6 +108,12 @@ build CMakeFiles/simiamsVSmaawox.dir/src/Champion.cpp.o: CXX_COMPILER__simiamsVS
   OBJECT_DIR = CMakeFiles/simiamsVSmaawox.dir
   OBJECT_FILE_DIR = CMakeFiles/simiamsVSmaawox.dir/src
 
+build CMakeFiles/simiamsVSmaawox.dir/src/Spell.cpp.o: CXX_COMPILER__simiamsVSmaawox_Debug /Users/mderoir/Desktop/EPSI/B1/Cplusplus/simiamsVSmaawox/src/Spell.cpp || cmake_object_order_depends_target_simiamsVSmaawox
+  DEP_FILE = CMakeFiles/simiamsVSmaawox.dir/src/Spell.cpp.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -std=gnu++14
+  OBJECT_DIR = CMakeFiles/simiamsVSmaawox.dir
+  OBJECT_FILE_DIR = CMakeFiles/simiamsVSmaawox.dir/src
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target simiamsVSmaawox
@@ -116,7 +122,7 @@ build CMakeFiles/simiamsVSmaawox.dir/src/Champion.cpp.o: CXX_COMPILER__simiamsVS
 #############################################
 # Link the executable simiamsVSmaawox
 
-build simiamsVSmaawox: CXX_EXECUTABLE_LINKER__simiamsVSmaawox_Debug CMakeFiles/simiamsVSmaawox.dir/main.cpp.o CMakeFiles/simiamsVSmaawox.dir/src/Player.cpp.o CMakeFiles/simiamsVSmaawox.dir/src/Enemy.cpp.o CMakeFiles/simiamsVSmaawox.dir/src/Game.cpp.o CMakeFiles/simiamsVSmaawox.dir/src/utils.cpp.o CMakeFiles/simiamsVSmaawox.dir/src/Champion.cpp.o
+build simiamsVSmaawox: CXX_EXECUTABLE_LINKER__simiamsVSmaawox_Debug CMakeFiles/simiamsVSmaawox.dir/main.cpp.o CMakeFiles/simiamsVSmaawox.dir/src/Player.cpp.o CMakeFiles/simiamsVSmaawox.dir/src/Enemy.cpp.o CMakeFiles/simiamsVSmaawox.dir/src/Game.cpp.o CMakeFiles/simiamsVSmaawox.dir/src/utils.cpp.o CMakeFiles/simiamsVSmaawox.dir/src/Champion.cpp.o CMakeFiles/simiamsVSmaawox.dir/src/Spell.cpp.o
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk
   OBJECT_DIR = CMakeFiles/simiamsVSmaawox.dir
   POST_BUILD = :

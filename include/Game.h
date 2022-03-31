@@ -17,6 +17,18 @@ private:
     int MAX_ENEMY;
 
     int round;
+
+    char enemy_dict[62] = {
+            '0','1','2','3','4','5','6','7','8','9',
+
+            'a','b','c','d','e','f','g','h','i','j',
+            'k','l','m','n','o','p','q','r','s','t',
+            'u','v','w','x','y','z',
+
+            'A','B','C','D','E','F','G','H','I','J',
+            'K','L','M','N','O','P','Q','R','S','T',
+            'U','V','W','X','Y','Z'
+    };
     vector<vector<int> > map;
 
 
@@ -34,7 +46,7 @@ public:
     void update();
 
     //support func
-    int count_line(vector<int>  map);
+    int count_line(vector<int> map);
 
     vector<vector<int> > push_row(vector<vector<int> > vec);
 
@@ -51,8 +63,13 @@ public:
 
     //game UI
     void displayHUI();
+
     void displayFUI();
 
+    //vector comparison
+    void drawRange(vector<vector<int> > map, vector<vector<int> > range);
+
+    vector<vector<int> > applyDamage(vector<vector<int> > map, vector<vector<int> > range);
 
 };
 
