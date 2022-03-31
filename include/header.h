@@ -11,17 +11,26 @@
 #include <cstdlib>
 #include <stdlib.h>
 #include <ctime>
-
+#include <typeinfo>
 
 using namespace std;
 
 void print(string str);
 
-int dmg_to_player(vector<vector<int>> map);
-
-vector<vector<int>> push_row(vector<vector<int>> vec);
-
-vector<vector<int>> spawner(vector<vector<int>> vec, int round);
+struct uii{
+    int hp;
+};
 
 
 #endif //SIMIAMSVSMAAWOX_HEADER_H
+
+/*
+ * 0 = black
+ * 1 = red
+ * 2 = green
+ * 3 = yellow
+ * 4 = dark blue
+ * 5 = pink
+ * 6 = light blue
+ * 7 = white
+ */

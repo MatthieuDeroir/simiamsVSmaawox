@@ -6,21 +6,20 @@
 #define SIMIAMSVSMAAWOX_PLAYER_H
 
 #include "header.h"
+#include "Champion.h"
 
 
 class Player {
 private:
     string name;
-    char sprite;
     int hp;
-    int att;
-    int def;
     int money;
     int score;
+    vector<Champion> champ;
 
 public:
     //Class Constructor
-    Player(string name, int hp, int att, int def, int money, char sprite, int score);
+    Player(string name, int hp, int money, int score);
 
     // Getter & Setter
     string getName();
@@ -29,20 +28,12 @@ public:
     int getHp();
     void setHp(int hp);
 
-    int getAtt();
-    void setAtt(int att);
-
-    int getDef();
-    void setDef(int def);
-
     int getMoney();
     void setMoney(int att);
 
     int getScore();
     void setScore(int score);
 
-    char getSprite();
-    void setSprite(char sprite);
     //toString
     void toString();
     // Methods

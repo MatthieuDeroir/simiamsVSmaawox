@@ -11,13 +11,15 @@
 
 
 int main() {
+
     srand(time(NULL));
 
     string usr_input = " ";
+    system("clear");
 
     cout << "Bienvenue sur Maawox versus Simsim : le retour du Roi de la coline d'à côté de la montagne verte" << endl;
 
-    Game* game = new Game(20, 15);
+    Game* game = new Game(9, 15);
 
     Player* playerG = new Player("Guigz", 200, 12, 20, 100, '|', 0);
     Player* playerM = new Player("Nirma", 200, 12, 20, 100, '!', 0);
@@ -33,11 +35,12 @@ int main() {
 //    enemyM->toString();
 
         game->init();
-    while (usr_input != "exit"){
+
+    while (usr_input != "q!"){
 
         //IMPORTANT : pour utilisation sous windows
         // il faut commenter les deux lignes system ci-dessous et décommenter les suivantes
-        system("read");
+        getline(cin, usr_input);
         system("clear");
         //system("pause");
         //system("cls");
@@ -45,6 +48,8 @@ int main() {
 
         game->update();
         game->draw();
+
+
     }
     return 0;
 }
