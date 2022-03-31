@@ -37,12 +37,6 @@ void Spell::setManaCost(int manaCost){
 
 vector<vector<int> > Spell::getRange(){
     return this->range;
-
-    mana_cost
-    get + nom var = fonction
-            fonction camelCase
-
-    getMana_cost // getManaCost ??
 }
 
 void Spell::setRange(vector<vector<int> > range){

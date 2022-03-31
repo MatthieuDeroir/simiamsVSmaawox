@@ -14,12 +14,13 @@ private:
     string name;
     int hp;
     int money;
+    int mana;
     int score;
     vector<Champion> champ;
 
 public:
     //Class Constructor
-    Player(string name, int hp, int money, int score);
+    Player(string name, int hp, int money, int mana, int score);
 
     // Getter & Setter
     string getName();
@@ -29,7 +30,10 @@ public:
     void setHp(int hp);
 
     int getMoney();
-    void setMoney(int att);
+    void setMoney(int money);
+
+    int getMana();
+    void setMana(int mana);
 
     int getScore();
     void setScore(int score);
@@ -37,6 +41,10 @@ public:
     //toString
     void toString();
     // Methods
+
+    void takeDamage(int damage);
+    void buy(int price);
+    void spendMana(int mana);
 
 };
 

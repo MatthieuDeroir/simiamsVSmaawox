@@ -24,8 +24,24 @@ int main() {
     Game* game = new Game(9, 15);
 
 
-    vector<vector<int> > sort1(10, vector<int>(10, 10));
-    Spell* spell = new Spell("MAGIE DE FEU", 100, 5, sort1);
+    vector<vector<int> > range = {
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 1, 1, 1, 0, 0, 0 },
+            { 0, 0, 0, 1, 1, 1, 0, 0, 0 },
+            { 0, 0, 0, 1, 1, 1, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+    };
+    Spell* spell = new Spell("MAGIE DE FEU", 100, 5, range);
     spell->getRange();
 
 //    Player* playerG = new Player("Guigz", 200, 12, 20, 100, '|', 0);
@@ -47,11 +63,12 @@ int main() {
 
         //IMPORTANT : pour utilisation sous windows
         // il faut commenter les deux lignes system ci-dessous et décommenter les suivantes
+
         getline(cin, usr_input);
         system("clear");
         //system("pause");
         //system("cls");
-        game->update();
+        game->update(range);
         game->draw();
     }
 

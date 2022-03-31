@@ -43,7 +43,7 @@ public:
 
     void init();
 
-    void update();
+    void update(vector<vector<int> > range);
 
     //support func
     int count_line(vector<int> map);
@@ -70,6 +70,9 @@ public:
     void drawRange(vector<vector<int> > map, vector<vector<int> > range);
 
     vector<vector<int> > applyDamage(vector<vector<int> > map, vector<vector<int> > range);
+
+    //Player implementation
+    void playerTurn(vector<vector<int> > range);
 
 };
 

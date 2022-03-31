@@ -9,6 +9,8 @@
 // (difficulty, terrain type, enemy type etc...)
 // this would allow us to create a level selector, or even a campaign;
 
+
+
 Game::Game(int w, int h) {
     this->MAP_WIDTH = w;
     this->MAP_HEIGHT = h;
@@ -24,13 +26,14 @@ void Game::init() {
     setMap(map);
 }
 
-void Game::update() {
+void Game::update(vector<vector<int> > range) {
     vector<int> tmp_map = getMap()[getMap().size() - 1];
     count_line(tmp_map);
     setMap(push_row(getMap()));
     setRound((getRound()) + 1);
     //spawn les enemies
     setMap(spawner(getMap(), getRound()));
+//    playerTurn(range); //TODO PLAYER TURN
 }
 
 void Game::draw() {
@@ -145,11 +148,11 @@ void Game::drawRange(vector<vector<int> > map, vector<vector<int> > range) {
     for (int i = 0; i < range.size(); i++) {
         cout << "      ";
         for (int j = 0; j < range[i].size(); j++) {
-            if (range[i][j] > 0) {
-                system("tput setaf 6");
+            if (range[i][j] == 1) {
+                system("tput setab 1");
                 cout << map[i][j] << " ";
-            } else {
-                system("tput setaf 4");
+                system("tput setab 0");
+            } else if (range[i][j] == 0) {
                 cout << map[i][j] << " ";
             }
         }
@@ -169,6 +172,25 @@ vector<vector<int> > Game::applyDamage(vector<vector<int> > map, vector<vector<i
         cout << endl;
     }
     return map;
+}
+
+//Player implementation
+
+void Game::playerTurn(vector<vector<int> > range)
+{
+    string usr_input;
+    cout << "1 pour visualiser" << endl;
+    getline(cin, usr_input);
+    if (usr_input == "1"){
+        system("clear");
+        this->drawRange(this->getMap(), range);
+        cout << "1 pour lancer" << endl;
+        getline(cin, usr_input);
+        if (usr_input == "1") {
+            this->applyDamage(this->getMap(), range);
+            this->draw();
+        }
+    }
 }
 
 
