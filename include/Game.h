@@ -67,7 +67,7 @@ public:
     void displayFUI();
 
     //vector comparison
-    void drawRange(vector<vector<int> > map, vector<vector<int> > range);
+    void drawRange(vector<vector<int> > range);
 
     vector<vector<int> > applyDamage(vector<vector<int> > map, vector<vector<int> > range);
 

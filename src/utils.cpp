@@ -32,7 +32,7 @@ void color(char p, string color) {
             if (color == "black")
                 system("tput setaf 0");
             else if (color == "red")
-                system("tput setaf 1");
+                system("tput setaf 1 10 10");
             else if (color == "green")
                 system("tput setaf 2");
             else if (color == "yellow")
@@ -47,21 +47,21 @@ void color(char p, string color) {
                 system("tput setaf 7");
         } else if (p == 'b') {
             if (color == "black")
-                system("tput setaf 0");
+                system("tput setab 0");
             else if (color == "red")
-                system("tput setaf 1");
+                system("tput setab 1");
             else if (color == "green")
-                system("tput setaf 2");
+                system("tput setab 2");
             else if (color == "yellow")
-                system("tput setaf 3");
+                system("tput setab 3");
             else if (color == "dblue")
-                system("tput setaf 4");
+                system("tput setab 4");
             else if (color == "pink")
-                system("tput setaf 5");
+                system("tput setab 5");
             else if (color == "lblue")
-                system("tput setaf 9");
+                system("tput setab 9");
             else if (color == "white")
-                system("tput setaf 7");
+                system("tput setab 7");
         } else if (os == 'w') {
             //TODO color for cmd
         } else {

@@ -57,20 +57,20 @@ int main() {
 //    enemyS->toString();
 //    enemyM->toString();
 
-        game->init();
+//        game->init();
+//
+//    while (usr_input != "q!"){
+//
+//        //IMPORTANT : pour utilisation sous windows
+//        // il faut commenter les deux lignes system ci-dessous et décommenter les suivantes
+//
+//        getline(cin, usr_input);
+//        //system("pause");
+//        //system("cls");
+//        game->update(range);
+//    }
 
-    while (usr_input != "q!"){
 
-        //IMPORTANT : pour utilisation sous windows
-        // il faut commenter les deux lignes system ci-dessous et décommenter les suivantes
-
-        getline(cin, usr_input);
-        system("clear");
-        //system("pause");
-        //system("cls");
-        game->update(range);
-        game->draw();
-    }
 
 
     return 0;

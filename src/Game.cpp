@@ -33,18 +33,20 @@ void Game::update(vector<vector<int> > range) {
     setRound((getRound()) + 1);
     //spawn les enemies
     setMap(spawner(getMap(), getRound()));
-//    playerTurn(range); //TODO PLAYER TURN
+    draw();
+    playerTurn(range); //TODO PLAYER TURN
 }
 
 void Game::draw() {
-
+    system("clear");
     displayHUI();
     color('f', "lblue");
     for (int i = 0; i < this->map.size(); i++) {
         cout << "      ";
         for (int j = 0; j < this->map[i].size(); j++) {
-            cout << enemy_dict[map[i][j]] << " ";
+            cout << enemy_dict[map[i][j]] << "  ";
         }
+        cout << endl;
         cout << endl;
     }
     displayFUI();
@@ -147,22 +149,28 @@ void Game::displayFUI() {
 
 // vector comparison
 
-void Game::drawRange(vector<vector<int> > map, vector<vector<int> > range) {
+void Game::drawRange(vector<vector<int> > range) {
+    system("clear");
+    displayHUI();
+    color('f', "white");
+
     for (int i = 0; i < range.size(); i++) {
         cout << "      ";
         for (int j = 0; j < range[i].size(); j++) {
-            if (range[i][j] == 1) {
+            if (range[i][j] > 0) {
                 color('b', "red");
-
-                cout << map[i][j] << " ";
+                cout << this->map[i][j] << " ";
                 color('b', "black");
-
             } else if (range[i][j] == 0) {
-                cout << map[i][j] << " ";
+                color('b', "black");
+                cout << this->map[i][j] << " ";
+                color('b', "red");
             }
         }
         cout << endl;
     }
+    displayFUI();
+
 }
 
 vector<vector<int> > Game::applyDamage(vector<vector<int> > map, vector<vector<int> > range) {
@@ -188,11 +196,11 @@ void Game::playerTurn(vector<vector<int> > range)
     getline(cin, usr_input);
     if (usr_input == "1"){
         system("clear");
-        this->drawRange(this->getMap(), range);
+        this->drawRange(range);
         cout << "1 pour lancer" << endl;
         getline(cin, usr_input);
         if (usr_input == "1") {
-            this->applyDamage(this->getMap(), range);
+            setMap(this->applyDamage(this->getMap(), range));
             this->draw();
         }
     }
