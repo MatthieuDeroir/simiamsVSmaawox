@@ -14,7 +14,22 @@ private:
     int att;
     vector<Spell*> spells;
 public:
-    Champion();
+    Champion(string name, int att, vector<Spell*> spells);
+
+    //Getter & Setter
+    int getAtt();
+    void setAtt(int att);
+
+    string getName();
+    void setName(string name);
+
+    vector<Spell*> getSpells();
+    void setSpells(vector<Spell*> spells);
+
+    //toString
+    void toString();
+    //Upgrades
+    void upgradeAtt();
 };
 
 #endif //SIMIAMSVSMAAWOX_CHAMPION_H

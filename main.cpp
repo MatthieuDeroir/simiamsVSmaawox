@@ -12,7 +12,6 @@
 #include "include/defines.h"
 
 
-
 int main() {
 
 
@@ -27,15 +26,12 @@ int main() {
 
     Player *player = playerInitialization();
 
-    Game *game = new Game(9, 15, player);
+    Game *game = new Game(9, 9, player);
 
-
-//        game->init();
-//    while (usr_input != "q!"){
-//        //system("pause");
-//        //system("cls");
-//        game->update();
-//    }
+    game->init();
+    while (usr_input != "q!") {
+        game->update();
+    }
     return 0;
 }
 

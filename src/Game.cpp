@@ -15,8 +15,7 @@ Game::Game(int w, int h, Player *player) {
     this->MAP_WIDTH = w;
     this->MAP_HEIGHT = h;
     this->MAX_ENEMY = 61;
-
-
+    this->player = player;
 }
 
 //main func
@@ -97,7 +96,7 @@ vector<vector<int> > Game::push_row(vector<vector<int> > vec) {
 }
 
 vector<vector<int> > Game::spawner(vector<vector<int> > vec, int round) {
-    int en_nb = abs(cos((1 + round))*10);
+    int en_nb = abs(cos((1 + round)) * 10);
 
     cout << en_nb << endl;
 
@@ -151,16 +150,16 @@ void Game::displayHUI() {
 }
 
 void Game::displayFUI() {
-    cout << MAGENTA << "      " << "  " << "@" << "     " << "#" << "     " << "%" << RESET << endl;
+    cout << MAGENTA << "      " << "  " << "M" << "     " << "W" << "     " << "A" << RESET << endl;
 
     cout << "##############################" << endl;
-    cout << "#      " << GREEN << "HitPoint : " << this->player->getHp() << "/" << this->player->getMaxHp() << RESET << "      #"
-          << endl;
+    cout << "#      " << GREEN << "HitPoint : " << this->player->getHp() << "/" << this->player->getMaxHp() << RESET
+         << "      #"
+         << endl;
 
-    cout << "#      " << CYAN << "Manawox : 0/100" << RESET << "       #" << endl;
+    cout << "#      " << CYAN << "Manawox : " << this->player->getMana() << "/" << this->player->getMaxMana()<< RESET << "       #" << endl;
 
-    cout << "#      $imiam$ : 0           #" << endl;
-    cout << "#                            #" << endl;
+    cout << "#      " << YELLOW << "$imiam$ : " << this->player->getMoney() << RESET << "           #" << endl;
     cout << "##############################" << endl;
 
 }
@@ -233,28 +232,95 @@ vector<vector<int> > Game::applyDamage(vector<vector<int> > map, Champion *champ
     return map;
 }
 
+
 //Player implementation
 void Game::playerTurn() {
-/*
- *
- *  vector<vector<int> > tmp;
-    tmp = getMap();
+    string user_choice = "\0";
+    vector<vector<int> > tmp;
+    for (int i = 0; i < this->player->getChampions().size(); ++i) { // Pour chaque champion
+        bool invalid_syntax = true;
+        while (invalid_syntax) {
+            tmp = getMap();
+            cout << "Au tour de " << GREEN << this->player->getChampions()[i]->getName() << endl;
 
-    string usr_input;
-    cout << "1 pour visualiser" << endl;
-    getline(cin, usr_input);
-    if (usr_input == "1") {
-        system("clear");
-        this->drawRange(range);
-        cout << "1 pour lancer" << endl;
-        getline(cin, usr_input);
-        if (usr_input == "1") {
-            setMap(this->applyDamage(this->getMap(), range));
-            this->drawEnemyKilled(tmp);
-            cout << "Appuyez sur une touche pour continuer..." << endl;
-            getline(cin, usr_input);
+            cout << "1 pour Attaquer" << endl;
+            cout << "2 pour visualiser" << endl;
+            cout << "3 pour visualiser" << endl;
+            cout << "4 pour visualiser" << endl;
+            cin >> user_choice;
+
+            if (user_choice == "1") { // Attaque
+
+
+                int spell_choice_back = 5;
+                int spell_choice;
+                bool confirm_spell_choice;
+                system("clear");
+                this->draw();
+                do {
+
+                    for (int j = 0; j <this->player->getChampions()[i]->getSpells().size(); j++){ // Pour tout les sort du champion
+
+                        if (j != spell_choice_back) {
+                            cout << j + 1 << " - " << this->player->getChampions()[i]->getSpells()[j]->getName()
+                                 << endl;
+                        } else {
+                            cout << j + 1 << " - " << this->player->getChampions()[i]->getSpells()[j]->getName()
+                                 << " - Confirmer" << endl;
+                        }
+                    }
+
+
+                    invalid_syntax = true;
+                    while (invalid_syntax) { // Choix sort
+                        if (user_choice == "1" || user_choice == "2" || user_choice == "3" || user_choice == "4") {
+                            cin >> user_choice;
+                            spell_choice = stoi(user_choice) - 1;
+                            invalid_syntax = false;
+                        } else {
+                            cout << "Invalid syntaxe !" << endl;
+                            invalid_syntax = true;
+                        }
+                    }
+
+
+                    if (spell_choice_back != spell_choice) { // Si tu choisi un sort different
+                        system("clear");
+                        this->drawRange(this->player->getChampions()[i]->getSpells()[spell_choice]->getRange()); // Dessine la range
+                        confirm_spell_choice = false;
+                    }else{
+                        confirm_spell_choice = true;
+                    }
+
+                    spell_choice_back = spell_choice;
+
+                } while (!confirm_spell_choice);
+
+                setMap(this->applyDamage(this->getMap(), this->player->getChampions()[i],this->player->getChampions()[i]->getSpells()[spell_choice]->getRange()));
+                this->player->setMana(this->player->getMana() - this->player->getChampions()[i]->getSpells()[spell_choice]->getManaCost());
+                this->drawEnemyKilled(tmp);
+
+
+
+
+            } else if (user_choice == "2") {
+                //Banque
+
+                invalid_syntax = false;
+            } else if (user_choice == "3") {
+
+                invalid_syntax = false;
+            } else if (user_choice == "4") {
+
+                invalid_syntax = false;
+            } else {
+                cout << "Invalid Syntaxe" << endl;
+                invalid_syntax = true;
+            }
         }
     }
+    cout << "Appuyez sur une touche puis sur Enter pour passer au round suivant.." << endl;
+    cin >> user_choice;
 }
 
 

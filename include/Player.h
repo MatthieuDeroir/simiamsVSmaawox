@@ -14,8 +14,11 @@ private:
     string name;
     int max_hp;
     int hp;
+    int def;
     int money;
+    int max_mana;
     int mana;
+    int mana_regen;
     int score;
     vector<Champion*> champs;
 
@@ -33,11 +36,20 @@ public:
     int getMaxHp();
     void setMaxHp(int max_hp);
 
+    int getDef();
+    void setDef(int def);
+
     int getMoney();
     void setMoney(int money);
 
     int getMana();
     void setMana(int mana);
+
+    int getMaxMana();
+    void setMaxMana(int max_mana);
+
+    int getManaRegen();
+    void setManaRegen(int mana);
 
     int getScore();
     void setScore(int score);
@@ -52,6 +64,18 @@ public:
     void takeDamage(int damage);
     void spendMoney(int price);
     void spendMana(int mana);
+
+    //Upgrades
+    void upgradeDef();
+    void upgradeHpMax();
+    void upgradeManaMax();
+    void upgradeManaRegen();
+
+    //Regen
+    void regenHp();
+    void regenMana();
+
+
 
 };
 

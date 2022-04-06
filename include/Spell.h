@@ -34,7 +34,7 @@ public:
     //toString
     void toString();
     //Methods
-    void upgradeSpell(Spell* spell);
+    void upgradeSpell();
 };
 
 
