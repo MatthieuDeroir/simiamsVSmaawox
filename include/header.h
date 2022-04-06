@@ -17,6 +17,8 @@ using namespace std;
 
 void print(string str);
 
+void color(char p, string color);
+
 struct uii{
     int hp;
 };

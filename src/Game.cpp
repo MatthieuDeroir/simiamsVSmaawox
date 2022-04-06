@@ -39,7 +39,7 @@ void Game::update(vector<vector<int> > range) {
 void Game::draw() {
 
     displayHUI();
-    system("tput setaf 6");
+    color('f', "lblue");
     for (int i = 0; i < this->map.size(); i++) {
         cout << "      ";
         for (int j = 0; j < this->map[i].size(); j++) {
@@ -117,25 +117,28 @@ void Game::setRound(int round) {
 
 //Game UI
 void Game::displayHUI() {
-    system("tput setaf 5");
+    color('f', "pink");
+
     cout << "######## ROUND N. : " << getRound() << " ########" << endl;
 }
 
 void Game::displayFUI() {
-    system("tput setaf 5");
+    color('f', "pink");
     cout << "      " << "  " << "@" << "     " << "#" << "     " << "%" << endl;
 
-    system("tput setaf 2");
+    color('f', "green");
     cout << "##############################" << endl;
     cout << "#                            #" << endl;
     cout << "#      HitPoint : 30/30      #" << endl;
     cout << "#                            #" << endl;
 
-    system("tput setaf 4");
+    color('f', "dblue");
+
     cout << "#      Manawox : 0/100       #" << endl;
     cout << "#                            #" << endl;
 
-    system("tput setaf 3");
+    color('f', "yellow");
+
     cout << "#      $imiam$ : 0           #" << endl;
     cout << "#                            #" << endl;
     cout << "##############################" << endl;
@@ -149,9 +152,11 @@ void Game::drawRange(vector<vector<int> > map, vector<vector<int> > range) {
         cout << "      ";
         for (int j = 0; j < range[i].size(); j++) {
             if (range[i][j] == 1) {
-                system("tput setab 1");
+                color('b', "red");
+
                 cout << map[i][j] << " ";
-                system("tput setab 0");
+                color('b', "black");
+
             } else if (range[i][j] == 0) {
                 cout << map[i][j] << " ";
             }
