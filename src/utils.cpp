@@ -6,9 +6,6 @@
 
 //TODO : Implementer les fonctions suivantes dans les classes appropriées
 
-void systemVarInit(){
-    system("Red=$(tput bold ; tput setaf 1)");
-}
 
 void print(string str) {
     cout << str << endl;

@@ -212,12 +212,19 @@ void Game::drawEnemyKilled(vector<vector<int> > prev_map) {
     cout << RESET << "Vous avez touché " << BLUE << e_nb << RESET << " enemi(s) !" << endl;
 }
 
-vector<vector<int> > Game::applyDamage(vector<vector<int> > map, vector<vector<int> > range) {
+vector<vector<int> > Game::applyDamage(vector<vector<int> > map, Champion *champ, vector<vector<int> > range) {
+    int dmg_alea;
     for (int i = 0; i < range.size(); i++) {
-        cout << "      ";
         for (int j = 0; j < range[i].size(); j++) {
-            if (range[i][j] > 0)
-                map[i][j] -= range[i][j];
+            if (range[i][j] > 0 && map[i][j] > 0) {
+                dmg_alea = rand() % (range[i][j] * champ->getAtt());
+                map[i][j] -= dmg_alea;
+                this->player->setMoney(this->player->getMoney() + dmg_alea);
+                if (dmg_alea)
+                    cout << "Attaque réussie en" << GREEN << "[" << i << "," << j << "]" << RESET << " !" << endl;
+                else
+                    cout << "Attaque ratée en" << RED << "[" << i << "," << j << "]" << RESET << " !" << endl;
+            }
             if (map[i][j] < 0)
                 map[i][j] = 0;
         }

@@ -79,7 +79,7 @@ public:
 
     void drawEnemyKilled(vector<vector<int> > prev_map);
 
-    vector<vector<int> > applyDamage(vector<vector<int> > map, vector<vector<int> > range);
+    vector<vector<int> > applyDamage(vector<vector<int> > map, Champion* champ, vector<vector<int> > range);
 
     //Player implementation
     void playerTurn();

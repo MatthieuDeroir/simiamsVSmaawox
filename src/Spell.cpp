@@ -4,7 +4,7 @@
 
 #include "../include/Spell.h"
 
-Spell::Spell(string name, int price, int manaCost, vector<vector<int> > range){
+Spell::Spell(string name, int price, int manaCost, vector<vector<int> > range) {
     this->name = name;
     this->price = price;
     this->manaCost = manaCost;
@@ -12,18 +12,20 @@ Spell::Spell(string name, int price, int manaCost, vector<vector<int> > range){
 }
 
 //Getter & Setter
-string Spell::getName(){
+string Spell::getName() {
     return this->name;
 }
-void Spell::setName(string name){
+
+void Spell::setName(string name) {
     this->name = name;
 }
 
 
-int Spell::getPrice(){
+int Spell::getPrice() {
     return this->price;
 }
-void Spell::setPrice(int price){
+
+void Spell::setPrice(int price) {
     this->price = price;
 }
 
@@ -31,22 +33,31 @@ void Spell::setPrice(int price){
 int Spell::getManaCost() {
     return this->manaCost;
 }
-void Spell::setManaCost(int manaCost){
+
+void Spell::setManaCost(int manaCost) {
     this->manaCost = manaCost;
 }
 
-vector<vector<int> > Spell::getRange(){
+vector<vector<int> > Spell::getRange() {
     return this->range;
 }
 
-void Spell::setRange(vector<vector<int> > range){
+void Spell::setRange(vector<vector<int> > range) {
     this->range = range;
 }
 
 //To String
-void Spell::toString(){
+void Spell::toString() {
     cout << "Name : " << this->name << "// Price: " << this->price << "$imiam$// Mana cost: " << this->manaCost << endl;
 }
 
 //Methods
+void Spell::upgradeSpell() {
+    for (int i = 0; i < this->getRange().size() - 1; i++) {
+        for (int j = 0; j < this->getRange()[i].size() - 1; j++) {
+            if (this->getRange()[i][j] > 0)
+                this->getRange()[i][j]++;
+        }
+    }
+};
 
