@@ -45,7 +45,7 @@ void Spell::setRange(vector<vector<int> > range){
 
 //To String
 void Spell::toString(){
-    cout << "Attaque: " << this->name << "// Price: " << this->price << "$imiam$// Mana cost: " << this->manaCost << endl;
+    cout << "Name : " << this->name << "// Price: " << this->price << "$imiam$// Mana cost: " << this->manaCost << endl;
 }
 
 //Methods

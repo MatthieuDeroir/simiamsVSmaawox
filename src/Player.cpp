@@ -76,7 +76,12 @@ void Player::setChampions(vector<Champion*> champs){
 
 //To String
 void Player::toString() {
-    cout << "Player: " << this->name << "// HP: " << this->hp << "// MONEY: " << this->money << endl;
+    cout << "Player: " << this->name << "// HP: " << this->hp << "// MANA: " << this->mana << "// MONEY: " << this->money << endl;
+
+    for (int i = 0; i < this->champs.size(); i++){
+        cout << "Champion "<< i+1 << " : " << endl;
+        champs[i]->toString();
+    }
 }
 
 // Methods

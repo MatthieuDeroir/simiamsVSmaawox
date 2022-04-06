@@ -14,7 +14,6 @@
 #include <ctime>
 #include <typeinfo>
 #include <map>
-#include "Player.h"
 
 #define RESET       "\033[0m"
 #define BLACK       "\033[30m"      /* Black */
@@ -44,8 +43,6 @@ void print(string str);
 void wait();
 
 void color(char p, string color);
-
-Player* playerInitialization();
 
 
 #endif //SIMIAMSVSMAAWOX_HEADER_H

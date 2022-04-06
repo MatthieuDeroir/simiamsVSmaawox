@@ -9,6 +9,7 @@
 #include "include/Enemy.h"
 #include "include/Game.h"
 #include "include/Spell.h"
+#include "include/defines.h"
 
 
 
@@ -25,6 +26,8 @@ int main() {
     Player* player = playerInitialization();
 
     Game* game = new Game(9, 15, player);
+
+    game->getPlayer()->toString();
 
 
 
