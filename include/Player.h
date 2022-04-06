@@ -12,15 +12,16 @@
 class Player {
 private:
     string name;
+    int max_hp;
     int hp;
     int money;
     int mana;
     int score;
-    vector<Champion> champ;
+    vector<Champion*> champs;
 
 public:
     //Class Constructor
-    Player(string name, int hp, int money, int mana, int score);
+    Player(string name, int hp, int money, int mana, int score, vector<Champion*> champs);
 
     // Getter & Setter
     string getName();
@@ -28,6 +29,9 @@ public:
 
     int getHp();
     void setHp(int hp);
+
+    int getMaxHp();
+    void setMaxHp(int max_hp);
 
     int getMoney();
     void setMoney(int money);
@@ -38,12 +42,15 @@ public:
     int getScore();
     void setScore(int score);
 
+    vector<Champion*> getChampions();
+    void setChampions(vector<Champion*> champs);
+
     //toString
     void toString();
     // Methods
 
     void takeDamage(int damage);
-    void buy(int price);
+    void spendMoney(int price);
     void spendMana(int mana);
 
 };

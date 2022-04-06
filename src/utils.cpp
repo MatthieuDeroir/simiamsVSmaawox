@@ -6,9 +6,19 @@
 
 //TODO : Implementer les fonctions suivantes dans les classes appropriées
 
+void systemVarInit(){
+    system("Red=$(tput bold ; tput setaf 1)");
+}
 
 void print(string str) {
     cout << str << endl;
+}
+
+void wait(){
+    cout << "Appuyez sur une touche pour continuer..." << endl;
+    system ("/bin/stty raw");
+    getchar();
+    system("/bin/stty cooked");
 }
 
 //* 0 = black
@@ -32,7 +42,7 @@ void color(char p, string color) {
             if (color == "black")
                 system("tput setaf 0");
             else if (color == "red")
-                system("tput setaf 1 10 10");
+                system("tput setaf 1");
             else if (color == "green")
                 system("tput setaf 2");
             else if (color == "yellow")

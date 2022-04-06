@@ -14,9 +14,13 @@ private:
     int MAP_HEIGHT;
     int MAP_WIDTH;
 
+    Player* player;
+
     int MAX_ENEMY;
 
     int round;
+
+//    Player player;
 
     char enemy_dict[62] = {
             '0','1','2','3','4','5','6','7','8','9',
@@ -36,14 +40,14 @@ private:
 //    vector<Player*> players;
 //    vector<Enemy*> enemies;
 public:
-    Game(int w, int h);
+    Game(int w, int h, Player* player);
 
     //main game loop functionalities
     void draw();
 
     void init();
 
-    void update(vector<vector<int> > range);
+    void update();
 
     //support func
     int count_line(vector<int> map);
@@ -61,6 +65,10 @@ public:
 
     void setRound(int round);
 
+    Player* getPlayer();
+
+    void setPlayer(Player* player);
+
     //game UI
     void displayHUI();
 
@@ -69,10 +77,12 @@ public:
     //vector comparison
     void drawRange(vector<vector<int> > range);
 
+    void drawEnemyKilled(vector<vector<int> > prev_map);
+
     vector<vector<int> > applyDamage(vector<vector<int> > map, vector<vector<int> > range);
 
     //Player implementation
-    void playerTurn(vector<vector<int> > range);
+    void playerTurn();
 
 };
 

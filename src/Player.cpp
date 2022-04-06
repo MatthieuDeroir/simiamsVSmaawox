@@ -2,15 +2,18 @@
 // Created by Matthieu Deroir on 23/03/2022.
 //
 
+#include "../include/header.h"
 #include "../include/Player.h"
 
 
-Player::Player(string name, int hp = 100, int money = 0, int mana = 100, int score = 0) {
+Player::Player(string name, int hp, int money, int mana, int score, vector<Champion*> champs) {
     this->name = name;
+    this->max_hp = hp;
     this->hp = hp;
     this->money = money;
     this->mana = mana;
     this->score = score;
+    this->champs = champs;
 }
 
 
@@ -29,6 +32,14 @@ int Player::getHp() {
 
 void Player::setHp(int hp) {
     this->hp = hp;
+}
+
+int Player::getMaxHp(){
+    return this->max_hp;
+}
+
+void Player::setMaxHp(int max_hp){
+    this->max_hp = max_hp;
 }
 
 int Player::getMoney() {
@@ -55,6 +66,14 @@ void Player::setScore(int score){
     this->score = score;
 }
 
+vector<Champion*> Player::getChampions(){
+    return this->champs;
+}
+
+void Player::setChampions(vector<Champion*> champs){
+    this->champs = champs;
+}
+
 //To String
 void Player::toString() {
     cout << "Player: " << this->name << "// HP: " << this->hp << "// MONEY: " << this->money << endl;
@@ -62,15 +81,27 @@ void Player::toString() {
 
 // Methods
 
-void Player::takeDamage(int damage){
-    if (this->hp <= damage){
-        cout << "Game Over" << endl;
-    } else{
-        this->hp -= damage;
+void Player::takeDamage(int dmg){
+
+    if (this->hp <= dmg){
+        cout << "Vous subissez " << RED << dmg << RESET << " dégats !"  << endl;
+        setHp(getHp() - dmg);
+        cout << "Game Over" << endl; //TODO GAME OVER SCREEN
+    } else if (dmg > 0){
+        cout << "Vous subissez " << RED << dmg << RESET << " dégats !"  << endl;
+        setHp(getHp() - dmg);
     }
+    else
+    {
+        cout << "Vous ne subissez " << GREEN << "aucun " << RESET << "dégats !"  << endl;
+    }
+
+    if (this->hp < 0)
+        setHp(0);
+    wait();
 }
 
-void Player::buy(int price){
+void Player::spendMoney(int price){
     if (this->money < price){
         cout << "$imiam$ insuffisant" << endl;
     } else{

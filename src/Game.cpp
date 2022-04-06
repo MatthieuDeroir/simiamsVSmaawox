@@ -11,7 +11,7 @@
 
 
 
-Game::Game(int w, int h) {
+Game::Game(int w, int h, Player *player) {
     this->MAP_WIDTH = w;
     this->MAP_HEIGHT = h;
     this->MAX_ENEMY = 61;
@@ -26,15 +26,19 @@ void Game::init() {
     setMap(map);
 }
 
-void Game::update(vector<vector<int> > range) {
+void Game::update() {
+
+    int dmg;
     vector<int> tmp_map = getMap()[getMap().size() - 1];
-    count_line(tmp_map);
+
+    dmg = count_line(tmp_map);
     setMap(push_row(getMap()));
     setRound((getRound()) + 1);
     //spawn les enemies
     setMap(spawner(getMap(), getRound()));
     draw();
-    playerTurn(range); //TODO PLAYER TURN
+    this->player->takeDamage(dmg);
+    playerTurn(); //TODO PLAYER TURN
 }
 
 void Game::draw() {
@@ -44,9 +48,19 @@ void Game::draw() {
     for (int i = 0; i < this->map.size(); i++) {
         cout << "      ";
         for (int j = 0; j < this->map[i].size(); j++) {
-            cout << enemy_dict[map[i][j]] << "  ";
+            if (this->map[i][j] == 0) {
+                cout << BLUE << enemy_dict[map[i][j]] << " " << RESET;
+            } else if (this->map[i][j] < 10) {
+                cout << GREEN << enemy_dict[map[i][j]] << " " << RESET;
+            } else if (this->map[i][j] < 36) {
+                cout << YELLOW << enemy_dict[map[i][j]] << " " << RESET;
+
+            } else if (this->map[i][j] >= 36) {
+                cout << RED << enemy_dict[map[i][j]] << " " << RESET;
+
+            }
+
         }
-        cout << endl;
         cout << endl;
     }
     displayFUI();
@@ -57,7 +71,7 @@ int Game::count_line(vector<int> map) {
     int i = 0;
     int count = 0;
 
-    while (map[i]) {
+    while (i < map.size()) {
         count += map[i];
         i++;
     }
@@ -83,7 +97,11 @@ vector<vector<int> > Game::push_row(vector<vector<int> > vec) {
 }
 
 vector<vector<int> > Game::spawner(vector<vector<int> > vec, int round) {
-    int en_nb = rand() % 1 + round; // growing ennemy nb mecanic in functions of round nb =
+    int en_nb = abs(cos((1 + round))*10);
+
+    cout << en_nb << endl;
+
+    // growing ennemy nb mecanic in functions of round nb =
     if (en_nb > MAP_WIDTH * 60)
         en_nb = MAP_WIDTH * 60;
     while (en_nb) {
@@ -117,29 +135,29 @@ void Game::setRound(int round) {
     this->round = round;
 }
 
+Player *Game::getPlayer() {
+    return this->player;
+}
+
+void Game::setPlayer(Player *player) {
+    this->player = player;
+}
+
 //Game UI
 void Game::displayHUI() {
     color('f', "pink");
 
-    cout << "######## ROUND N. : " << getRound() << " ########" << endl;
+    cout << BGMAGENTA << BLACK << "######## ROUND N. : " << getRound() << " ########" << RESET << endl;
 }
 
 void Game::displayFUI() {
-    color('f', "pink");
-    cout << "      " << "  " << "@" << "     " << "#" << "     " << "%" << endl;
+    cout << MAGENTA << "      " << "  " << "@" << "     " << "#" << "     " << "%" << RESET << endl;
 
-    color('f', "green");
     cout << "##############################" << endl;
-    cout << "#                            #" << endl;
-    cout << "#      HitPoint : 30/30      #" << endl;
-    cout << "#                            #" << endl;
+    cout << "#      " << GREEN << "HitPoint : " << this->player->getHp() << "/" << this->player->getMaxHp() << RESET << "      #"
+          << endl;
 
-    color('f', "dblue");
-
-    cout << "#      Manawox : 0/100       #" << endl;
-    cout << "#                            #" << endl;
-
-    color('f', "yellow");
+    cout << "#      " << CYAN << "Manawox : 0/100" << RESET << "       #" << endl;
 
     cout << "#      $imiam$ : 0           #" << endl;
     cout << "#                            #" << endl;
@@ -152,25 +170,46 @@ void Game::displayFUI() {
 void Game::drawRange(vector<vector<int> > range) {
     system("clear");
     displayHUI();
-    color('f', "white");
+
 
     for (int i = 0; i < range.size(); i++) {
         cout << "      ";
         for (int j = 0; j < range[i].size(); j++) {
             if (range[i][j] > 0) {
-                color('b', "red");
-                cout << this->map[i][j] << " ";
-                color('b', "black");
+                cout << BGRED << enemy_dict[map[i][j]] << RESET << " ";
+
             } else if (range[i][j] == 0) {
-                color('b', "black");
-                cout << this->map[i][j] << " ";
-                color('b', "red");
+                cout << WHITE << enemy_dict[map[i][j]] << " " << RESET;
+
             }
         }
         cout << endl;
     }
     displayFUI();
+}
 
+void Game::drawEnemyKilled(vector<vector<int> > prev_map) {
+    system("clear");
+    displayHUI();
+    int e_nb;
+
+    e_nb = 0;
+
+    for (int i = 0; i < prev_map.size(); i++) {
+        cout << "      ";
+        for (int j = 0; j < prev_map[i].size(); j++) {
+            if (prev_map[i][j] > this->map[i][j]) {
+                cout << BLUE << enemy_dict[map[i][j]] << RESET << " ";
+                e_nb++;
+            } else {
+                cout << WHITE << enemy_dict[map[i][j]] << " " << RESET;
+
+            }
+        }
+        cout << endl;
+    }
+    displayFUI();
+    cout << RESET << "Vous avez touché " << BLUE << e_nb << RESET << " enemi(s) !" << endl;
 }
 
 vector<vector<int> > Game::applyDamage(vector<vector<int> > map, vector<vector<int> > range) {
@@ -188,20 +227,25 @@ vector<vector<int> > Game::applyDamage(vector<vector<int> > map, vector<vector<i
 }
 
 //Player implementation
+void Game::playerTurn() {
+/*
+ *
+ *  vector<vector<int> > tmp;
+    tmp = getMap();
 
-void Game::playerTurn(vector<vector<int> > range)
-{
     string usr_input;
     cout << "1 pour visualiser" << endl;
     getline(cin, usr_input);
-    if (usr_input == "1"){
+    if (usr_input == "1") {
         system("clear");
         this->drawRange(range);
         cout << "1 pour lancer" << endl;
         getline(cin, usr_input);
         if (usr_input == "1") {
             setMap(this->applyDamage(this->getMap(), range));
-            this->draw();
+            this->drawEnemyKilled(tmp);
+            cout << "Appuyez sur une touche pour continuer..." << endl;
+            getline(cin, usr_input);
         }
     }
 }
