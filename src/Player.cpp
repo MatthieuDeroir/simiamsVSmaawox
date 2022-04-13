@@ -104,7 +104,7 @@ void Player::toString() {
 
 // Methods
 
-void Player::takeDamage(int dmg){
+void Player::takeDamage(int dmg, int round){
 
     if (this->hp <= dmg){
         cout << "Vous subissez " << RED << dmg << RESET << " dégats !"  << endl;
@@ -114,7 +114,7 @@ void Player::takeDamage(int dmg){
         cout << "Vous subissez " << RED << dmg << RESET << " dégats !"  << endl;
         setHp(getHp() - dmg);
     }
-    else
+    else if (round != 1)
     {
         cout << "Vous ne subissez " << GREEN << "aucun " << RESET << "dégats !"  << endl;
     }

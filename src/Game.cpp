@@ -36,7 +36,7 @@ void Game::update() {
     //spawn les enemies
     setMap(spawner(getMap(), getRound()));
     draw();
-    this->player->takeDamage(dmg);
+    this->player->takeDamage(dmg, this->round);
     playerTurn(); //TODO PLAYER TURN
 }
 
@@ -96,7 +96,7 @@ vector<vector<int> > Game::push_row(vector<vector<int> > vec) {
 }
 
 vector<vector<int> > Game::spawner(vector<vector<int> > vec, int round) {
-    int en_nb = abs(cos((1 + round)) * 10);
+    int en_nb = (1 + round)*round;
 
     cout << en_nb << endl;
 
@@ -143,13 +143,13 @@ void Game::setPlayer(Player *player) {
 }
 
 //Game UI
-void Game::displayHUI() {
+void Game::displayHUI() { //affichage de l'entête de l'UI
     color('f', "pink");
 
     cout << BGMAGENTA << BLACK << "######## ROUND N. : " << getRound() << " ########" << RESET << endl;
 }
 
-void Game::displayFUI() {
+void Game::displayFUI() { //affichage du bas de l'UI //TODO : faire les bordures à droite pour qu'elles soient dynamiques avec la valeur d'affichage des stats
     cout << MAGENTA << "      " << "  " << "M" << "     " << "W" << "     " << "A" << RESET << endl;
 
     cout << "##############################" << endl;
@@ -166,7 +166,7 @@ void Game::displayFUI() {
 
 // vector comparison
 
-void Game::drawRange(vector<vector<int> > range) {
+void Game::drawRange(vector<vector<int> > range) { // affiche les cases visées par une attaque
     system("clear");
     displayHUI();
 
@@ -187,7 +187,7 @@ void Game::drawRange(vector<vector<int> > range) {
     displayFUI();
 }
 
-void Game::drawEnemyKilled(vector<vector<int> > prev_map) {
+void Game::drawEnemyKilled(vector<vector<int> > prev_map) { // affiche en surbrillance les cases enemies touchées après une attaque
     system("clear");
     displayHUI();
     int e_nb;
@@ -211,16 +211,37 @@ void Game::drawEnemyKilled(vector<vector<int> > prev_map) {
     cout << RESET << "Vous avez touché " << BLUE << e_nb << RESET << " enemi(s) !" << endl;
 }
 
+void Game::drawSpellDamage(vector<vector<int> > range) { //affiche les dégats maximum des sorts
+    system("clear");
+    displayHUI();
+
+    for (int i = 0; i < range.size(); i++) {
+        cout << "      ";
+        for (int j = 0; j < range[i].size(); j++) {
+            if (range[i][j] > 0) {
+                cout << BGGREEN << range[i][j] << RESET << " ";
+            } else {
+                cout << WHITE << range[i][j] << " " << RESET;
+
+            }
+        }
+        cout << endl;
+    }
+    displayFUI();
+}
+
 vector<vector<int> > Game::applyDamage(vector<vector<int> > map, Champion *champ, vector<vector<int> > range) {
     int dmg_alea;
     for (int i = 0; i < range.size(); i++) {
         for (int j = 0; j < range[i].size(); j++) {
             if (range[i][j] > 0 && map[i][j] > 0) {
-                dmg_alea = rand() % (range[i][j] * champ->getAtt());
+                dmg_alea = rand() % ((range[i][j] * champ->getAtt()) + 1);
                 map[i][j] -= dmg_alea;
                 this->player->setMoney(this->player->getMoney() + dmg_alea);
-                if (dmg_alea)
-                    cout << "Attaque réussie en" << GREEN << "[" << i << "," << j << "]" << RESET << " !" << endl;
+                if (dmg_alea) {
+                    cout << "Attaque réussie en " << GREEN << "[" << i << "," << j << "]" << RESET << " !" << endl;
+                    cout << "Vous infligez " << GREEN << dmg_alea << " dégats ! " << RESET << " !" << endl;
+                }
                 else
                     cout << "Attaque ratée en" << RED << "[" << i << "," << j << "]" << RESET << " !" << endl;
             }

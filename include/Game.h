@@ -75,10 +75,14 @@ public:
     void displayFUI();
 
     //vector comparison
+        //drawing options
     void drawRange(vector<vector<int> > range);
 
     void drawEnemyKilled(vector<vector<int> > prev_map);
 
+    void drawSpellDamage(vector<vector<int> > range);
+
+        //vector differences
     vector<vector<int> > applyDamage(vector<vector<int> > map, Champion* champ, vector<vector<int> > range);
 
     //Player implementation

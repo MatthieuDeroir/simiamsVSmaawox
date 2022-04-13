@@ -7,11 +7,11 @@
 //TODO : Implementer les fonctions suivantes dans les classes appropriées
 
 
-void print(string str) {
+void print(string str) { // un print basique pour le debug
     cout << str << endl;
 }
 
-void wait(){
+void wait(){ //fonction de pause mais ne fonctionne pas avec le terminal Clion
     cout << "Appuyez sur une touche pour continuer..." << endl;
     system ("/bin/stty raw");
     getchar();
@@ -31,7 +31,7 @@ void wait(){
 //
 //white
 
-void color(char p, string color) {
+void color(char p, string color) { //fonction d'affichage de couleur par ligne
     char os = 'm'; //change to w for windows
 
     if (os == 'm') {

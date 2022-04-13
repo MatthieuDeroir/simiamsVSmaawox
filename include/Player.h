@@ -61,7 +61,7 @@ public:
     void toString();
     // Methods
 
-    void takeDamage(int damage);
+    void takeDamage(int damage, int round);
     void spendMoney(int price);
     void spendMana(int mana);
 
