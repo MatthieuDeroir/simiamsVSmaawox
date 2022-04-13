@@ -17,6 +17,12 @@ Player::Player(string name, int hp, int money, int mana, int score, vector<Champ
     this->mana_regen = 1;
     this->score = score;
     this->champs = champs;
+
+    //const definition
+    this->MANA_BASE_COST = 0;
+    this->MANA_REGEN_BASE_COST = 0;
+    this->MANA_BASE_UP = 0;
+    this->MANA_REGEN_BASE_UP = 0;
 }
 
 
@@ -139,6 +145,70 @@ void Player::spendMana(int mana){
     }
 }
 
+void Player::rangeUpdate(Champion* champ1, Champion* champ2){
+
+    vector<vector<int> > newRange;
+
+    auto it1 = find(this->getChampions().begin(), this->getChampions().end(), champ1);
+    int mul1 = distance(this->getChampions().begin(), it1);
+
+    auto it2 = find(this->getChampions().begin(), this->getChampions().end(), champ1);
+    int mul2 = distance(this->getChampions().begin(), it2);
+
+//    for (int y = 0; y < champ1->getSpells().size(); y++){
+//        for (int i = 0; i < champ1->getSpells()[y]->getRange().size(); i++){
+//            for (int j = 0; j < champ1->getSpells()[y]->getRange()[i].size(); j++){
+//                if (j/3 == mul2){
+//                        for (int i1 = 0; i < champ1->getSpells()[y]->getRange().size(); i++){
+//                            for (int j1 = 0; j < champ1->getSpells()[y]->getRange()[i].size(); j++){
+//                                if (j1/3 == mul1){
+//                                    cout << champ1->getSpells()[y]->getRange()[i1][j1] << champ1->getSpells()[y]->getRange()[i][j] << endl;
+//                                    champ1->getSpells()[y]->getRange()[i1][j1] = champ1->getSpells()[y]->getRange()[i][j];
+//                                    cout << champ1->getSpells()[y]->getRange()[i1][j1] << champ1->getSpells()[y]->getRange()[i][j] << endl;
+//                                }
+//                            }
+//                        }
+//                }
+//            }
+//        }
+//    }
+//    for (int y = 0; y < champ2->getSpells().size(); y++){
+//        for (int i = 0; i < champ2->getSpells()[y]->getRange().size(); i++){
+//            for (int j = 0; j < champ2->getSpells()[y]->getRange()[i].size(); j++){
+//                if (j/3 == mul1){
+//                    for (int i1 = 0; i < champ2->getSpells()[y]->getRange().size(); i++){
+//                        for (int j1 = 0; j < champ2->getSpells()[y]->getRange()[i].size(); j++){
+//                            if (j1/3 == mul2){
+//                                champ2->getSpells()[y]->getRange()[i1][j1] = champ2->getSpells()[y]->getRange()[i][j];
+//
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+
+}
+
+void Player::swapChamp(char champOrig, char champDest){
+    int orig;
+    int dest;
+    for (int i = 0; i < this->champs.size(); i++){
+        if (champs[i]->getSprite() == champDest){
+            orig = i;
+        }
+    }
+    for (int j = 0; j < this->champs.size(); j++){
+        if (champs[j]->getSprite() == champOrig) {
+            dest = j;
+        }
+    }
+    swap(champs[orig], champs[dest]);
+    rangeUpdate(champs[orig], champs[dest]);
+    cout << YELLOW << champs[dest]->getName() << RESET << " a changé de position avec " << YELLOW << champs[orig]->getName() << RESET << endl;
+}
+
 //Upgrades
 //Upgrades
 void Player::upgradeDef(){
@@ -161,10 +231,14 @@ void Player::regenHp(){
         this->setHp(this->getMaxHp());
 }
 void Player::regenMana(){
-    this->setMana(this->getMana() + 10);
-    if (this->getMana() > this->getMaxMana())
+    if (this->getManaRegen() + this->getMana() <= this->getMaxMana()) {
+        this->setMana(this->getMana() + this->getManaRegen());
+    }else if (this->getManaRegen() + this->getMana() > this->getMaxMana()) {
+        this->setMana(this->getMaxMana());
+    }else if (this->getMana() > this->getMaxMana())
         this->setMana(this->getMaxMana());
 }
+
 
 
 

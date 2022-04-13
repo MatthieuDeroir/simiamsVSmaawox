@@ -99,7 +99,7 @@ static vector<vector<vector<int> > > rangesInitialization(){
             { 0, 0, 0, 2, 0, 2, 0, 0, 0 },
             { 0, 0, 0, 2, 0, 2, 0, 0, 0 },
             { 0, 0, 0, 2, 0, 2, 0, 0, 0 },
-            { 0, 0, 0, 2, 1, 2, 0, 0, 0 },
+            { 0, 0, 0, 2, 0, 2, 0, 0, 0 },
             { 0, 0, 0, 2, 1, 2, 0, 0, 0 },
     };
 
@@ -222,11 +222,11 @@ vector<Champion*> champInitialization(){
     vector<Champion*> champions;
     vector<vector<Spell*> > spells = spellInitialization();
 
-    Champion* champ_mage = new Champion("Mage", 1, spells[0]);
+    Champion* champ_mage = new Champion("Mage", 'M', 1, spells[0]);
 
-    Champion* champ_warrior = new Champion("Warrior", 1, spells[1]);
+    Champion* champ_warrior = new Champion("Warrior", 'W', 1, spells[1]);
 
-    Champion* champ_archer = new Champion("Archer", 1, spells[2]);
+    Champion* champ_archer = new Champion("Archer", 'A', 1, spells[2]);
 
     champions.push_back(champ_mage);
     champions.push_back(champ_warrior);

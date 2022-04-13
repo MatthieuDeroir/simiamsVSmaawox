@@ -35,9 +35,10 @@ void Game::update() {
     setRound((getRound()) + 1);
     //spawn les enemies
     setMap(spawner(getMap(), getRound()));
-    draw();
     this->player->takeDamage(dmg, this->round);
+    draw();
     playerTurn(); //TODO PLAYER TURN
+
 }
 
 void Game::draw() {
@@ -65,7 +66,7 @@ void Game::draw() {
     displayFUI();
 }
 
-//support func
+//base game func
 int Game::count_line(vector<int> map) {
     int i = 0;
     int count = 0;
@@ -114,34 +115,6 @@ vector<vector<int> > Game::spawner(vector<vector<int> > vec, int round) {
 }
 
 
-
-
-//getters and setters
-
-vector<vector<int> > Game::getMap() {
-    return this->map;
-}
-
-void Game::setMap(vector<vector<int> > map) {
-    this->map = map;
-}
-
-int Game::getRound() {
-    return this->round;
-}
-
-void Game::setRound(int round) {
-    this->round = round;
-}
-
-Player *Game::getPlayer() {
-    return this->player;
-}
-
-void Game::setPlayer(Player *player) {
-    this->player = player;
-}
-
 //Game UI
 void Game::displayHUI() { //affichage de l'entête de l'UI
     color('f', "pink");
@@ -166,10 +139,12 @@ void Game::displayFUI() { //affichage du bas de l'UI //TODO : faire les bordures
 
 // vector comparison
 
-void Game::drawRange(vector<vector<int> > range) { // affiche les cases visées par une attaque
+void Game::drawRange(vector<vector<int> > range, Champion *champ) { // affiche les cases visées par une attaque
     system("clear");
     displayHUI();
 
+//    auto it = find(this->player->getChampions().begin(), this->player->getChampions().end(), champ);
+//    int mul = distance(this->player->getChampions().begin(), it);
 
     for (int i = 0; i < range.size(); i++) {
         cout << "      ";
@@ -232,6 +207,8 @@ void Game::drawSpellDamage(vector<vector<int> > range) { //affiche les dégats m
 
 vector<vector<int> > Game::applyDamage(vector<vector<int> > map, Champion *champ, vector<vector<int> > range) {
     int dmg_alea;
+//    auto it = find(this->player->getChampions().begin(), this->player->getChampions().end(), champ);
+//    int mul = distance(this->player->getChampions().begin(), it) + 1;
     for (int i = 0; i < range.size(); i++) {
         for (int j = 0; j < range[i].size(); j++) {
             if (range[i][j] > 0 && map[i][j] > 0) {
@@ -260,8 +237,14 @@ void Game::playerTurn() {
     vector<vector<int> > tmp;
     for (int i = 0; i < this->player->getChampions().size(); ++i) { // Pour chaque champion
         bool invalid_syntax = true;
+        //set current_champ to true when its the champion turn to change color on display
+        this->player->getChampions()[i]->setCurrentChamp(true);
+
+
         while (invalid_syntax) {
             tmp = getMap();
+            system("clear");
+            this->draw();
             cout << "Au tour de " << GREEN << this->player->getChampions()[i]->getName() << endl;
 
             cout << "1 Attaque" << endl;
@@ -307,7 +290,8 @@ void Game::playerTurn() {
 
                     if (spell_choice_back != spell_choice) { // Si tu choisi un sort different
                         system("clear");
-                        this->drawRange(this->player->getChampions()[i]->getSpells()[spell_choice]->getRange()); // Dessine la range
+                        this->drawRange(this->player->getChampions()[i]->getSpells()[spell_choice]->getRange(),
+                                        this->player->getChampions()[i]); // Dessine la range
                         confirm_spell_choice = false;
                     }else{
                         confirm_spell_choice = true;
@@ -336,6 +320,11 @@ void Game::playerTurn() {
                 invalid_syntax = false;
             } else if (user_choice == "3") {
 
+
+                char sprite_choice;
+                cout << "Avec quel champion souhaitez vous changer de position ?" << endl;
+                cin >> sprite_choice;
+                this->player->swapChamp(this->player->getChampions()[i]->getSprite(), sprite_choice);
                 invalid_syntax = false;
             } else if (user_choice == "4") {
 
@@ -344,10 +333,39 @@ void Game::playerTurn() {
                 cout << "Invalid Syntaxe" << endl;
                 invalid_syntax = true;
             }
+            //setting the current champ to false
+            this->player->getChampions()[i]->setCurrentChamp(false);
         }
     }
     cout << "Appuyez sur une touche puis sur Enter pour passer au round suivant.." << endl;
     cin >> user_choice;
+}
+
+
+//getters and setters
+
+vector<vector<int> > Game::getMap() {
+    return this->map;
+}
+
+void Game::setMap(vector<vector<int> > map) {
+    this->map = map;
+}
+
+int Game::getRound() {
+    return this->round;
+}
+
+void Game::setRound(int round) {
+    this->round = round;
+}
+
+Player *Game::getPlayer() {
+    return this->player;
+}
+
+void Game::setPlayer(Player *player) {
+    this->player = player;
 }
 
 

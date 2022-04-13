@@ -14,6 +14,9 @@ private:
     int MAP_HEIGHT;
     int MAP_WIDTH;
 
+
+
+
     Player* player;
 
     int MAX_ENEMY;
@@ -76,11 +79,13 @@ public:
 
     //vector comparison
         //drawing options
-    void drawRange(vector<vector<int> > range);
+    void drawRange(vector<vector<int> > range, Champion* champ);
+
+    void drawSpellDamage(vector<vector<int> > range);
 
     void drawEnemyKilled(vector<vector<int> > prev_map);
 
-    void drawSpellDamage(vector<vector<int> > range);
+
 
         //vector differences
     vector<vector<int> > applyDamage(vector<vector<int> > map, Champion* champ, vector<vector<int> > range);

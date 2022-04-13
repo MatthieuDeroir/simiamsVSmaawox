@@ -22,6 +22,13 @@ private:
     int score;
     vector<Champion*> champs;
 
+    //upgrades base cost const
+    int UPGRADE_COST_COEFF; //for all upgrades
+    int MANA_REGEN_BASE_COST;
+    int MANA_BASE_COST;
+    int MANA_REGEN_BASE_UP;
+    int MANA_BASE_UP;
+
 public:
     //Class Constructor
     Player(string name, int hp, int money, int mana, int score, vector<Champion*> champs);
@@ -64,6 +71,8 @@ public:
     void takeDamage(int damage, int round);
     void spendMoney(int price);
     void spendMana(int mana);
+    void rangeUpdate(Champion* champ1, Champion* champ2);
+    void swapChamp(char champ1, char champ2);
 
     //Upgrades
     void upgradeDef();

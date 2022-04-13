@@ -11,10 +11,11 @@
 class Champion {
 private:
     string name;
+    char sprite;
     int att;
     vector<Spell*> spells;
 public:
-    Champion(string name, int att, vector<Spell*> spells);
+    Champion(string name, char sprite, int att, vector<Spell*> spells);
 
     //Getter & Setter
     int getAtt();
@@ -25,6 +26,12 @@ public:
 
     vector<Spell*> getSpells();
     void setSpells(vector<Spell*> spells);
+
+    char getSprite();
+    void setSprite(char sprite);
+
+    bool getCurrentChamp();
+    void setCurrentChamp(bool current_champ);
 
     //toString
     void toString();
