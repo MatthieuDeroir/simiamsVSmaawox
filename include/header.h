@@ -46,6 +46,7 @@ void color(char p, string color);
 
 int count_vec(vector<vector<int> > vec);
 
+void multiprint(string str, int nb);
 
 #endif //SIMIAMSVSMAAWOX_HEADER_H
 

@@ -145,14 +145,17 @@ Game::displayFUI() { //affichage du bas de l'UI //TODO : faire les bordures à d
              << RESET << endl;
     }
     cout << "##############################" << endl;
-    cout << "#      " << GREEN << "HitPoint : " << this->player->getHp() << "/" << this->player->getMaxHp() << RESET
-         << "      #"
-         << endl;
+    cout << "#      " << GREEN << "HitPoint : " << this->player->getHp() << "/" << this->player->getMaxHp() << RESET;
+    multiprint(" ", 8 - to_string(this->player->getHp()).length());
+    cout << "#" << endl;
 
-    cout << "#      " << CYAN << "Manawox : " << this->player->getMana() << "/" << this->player->getMaxMana() << RESET
-         << "       #" << endl;
+    cout << "#      " << CYAN << "Manawox : " << this->player->getMana() << "/" << this->player->getMaxMana() << RESET;
+    multiprint(" ", 8 - to_string(this->player->getMana()).length());
+    cout << "#" << endl;
 
-    cout << "#      " << YELLOW << "$imiam$ : " << this->player->getMoney() << RESET << "           #" << endl;
+    cout << "#      " << YELLOW << "$imiam$ : " << this->player->getMoney() << RESET;
+    multiprint(" ", 12 - to_string(this->player->getMoney()).length());
+    cout << "#" << endl;
     cout << "##############################" << endl;
 
 }
@@ -410,8 +413,8 @@ void Game::playerTurn() {
 
             } else if (user_choice == "2") {
                 //Banque
+                this->shop(this->player->getChampions()[i]);
                 invalid_syntax = false;
-
             } else if (user_choice == "3") {
 
 

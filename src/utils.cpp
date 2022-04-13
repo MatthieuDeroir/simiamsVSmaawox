@@ -88,3 +88,9 @@ int count_vec(vector<vector<int> > vec){
     return nb;
 }
 
+void multiprint(string str, int nb){
+    for (int i = 0; i < nb; i++){
+        cout << str;
+    }
+}
+
