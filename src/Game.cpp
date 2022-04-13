@@ -97,7 +97,7 @@ vector<vector<int> > Game::push_row(vector<vector<int> > vec) {
 }
 
 vector<vector<int> > Game::spawner(vector<vector<int> > vec, int round) {
-    int en_nb = (1 + round)*round;
+    int en_nb = (1 + round) * round;
 
     cout << en_nb << endl;
 
@@ -122,15 +122,35 @@ void Game::displayHUI() { //affichage de l'entête de l'UI
     cout << BGMAGENTA << BLACK << "######## ROUND N. : " << getRound() << " ########" << RESET << endl;
 }
 
-void Game::displayFUI() { //affichage du bas de l'UI //TODO : faire les bordures à droite pour qu'elles soient dynamiques avec la valeur d'affichage des stats
-    cout << MAGENTA << "      " << "  " << "M" << "     " << "W" << "     " << "A" << RESET << endl;
+void
+Game::displayFUI() { //affichage du bas de l'UI //TODO : faire les bordures à droite pour qu'elles soient dynamiques avec la valeur d'affichage des stats
 
+
+    if (this->player->getChampions()[0]->getCurrentChamp()){
+        cout << RESET << "      " << "  " << this->player->getChampions()[0]->getSprite() << MAGENTA << "     "
+             << this->player->getChampions()[1]->getSprite() << "     " << this->player->getChampions()[2]->getSprite()
+             << RESET << endl;
+    }else if (this->player->getChampions()[1]->getCurrentChamp()){
+        cout << MAGENTA << "      " << "  " << this->player->getChampions()[0]->getSprite() << RESET << "     "
+             << this->player->getChampions()[1]->getSprite() << MAGENTA << "     " << this->player->getChampions()[2]->getSprite()
+             << RESET << endl;
+    }else if (this->player->getChampions()[2]->getCurrentChamp()){
+        cout << MAGENTA << "      " << "  " << this->player->getChampions()[0]->getSprite() << "     "
+             << this->player->getChampions()[1]->getSprite() << "     " << RESET << this->player->getChampions()[2]->getSprite()
+             << RESET << endl;
+    }
+    else{
+        cout << RESET << "      " << "  " << this->player->getChampions()[0]->getSprite() << MAGENTA << "     "
+             << this->player->getChampions()[1]->getSprite() << "     " << this->player->getChampions()[2]->getSprite()
+             << RESET << endl;
+    }
     cout << "##############################" << endl;
     cout << "#      " << GREEN << "HitPoint : " << this->player->getHp() << "/" << this->player->getMaxHp() << RESET
          << "      #"
          << endl;
 
-    cout << "#      " << CYAN << "Manawox : " << this->player->getMana() << "/" << this->player->getMaxMana()<< RESET << "       #" << endl;
+    cout << "#      " << CYAN << "Manawox : " << this->player->getMana() << "/" << this->player->getMaxMana() << RESET
+         << "       #" << endl;
 
     cout << "#      " << YELLOW << "$imiam$ : " << this->player->getMoney() << RESET << "           #" << endl;
     cout << "##############################" << endl;
@@ -162,7 +182,8 @@ void Game::drawRange(vector<vector<int> > range, Champion *champ) { // affiche l
     displayFUI();
 }
 
-void Game::drawEnemyKilled(vector<vector<int> > prev_map) { // affiche en surbrillance les cases enemies touchées après une attaque
+void Game::drawEnemyKilled(
+        vector<vector<int> > prev_map) { // affiche en surbrillance les cases enemies touchées après une attaque
     system("clear");
     displayHUI();
     int e_nb;
@@ -218,8 +239,7 @@ vector<vector<int> > Game::applyDamage(vector<vector<int> > map, Champion *champ
                 if (dmg_alea) {
                     cout << "Attaque réussie en " << GREEN << "[" << i << "," << j << "]" << RESET << " !" << endl;
                     cout << "Vous infligez " << GREEN << dmg_alea << " dégats ! " << RESET << " !" << endl;
-                }
-                else
+                } else
                     cout << "Attaque ratée en" << RED << "[" << i << "," << j << "]" << RESET << " !" << endl;
             }
             if (map[i][j] < 0)
@@ -228,6 +248,49 @@ vector<vector<int> > Game::applyDamage(vector<vector<int> > map, Champion *champ
         cout << endl;
     }
     return map;
+}
+
+void Game::shop (Champion* champion){
+    string user_choice;
+    bool invalid_syntaxte = false;
+    cout << "Ame" << endl;
+    cout << "1 - MaxMANA" << endl;
+    cout << "2 - REGENMANA" << endl;
+    cout << "3 - MAXHP" << endl;
+    cout << "4 - REGENHP" << endl;
+    cout << "5 - ATTAQUE" << endl;
+    for(int i = 0; i < champion->getSpells().size(); ++i){
+        cout << i+6 << " - Ameliorer " << champion->getSpells()[i] << endl;
+    }
+    cin >> user_choice;
+
+    while(!invalid_syntaxte){
+        if (user_choice == "1" || user_choice == "2" || user_choice == "3" || user_choice == "4" ||
+             user_choice == "5" || user_choice == "6" || user_choice == "7" || user_choice == "8" || user_choice == "9"){
+            if (user_choice == "1"){
+                this->player->setMaxMana((this->player->getMaxMana()-200)/this->player->getMana());
+            }else if (user_choice == "2"){
+
+            }else if (user_choice == "3"){
+
+            }else if (user_choice == "4"){
+
+            }else if (user_choice == "5"){
+
+            }else if (user_choice == "6"){
+
+            }else if (user_choice == "7"){
+
+            }else if (user_choice == "8"){
+
+            }else if (user_choice == "9"){
+
+            }
+
+        }else{
+            invalid_syntaxte = true;
+        }
+    }
 }
 
 
@@ -255,69 +318,100 @@ void Game::playerTurn() {
 
             if (user_choice == "1") { // Attaque
 
-
-                int spell_choice_back = 5;
+                int spell_choice_back = 6;
                 int spell_choice;
                 bool confirm_spell_choice;
                 system("clear");
                 this->draw();
                 do {
 
-                    for (int j = 0; j <this->player->getChampions()[i]->getSpells().size(); j++){ // Pour tout les sort du champion
+                    for (int j = 0; j <
+                                    this->player->getChampions()[i]->getSpells().size(); j++) { // Pour tout les sort du champion
 
                         if (j != spell_choice_back) {
-                            cout << j + 1 << " - " << this->player->getChampions()[i]->getSpells()[j]->getName()
-                                 << endl;
+                            if (this->player->getMana() <
+                                this->player->getChampions()[i]->getSpells()[j]->getManaCost()) {
+                                cout << RED << j + 1 << " - "
+                                     << this->player->getChampions()[i]->getSpells()[j]->getName()
+                                     << " - " << this->player->getChampions()[i]->getSpells()[j]->getManaCost() << " Ø"
+                                     << RESET
+                                     << endl;
+
+                            } else {
+                                cout << j + 1 << " - " << this->player->getChampions()[i]->getSpells()[j]->getName()
+                                     << " - " << this->player->getChampions()[i]->getSpells()[j]->getManaCost() << " Ø"
+                                     << endl;
+                            }
                         } else {
-                            cout << j + 1 << " - " << this->player->getChampions()[i]->getSpells()[j]->getName()
-                                 << " - Confirmer" << endl;
+                            if (this->player->getMana() <
+                                this->player->getChampions()[i]->getSpells()[j]->getManaCost()) {
+                                cout << RED << j + 1 << " - "
+                                     << this->player->getChampions()[i]->getSpells()[j]->getName()
+                                     << " - " << this->player->getChampions()[i]->getSpells()[j]->getManaCost() << " Ø"
+                                     << RESET
+                                     << endl;
+
+                            } else {
+                                cout << j + 1 << " - " << this->player->getChampions()[i]->getSpells()[j]->getName()
+                                     << " - " << this->player->getChampions()[i]->getSpells()[j]->getManaCost() << " Ø"
+                                     << " - Confirmer" << endl;
+                            }
                         }
                     }
+                    cout << "5 - Retour" << endl;
 
 
                     invalid_syntax = true;
                     while (invalid_syntax) { // Choix sort
                         cin >> user_choice;
-                        if (user_choice == "1" || user_choice == "2" || user_choice == "3" || user_choice == "4" || user_choice == "5") {
+                        if (user_choice == "1" || user_choice == "2" || user_choice == "3" || user_choice == "4" ||
+                            user_choice == "5") {
                             spell_choice = stoi(user_choice) - 1;
-                            invalid_syntax = false;
+                            if (spell_choice != 4 && this->player->getMana() <
+                                                     this->player->getChampions()[i]->getSpells()[spell_choice]->getManaCost()) {
+                                cout << RED << "Manawox Insuffisante" << RESET << endl;
+                                cout << endl << "Veuillez selectionner un sort : " << endl;
+                                invalid_syntax = true;
+                            } else {
+                                invalid_syntax = false;
+                            }
                         } else {
-                            cout << "Invalid syntaxe !" << endl;
+                            cout << RED << "Invalid syntaxe !" << RESET << endl;
+                            cout << endl << "Veuillez selectionner un sort : " << endl;
                             invalid_syntax = true;
                         }
                     }
 
 
-                    if (spell_choice_back != spell_choice) { // Si tu choisi un sort different
+                    if (spell_choice_back != spell_choice && spell_choice != 4) { // Si tu choisi un sort different
                         system("clear");
                         this->drawRange(this->player->getChampions()[i]->getSpells()[spell_choice]->getRange(),
                                         this->player->getChampions()[i]); // Dessine la range
                         confirm_spell_choice = false;
-                    }else{
+                    } else {
                         confirm_spell_choice = true;
                     }
 
                     spell_choice_back = spell_choice;
+                    cout << confirm_spell_choice << endl;
 
                 } while (!confirm_spell_choice);
 
-                if (spell_choice != 4){
-                    setMap(this->applyDamage(this->getMap(), this->player->getChampions()[i],
-                                             this->player->getChampions()[i]->getSpells()[spell_choice]->getRange()));
+                if (spell_choice != 4) {
                     this->player->setMana(this->player->getMana() -
                                           this->player->getChampions()[i]->getSpells()[spell_choice]->getManaCost());
+                    setMap(this->applyDamage(this->getMap(), this->player->getChampions()[i],
+                                             this->player->getChampions()[i]->getSpells()[spell_choice]->getRange()));
                     this->drawEnemyKilled(tmp);
-                }
-                else if (spell_choice == 4) {
+                } else if (spell_choice == 4) {
                     invalid_syntax = true;
                 }
 
 
-
             } else if (user_choice == "2") {
                 //Banque
-
                 invalid_syntax = false;
+
             } else if (user_choice == "3") {
 
 
@@ -326,11 +420,17 @@ void Game::playerTurn() {
                 cin >> sprite_choice;
                 this->player->swapChamp(this->player->getChampions()[i]->getSprite(), sprite_choice);
                 invalid_syntax = false;
+
             } else if (user_choice == "4") {
 
+                cout << YELLOW << this->player->getChampions()[i]->getName() << RESET << " passe son tour de pise (lol)"
+                     << endl;
+                cout << "Appuyez sur une touche puis sur Enter pour passer au champion suivant.." << endl;
                 invalid_syntax = false;
+
+
             } else {
-                cout << "Invalid Syntaxe" << endl;
+                cout << RED << "Invalid syntaxe !" << RESET << endl;
                 invalid_syntax = true;
             }
             //setting the current champ to false
@@ -338,6 +438,7 @@ void Game::playerTurn() {
         }
     }
     cout << "Appuyez sur une touche puis sur Enter pour passer au round suivant.." << endl;
+    this->player->regenMana();
     cin >> user_choice;
 }
 
@@ -367,5 +468,3 @@ Player *Game::getPlayer() {
 void Game::setPlayer(Player *player) {
     this->player = player;
 }
-
-

@@ -90,6 +90,8 @@ public:
         //vector differences
     vector<vector<int> > applyDamage(vector<vector<int> > map, Champion* champ, vector<vector<int> > range);
 
+    void shop(Champion* champion);
+
     //Player implementation
     void playerTurn();
 

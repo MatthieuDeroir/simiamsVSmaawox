@@ -241,7 +241,7 @@ Player* playerInitialization(){
     string username;
     cout << "Saisissez un nom : " << endl;
     cin >> username;
-    Player* player = new Player(username, 30, 0, 100, 0, champs);
+    Player* player = new Player(username, 30, 0,  200, 1, 0, champs);
 
     return player;
 

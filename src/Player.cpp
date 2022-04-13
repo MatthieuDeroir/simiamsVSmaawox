@@ -6,7 +6,7 @@
 #include "../include/Player.h"
 
 
-Player::Player(string name, int hp, int money, int mana, int score, vector<Champion*> champs) {
+Player::Player(string name, int hp, int money, int mana, int mana_regen, int score, vector<Champion*> champs) {
     this->name = name;
     this->max_hp = hp;
     this->hp = hp;
@@ -14,7 +14,7 @@ Player::Player(string name, int hp, int money, int mana, int score, vector<Champ
     this->money = money;
     this->mana = mana;
     this->max_mana = mana;
-    this->mana_regen = 1;
+    this->mana_regen = mana_regen;
     this->score = score;
     this->champs = champs;
 
@@ -82,6 +82,23 @@ int Player::getManaRegen() {
 void Player::setManaRegen(int mana_regen) {
     this->mana = mana_regen;
 }
+
+int Player::getMaxManaBaseCost() {
+    return this->MANA_BASE_COST;
+}
+
+int Player::getManaRegenBaseCost() {
+    return this->MANA_REGEN_BASE_COST;
+}
+
+int Player::getMaxManaBaseUp() {
+    return this->MANA_BASE_UP;
+}
+
+int Player::getManaRegenBaseUp() {
+    return this->MANA_REGEN_BASE_UP;
+}
+
 
 int Player::getScore(){
     return this->score;

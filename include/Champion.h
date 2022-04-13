@@ -14,6 +14,8 @@ private:
     char sprite;
     int att;
     vector<Spell*> spells;
+    int base_cost;
+    bool current_champ;
 public:
     Champion(string name, char sprite, int att, vector<Spell*> spells);
 

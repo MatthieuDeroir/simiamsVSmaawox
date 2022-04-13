@@ -19,6 +19,7 @@ private:
     int max_mana;
     int mana;
     int mana_regen;
+
     int score;
     vector<Champion*> champs;
 
@@ -31,7 +32,7 @@ private:
 
 public:
     //Class Constructor
-    Player(string name, int hp, int money, int mana, int score, vector<Champion*> champs);
+    Player(string name, int hp, int money, int mana, int mana_regen, int score, vector<Champion*> champs);
 
     // Getter & Setter
     string getName();
@@ -57,6 +58,14 @@ public:
 
     int getManaRegen();
     void setManaRegen(int mana);
+
+    int getMaxManaBaseCost();
+
+    int getManaRegenBaseCost();
+
+    int getMaxManaBaseUp();
+
+    int getManaRegenBaseUp();
 
     int getScore();
     void setScore(int score);
