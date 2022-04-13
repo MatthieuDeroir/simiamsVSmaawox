@@ -3,6 +3,7 @@
 //
 
 #include "../include/Spell.h"
+#include "../include/header.h"
 
 Spell::Spell(string name, int price, int manaCost, vector<vector<int> > range) {
     this->name = name;
@@ -59,5 +60,6 @@ void Spell::upgradeSpell() {
                 this->getRange()[i][j]++;
         }
     }
+    setManaCost(count_vec(this->getRange()));
 };
 

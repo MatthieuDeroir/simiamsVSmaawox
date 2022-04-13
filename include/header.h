@@ -44,6 +44,8 @@ void wait();
 
 void color(char p, string color);
 
+int count_vec(vector<vector<int> > vec);
+
 
 #endif //SIMIAMSVSMAAWOX_HEADER_H
 

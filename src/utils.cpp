@@ -77,3 +77,14 @@ void color(char p, string color) { //fonction d'affichage de couleur par ligne
     }
 }
 
+int count_vec(vector<vector<int> > vec){
+    int nb = 0;
+
+    for (int i = 0; i < vec.size(); i++){
+        for (int j = 0; j < vec.size(); j++){
+            nb += vec[i][j];
+        }
+    }
+    return nb;
+}
+

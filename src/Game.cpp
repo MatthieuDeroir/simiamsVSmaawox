@@ -264,10 +264,10 @@ void Game::playerTurn() {
             tmp = getMap();
             cout << "Au tour de " << GREEN << this->player->getChampions()[i]->getName() << endl;
 
-            cout << "1 pour Attaquer" << endl;
-            cout << "2 pour visualiser" << endl;
-            cout << "3 pour visualiser" << endl;
-            cout << "4 pour visualiser" << endl;
+            cout << "1 Attaque" << endl;
+            cout << "2 Boutique" << endl;
+            cout << "3 Changer de position" << endl;
+            cout << "4 Passer son tour" << endl;
             cin >> user_choice;
 
             if (user_choice == "1") { // Attaque
@@ -294,8 +294,8 @@ void Game::playerTurn() {
 
                     invalid_syntax = true;
                     while (invalid_syntax) { // Choix sort
-                        if (user_choice == "1" || user_choice == "2" || user_choice == "3" || user_choice == "4") {
-                            cin >> user_choice;
+                        cin >> user_choice;
+                        if (user_choice == "1" || user_choice == "2" || user_choice == "3" || user_choice == "4" || user_choice == "5") {
                             spell_choice = stoi(user_choice) - 1;
                             invalid_syntax = false;
                         } else {
@@ -317,10 +317,16 @@ void Game::playerTurn() {
 
                 } while (!confirm_spell_choice);
 
-                setMap(this->applyDamage(this->getMap(), this->player->getChampions()[i],this->player->getChampions()[i]->getSpells()[spell_choice]->getRange()));
-                this->player->setMana(this->player->getMana() - this->player->getChampions()[i]->getSpells()[spell_choice]->getManaCost());
-                this->drawEnemyKilled(tmp);
-
+                if (spell_choice != 4){
+                    setMap(this->applyDamage(this->getMap(), this->player->getChampions()[i],
+                                             this->player->getChampions()[i]->getSpells()[spell_choice]->getRange()));
+                    this->player->setMana(this->player->getMana() -
+                                          this->player->getChampions()[i]->getSpells()[spell_choice]->getManaCost());
+                    this->drawEnemyKilled(tmp);
+                }
+                else if (spell_choice == 4) {
+                    invalid_syntax = true;
+                }
 
 
 
