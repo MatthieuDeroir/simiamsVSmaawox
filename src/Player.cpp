@@ -19,10 +19,10 @@ Player::Player(string name, int hp, int money, int mana, int mana_regen, int sco
     this->champs = champs;
 
     //const definition
-    this->MANA_BASE_COST = 0;
-    this->MANA_REGEN_BASE_COST = 0;
-    this->MANA_BASE_UP = 0;
-    this->MANA_REGEN_BASE_UP = 0;
+    this->MANA_BASE_COST = 10;
+    this->MANA_REGEN_BASE_COST = 10;
+    this->MANA_BASE_UP = 10;
+    this->MANA_REGEN_BASE_UP = 10;
 }
 
 

@@ -257,22 +257,33 @@ void Game::shop (Champion* champion){
     string user_choice;
     bool invalid_syntaxte = false;
     cout << "Ame" << endl;
-    cout << "1 - MaxMANA" << endl;
-    cout << "2 - REGENMANA" << endl;
+    cout << "1 - MaxMANA - " << (this->player->getMaxMana()-200)/this->player->getMaxManaBaseUp()*this->player->getMaxManaBaseCost()*2 << "$imiam$" << endl;
+    cout << "2 - REGENMANA - " << (this->player->getManaRegen()-200)/this->player->getManaRegenBaseUp()*this->player->getManaRegenBaseCost()*2 << "$imiam$" << endl;
     cout << "3 - MAXHP" << endl;
     cout << "4 - REGENHP" << endl;
     cout << "5 - ATTAQUE" << endl;
     for(int i = 0; i < champion->getSpells().size(); ++i){
-        cout << i+6 << " - Ameliorer " << champion->getSpells()[i] << endl;
+        cout << i+6 << " - Ameliorer " << champion->getSpells()[i]->getName() << endl;
     }
     cin >> user_choice;
 
     while(!invalid_syntaxte){
         if (user_choice == "1" || user_choice == "2" || user_choice == "3" || user_choice == "4" ||
-             user_choice == "5" || user_choice == "6" || user_choice == "7" || user_choice == "8" || user_choice == "9"){
+            user_choice == "5" || user_choice == "6" || user_choice == "7" || user_choice == "8" || user_choice == "9"){
             if (user_choice == "1"){
-                this->player->setMaxMana((this->player->getMaxMana()-200)/this->player->getMana());
+                if (this->player->getMoney()-((this->player->getMaxMana()-200)/this->player->getMaxManaBaseUp()*this->player->getMaxManaBaseCost()*2)>=0){
+                    this->player->setMaxMana(this->player->getMaxMana() + this->player->getMaxManaBaseUp());
+                    this->player->setMoney(this->player->getMoney()-((this->player->getMaxMana()-200)/this->player->getMaxManaBaseUp()*this->player->getMaxManaBaseCost()*2));
+                }else{
+                    cout << RED << "$imiam$ insuffisant" << RESET <<endl;
+                }
             }else if (user_choice == "2"){
+                if (this->player->getMoney()-((this->player->getManaRegen()-200)/this->player->getManaRegenBaseUp()*this->player->getManaRegenBaseCost()*2)>=0){
+                    this->player->setManaRegen(this->player->getManaRegen() + this->player->getManaRegenBaseUp());
+                    this->player->setMoney(this->player->getMoney()-((this->player->getManaRegen()-200)/this->player->getManaRegenBaseUp()*this->player->getManaRegenBaseCost()*2));
+                }else{
+                    cout << RED << "$imiam$ insuffisant" << RESET <<endl;
+                }
 
             }else if (user_choice == "3"){
 
