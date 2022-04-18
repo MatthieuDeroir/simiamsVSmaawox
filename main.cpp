@@ -21,8 +21,6 @@ int main() {
         string usr_input = " ";
         system("clear");
 
-
-
         Player *player = playerInitialization();
 
         Game *game = new Game(9, 9, player);

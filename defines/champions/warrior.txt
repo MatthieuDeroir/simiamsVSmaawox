@@ -1,0 +1,16 @@
+champ_s1_range:
+champ_s1_name:
+
+champ_s2_range:
+champ_s2_name:
+
+champ_s3_range:
+champ_s3_name:
+
+champ_s4_range:
+champ_s4_name:
+
+champ_name:
+champ_sprite:
+champ_attack:
+

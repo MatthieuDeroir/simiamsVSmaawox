@@ -50,28 +50,63 @@ void Game::startMenu() {
 void Game::helpMenu(){
     system("clear");
     string user_input = "\0";
-    cout << BGBLACK << "###############################################################################################" << RESET << endl;
-    cout << BGBLACK << "#                                 Bienvenue dans " << MAGENTA << "Simsim" << RESET << BGBLACK << " vs " << YELLOW << BGBLACK << "Maawox" << RESET << BGBLACK << "                             #" << RESET << endl;
-    cout << BGBLACK << "###############################################################################################" << RESET << endl;
-    cout << BGBLACK << "# Vous êtes sur le point d'entrer dans un univers plein de dangers...#" << RESET << endl;
-    cout << BGBLACK << "# Les Simsims, petites créatures aussi têtues qu'hostiles ont décidées d'envahir le Royaume #" << RESET << endl;
-    cout << BGBLACK << "# Vous êtes chargés de l'organisation de la défense du royaume à l'aide des champions du Roi #" << RESET << endl;
-    cout << BGBLACK << "# Vous devrez tout d'abord selectionner 3 champions parmi ceux disponibles #" << RESET << endl;
-    cout << BGBLACK << "# A chaque round un nombre aléatoire de Simsim apparaitra #" << RESET << endl;
-    cout << BGBLACK << "# Mais attention, ce nombre s'accroit en fonction du nombre de round écoulé #" << RESET << endl;
-    cout << BGBLACK << "# Vous perdrez des" << GREEN << BGBLACK <<  " Points de Vies " << RESET << BGBLACK << "à chaque fois qu'un Simsim parviendra à passer vos défenses #" << RESET << endl;
-    cout << BGBLACK << "# Vous perdez lorsque vous n'avez plus de" << GREEN << BGBLACK <<  " Points de Vies " << RESET << BGBLACK << "!" << RESET << endl;
-    cout << BGBLACK << "# Un round se décompose en trois parties qui correspondent au tour de chaque champion #" << RESET << endl;
-    cout << BGBLACK << "# Chaque champion pourra effectuer une action parmi 4 : #" << RESET << endl;
-    cout << BGBLACK << "# " << RED << "Attaquer " << RESET << BGBLACK << " : selection d'un sort à utiliser #" << RESET << endl;
-    cout << BGBLACK << "# " << RED << "Boutique " << RESET << BGBLACK << " : selection d'un sort ou d'une caracteristique à améliorer #" << RESET << endl;
-    cout << BGBLACK << "# " << RED << "Changer de position " << RESET << BGBLACK << " : selection d'un champion avec lequel échanger sa place #" << RESET << endl;
-    cout << BGBLACK << "# " << RED << "Passer son tour " << RESET << BGBLACK << " : passe le tour du champion #" << RESET << endl;
-    cout << BGBLACK << "# Chaque sort coute du" << BLUE << BGBLACK << " Manawox " << RESET << BGBLACK << "en fonction de sa puissance #" << RESET << endl;
-    cout << BGBLACK << "# Vous récupérez des point de" << BLUE << BGBLACK << " Manawox " << RESET << BGBLACK << " à chaque round #" << RESET << endl;
-    cout << BGBLACK << "# Vous gagnez des" << YELLOW << BGBLACK << " $imiams " << RESET << BGBLACK << ", la monnaie du jeu, en fonction du nombre des dégats infligés #" << RESET << endl;
-    cout << BGBLACK << "# Ces" << YELLOW << BGBLACK << " $imiams " << RESET << BGBLACK << ", vous permettront d'acheter des améliorations dans la boutique #" << RESET << endl;
-    cout << BGBLACK << "###############################################################################################" << RESET << endl;
+    cout << BGBLACK << "###############################################################################################"
+         << RESET << endl;
+    cout << BGBLACK << "#                                 Bienvenue dans " << MAGENTA << "Simsim" << RESET << BGBLACK
+         << " vs " << YELLOW << BGBLACK << "Maawox" << RESET << BGBLACK << "                             #" << RESET
+         << endl;
+    cout << BGBLACK << "###############################################################################################"
+         << RESET << endl;
+    cout << BGBLACK << "# Vous êtes sur le point d'entrer dans un univers rempli de dangers...                        #"
+         << RESET << endl;
+    cout << BGBLACK << "# Les Simsims, petites créatures aussi têtues qu'hostiles ont décidé d'envahir le Royaume     #"
+         << RESET << endl;
+    cout << BGBLACK << "# Vous êtes chargés de l'organisation de la défense du royaume à l'aide des champions du Roi  #"
+         << RESET << endl;
+    cout << BGBLACK << "###############################################################################################"
+         << RESET << endl;
+    cout << BLACK << BGWHITE
+         << "#                                       Phase de préparation                                  #" << RESET
+         << endl;
+    cout << BGBLACK << "###############################################################################################"
+         << RESET << endl;
+    cout << BGBLACK << "# Vous devrez tout d'abord selectionner 3 champions parmi ceux disponibles                    #"
+         << RESET << endl;
+    cout << BGBLACK << "###############################################################################################"
+         << RESET << endl;
+    cout << BLACK << BGWHITE
+         << "#                                       Phase de jeu                                          #" << RESET
+         << endl;
+    cout << BGBLACK << "# A chaque round un nombre aléatoire de Simsim apparaitra                                     #"
+         << RESET << endl;
+    cout << BGBLACK << "# Mais attention, ce nombre s'accroit en fonction du nombre de round écoulé                   #"
+         << RESET << endl;
+    cout << BGBLACK << "# Vous perdrez des" << GREEN << BGBLACK << " Points de Vies " << RESET << BGBLACK
+         << "à chaque fois qu'un Simsim parviendra à passer vos défenses #" << RESET << endl;
+    cout << BGBLACK << "# Vous perdez lorsque vous n'avez plus de" << GREEN << BGBLACK << " Points de Vies " << RESET
+         << BGBLACK << "!                                    #" << RESET << endl;
+    cout << BGBLACK << "# Un round se décompose en trois parties qui correspondent au tour de chaque champion         #"
+         << RESET << endl;
+    cout << BGBLACK << "# Chaque champion pourra effectuer une action parmi 4 :                                       #"
+         << RESET << endl;
+    cout << BGBLACK << "# " << RED << "Attaquer " << RESET << BGBLACK
+         << " : selection d'un sort à utiliser                                                  #" << RESET << endl;
+    cout << BGBLACK << "# " << RED << "Boutique " << RESET << BGBLACK
+         << " : selection d'un sort ou d'une caracteristique à améliorer                        #" << RESET << endl;
+    cout << BGBLACK << "# " << RED << "Changer de position " << RESET << BGBLACK
+         << " : selection d'un champion avec lequel échanger sa place                #" << RESET << endl;
+    cout << BGBLACK << "# " << RED << "Passer son tour " << RESET << BGBLACK
+         << " : passe le tour du champion                                                #" << RESET << endl;
+    cout << BGBLACK << "# Chaque sort coute du" << BLUE << BGBLACK << " Manawox " << RESET << BGBLACK
+         << "en fonction de sa puissance                                    #" << RESET << endl;
+    cout << BGBLACK << "# Vous récupérez des point de" << BLUE << BGBLACK << " Manawox " << RESET << BGBLACK
+         << " à chaque round                                         #" << RESET << endl;
+    cout << BGBLACK << "# Vous gagnez des" << YELLOW << BGBLACK << " $imiam$ " << RESET << BGBLACK
+         << ", la monnaie du jeu, en fonction du nombre des dégats infligés      #" << RESET << endl;
+    cout << BGBLACK << "# Ces" << YELLOW << BGBLACK << " $imiam$ " << RESET << BGBLACK
+         << ", vous permettront d'acheter des améliorations dans la boutique                 #" << RESET << endl;
+    cout << BGBLACK << "###############################################################################################"
+         << RESET << endl;
     cout << "Appuyer sur une touche puis sur Entrer pour revenir au menu principal..." << endl;
     cin >> user_input;
 }
@@ -87,7 +122,17 @@ void Game::optionsMenu(){
 bool Game::gameOverMenu() {
     string user_input;
     system("clear");
-    cout << "GAME OVER" << endl << "Voulez vous rejouer ?(y/n)" << endl;
+    cout << RED << "@@@@@@@@   @@@@@@   @@@@@@@@@@   @@@@@@@@      @@@@@@   @@@  @@@  @@@@@@@@  @@@@@@@" << endl;
+    cout << "@@@@@@@@@  @@@@@@@@  @@@@@@@@@@@  @@@@@@@@     @@@@@@@@  @@@  @@@  @@@@@@@@  @@@@@@@@" << endl;
+    cout << "!@@        @@!  @@@  @@! @@! @@!  @@!          @@!  @@@  @@!  @@@  @@!       @@!  @@@" << endl;
+    cout << "!@!        !@!  @!@  !@! !@! !@!  !@!          !@!  @!@  !@!  @!@  !@!       !@!  @!@" << endl;
+    cout << "!@! @!@!@  @!@!@!@!  @!! !!@ @!@  @!!!:!       @!@  !@!  @!@  !@!  @!!!:!    @!@!!@!" << endl;
+    cout << " !! !!@!!  !!!@!!!!  !@!   ! !@!  !!!!!:       !@!  !!!  !@!  !!!  !!!!!:    !!@!@!" << endl;
+    cout << ":!!   !!:  !!:  !!!  !!:     !!:  !!:          !!:  !!!  :!:  !!:  !!:       !!: :!!" << endl;
+    cout << ":!:   !::  :!:  !:!  :!:     :!:  :!:          :!:  !:!   ::!!:!   :!:       :!:  !:!" << endl;
+    cout << "::: ::::  ::   :::  :::     ::    :: ::::     ::::: ::    ::::     :: ::::  ::   :::" << endl;
+    cout << " :: :: :    :   : :   :      :    : :: ::       : :  :      :      : :: ::    :   : :" << RESET << endl;
+    cout << endl << "Voulez vous rejouer ?(y/n)" << endl;
     cin >> user_input;
 
     return (user_input == "y");
@@ -170,7 +215,7 @@ vector<vector<int> > Game::push_row(vector<vector<int> > vec) {
 }
 
 vector<vector<int> > Game::spawner(vector<vector<int> > vec, int round) {
-    int en_nb = (rand() % ((1 + round) * round)) + 1;
+    int en_nb = (rand() % ((1 + round))) + 1;
 
     cout << en_nb << endl;
 
@@ -313,7 +358,7 @@ vector<vector<int> > Game::applyDamage(vector<vector<int> > map, Champion *champ
                     dmg_alea = map[i][j];
                 }
                 map[i][j] -= dmg_alea;
-                this->player->setMoney(this->player->getMoney() + dmg_alea);
+                this->player->setMoney(this->player->getMoney() + (dmg_alea * this->round));
                 if (dmg_alea) {
                     cout << "Attaque réussie en " << GREEN << "[" << i << "," << j << "]" << RESET << " !" << endl;
                     cout << "Vous infligez " << GREEN << dmg_alea << " dégats ! " << RESET << " !" << endl;
@@ -328,67 +373,237 @@ vector<vector<int> > Game::applyDamage(vector<vector<int> > map, Champion *champ
     return map;
 }
 
+
 void Game::shop(Champion *champion) {
     string user_choice;
+    bool flag = false;
     bool invalid_syntaxte = false;
-    cout << "Ame" << endl;
-    cout << "1 - MaxMANA - "
-         << (this->player->getMaxMana() - 200) / this->player->getMaxManaBaseUp() * this->player->getMaxManaBaseCost() *
-            2 << "$imiam$" << endl;
-    cout << "2 - REGENMANA - " << (this->player->getManaRegen() - 200) / this->player->getManaRegenBaseUp() *
-                                  this->player->getManaRegenBaseCost() * 2 << "$imiam$" << endl;
-    cout << "3 - MAXHP" << endl;
-    cout << "4 - REGENHP" << endl;
-    cout << "5 - ATTAQUE" << endl;
-    for (int i = 0; i < champion->getSpells().size(); ++i) {
-        cout << i + 6 << " - Ameliorer " << champion->getSpells()[i]->getName() << endl;
-    }
-    cin >> user_choice;
+    while (!flag) {
+        cout << "Boutique " << this->player->getMoney() << " $imiam$" << endl << endl;
+        cout << "1 - Stat" << endl;
+        cout << "2 - Potions" << endl;
+        cout << "3 - Champion" << endl;
+        cin >> user_choice;
 
-    while (!invalid_syntaxte) {
-        if (user_choice == "1" || user_choice == "2" || user_choice == "3" || user_choice == "4" ||
-            user_choice == "5" || user_choice == "6" || user_choice == "7" || user_choice == "8" ||
-            user_choice == "9") {
-            if (user_choice == "1") {
-                if (this->player->getMoney() - ((this->player->getMaxMana() - 200) / this->player->getMaxManaBaseUp() *
-                                                this->player->getMaxManaBaseCost() * 2) >= 0) {
-                    this->player->setMaxMana(this->player->getMaxMana() + this->player->getMaxManaBaseUp());
-                    this->player->setMoney(this->player->getMoney() -
-                                           ((this->player->getMaxMana() - 200) / this->player->getMaxManaBaseUp() *
-                                            this->player->getMaxManaBaseCost() * 2));
+        if (user_choice == "1") {
+            invalid_syntaxte = false;
+            while(!invalid_syntaxte) {
+                cout << "Boutique " << this->player->getMoney() << " $imiam$" << endl << endl;
+                if (this->player->getMaxMana() == this->player->getManaBase()) {
+                    cout << "1 - MaxMANA - " << this->player->getMaxManaBaseCost() << " $imiam$  "
+                         << this->player->getMaxMana()
+                         << " Manawox Max." << endl;
                 } else {
-                    cout << RED << "$imiam$ insuffisant" << RESET << endl;
+                    cout << "1 - MaxMANA - "
+                         << (this->player->getMaxMana() - this->player->getManaBase()) /
+                            this->player->getMaxManaBaseUp() *
+                            this->player->getMaxManaBaseCost() * 2 << "$imiam$  "
+                         << this->player->getMaxMana() << " Manawox Max." << endl;
                 }
-            } else if (user_choice == "2") {
-                if (this->player->getMoney() -
-                    ((this->player->getManaRegen() - 200) / this->player->getManaRegenBaseUp() *
-                     this->player->getManaRegenBaseCost() * 2) >= 0) {
-                    this->player->setManaRegen(this->player->getManaRegen() + this->player->getManaRegenBaseUp());
-                    this->player->setMoney(this->player->getMoney() -
-                                           ((this->player->getManaRegen() - 200) / this->player->getManaRegenBaseUp() *
-                                            this->player->getManaRegenBaseCost() * 2));
+                if (this->player->getManaRegen() == this->player->getManaRegenBase()) {
+                    cout << "2 - REGENMANA - " << this->player->getManaRegenBaseCost() << "$imiam$  "
+                         << this->player->getManaRegen() << " Manawox/Tour" << endl;
                 } else {
-                    cout << RED << "$imiam$ insuffisant" << RESET << endl;
+                    cout << "2 - REGENMANA - " << (this->player->getManaRegen() - this->player->getManaRegenBase()) /
+                                                  this->player->getManaRegenBaseUp() *
+                                                  this->player->getManaRegenBaseCost() * 2 << "$imiam$  "
+                         << this->player->getManaRegen() << " Manawox/Tour" << endl;
                 }
+                if (this->player->getMaxHp() == this->player->getHpBase()) {
+                    cout << "3 - MaxHP - " << this->player->getMaxHpBaseCost() << "$imiam$  "
+                         << this->player->getMaxHp()
+                         << " Hp Max." << endl;
+                } else {
+                    cout << "3 - MaxHP - "
+                         << (this->player->getMaxHp() - (this->player->getHpBase() / this->player->getMaxHpBaseUp()) *
+                                                        this->player->getMaxHpBaseCost() * 2) << "$imiam$  "
+                         << this->player->getMaxHp()
+                         << " Hp Max." << endl;
+                }
+                cout << "4 - retour" << endl;
+                cin >> user_choice;
 
-            } else if (user_choice == "3") {
+                if (user_choice == "1") {
+                    if (this->player->getMoney() -
+                        ((this->player->getMaxMana() - this->player->getManaBase()) / this->player->getMaxManaBaseUp() *
+                         this->player->getMaxManaBaseCost() * 2) >= 0 &&
+                        this->player->getMaxMana() > this->player->getManaBase()) {
+                        this->player->setMoney(this->player->getMoney() -
+                                               ((this->player->getMaxMana() - this->player->getManaBase()) /
+                                                this->player->getMaxManaBaseUp() *
+                                                this->player->getMaxManaBaseCost() * 2));
+                        this->player->setMaxMana(this->player->getMaxMana() + this->player->getMaxManaBaseUp());
+                    } else if (this->player->getMaxMana() == this->player->getManaBase() && this->player->getMoney() -
+                                                                                            ((this->player->getMaxMana() -
+                                                                                              this->player->getManaBase()) /
+                                                                                             this->player->getMaxManaBaseUp() *
+                                                                                             this->player->getMaxManaBaseCost() *
+                                                                                             2) >= 0) {
+                        this->player->setMoney(this->player->getMoney() - this->player->getMaxManaBaseCost());
+                        this->player->setMaxMana(this->player->getMaxMana() + this->player->getMaxManaBaseUp());
+                    } else {
+                        cout << RED << "$imiam$ insuffisant" << RESET << endl;
+                        invalid_syntaxte = false;
+                    }
 
-            } else if (user_choice == "4") {
+                } else if (user_choice == "2") {
+                    if (this->player->getMoney() -
+                        ((this->player->getManaRegen() - this->player->getManaRegenBase()) / this->player->getManaRegenBaseUp() * this->player->getManaRegenBaseCost() * 2) >= 0 && this->player->getManaRegen() > this->player->getManaRegenBase())                        this->player->setMoney(this->player->getMoney() -
+                                               ((this->player->getManaRegen() - this->player->getManaRegenBase()) /
+                                                this->player->getManaRegenBaseUp() *
+                                                this->player->getManaRegenBaseCost() * 2)){
+                        this->player->setManaRegen(this->player->getManaRegen() + this->player->getManaRegenBaseUp());
+                    } else if (this->player->getManaRegen() == this->player->getManaRegenBase() && this->player->getMoney() >= this->player->getManaRegenBaseCost() * 2) {
+                        cout << "acac";
+                        this->player->setMoney(this->player->getMoney() - this->player->getManaRegenBaseCost());
+                        this->player->setManaRegen(this->player->getManaRegen() + this->player->getManaRegenBaseUp());
+                    } else {
+                        cout << RED << "$imiam$ insuffisant" << RESET << endl;
+                        invalid_syntaxte = false;
+                    }
 
-            } else if (user_choice == "5") {
 
-            } else if (user_choice == "6") {
-
-            } else if (user_choice == "7") {
-
-            } else if (user_choice == "8") {
-
-            } else if (user_choice == "9") {
-
+                } else if (user_choice == "3") {
+                    if (this->player->getMoney() -
+                        ((this->player->getMaxHp() - this->player->getHpBase()) / this->player->getMaxHpBaseUp() *
+                         this->player->getMaxHpBaseCost() * 2) >= 0 &&
+                        this->player->getMaxHp() > this->player->getHpBase()) {
+                        this->player->setMoney(this->player->getMoney() -
+                                               ((this->player->getMaxHp() - this->player->getHpBase()) /
+                                                this->player->getMaxHpBaseUp() *
+                                                this->player->getMaxHpBaseCost() * 2));
+                        this->player->setMaxHp(this->player->getMaxHp() + this->player->getMaxHpBaseUp());
+                    } else if (this->player->getMaxHp() == this->player->getHpBase() && this->player->getMoney() -
+                                                                                        ((this->player->getMaxHp() -
+                                                                                          this->player->getHpBase()) /
+                                                                                         this->player->getMaxHpBaseUp() *
+                                                                                         this->player->getMaxHpBaseCost() *
+                                                                                         2) >= 0) {
+                        this->player->setMoney(this->player->getMoney() - this->player->getMaxHpBaseCost());
+                        this->player->setMaxHp(this->player->getMaxHp() + this->player->getMaxHpBaseUp());
+                    } else {
+                        cout << RED << "$imiam$ insuffisant" << RESET << endl;
+                        invalid_syntaxte = false;
+                    }
+                } else if (user_choice == "4") {
+                    invalid_syntaxte = true;
+                } else {
+                    cout << RED << "Invalid syntaxte" << RESET << endl;
+                    invalid_syntaxte = false;
+                }
             }
+        } else if (user_choice == "2") {
+            invalid_syntaxte = false;
+            while (!invalid_syntaxte) {
+                cout << "Boutique " << this->player->getMoney() << " $imiam$" << endl << endl;
+                cout << this->player->getHp() << "/" << this->player->getMaxHp() << " Hp / "
+                     << this->player->getMoney() << " $imiam$" << endl;
+                cout << "1 - Potion vie minime " << this->player->getHpPotion10() << " HP / " << "10 $imiam$"
+                     << endl;
+                cout << "2  -Potion vie Un peu cool " << this->player->getHpPotion50() << " HP / "
+                     << "50 $imiam$" << endl;
+                cout << "3 - Potion regen au max " << this->player->getHpPotionMax() << " HP / "
+                     << this->player->getMaxHp() / 2 << "$imiam$" << endl;
+                cin >> user_choice;
 
+                if (user_choice == "1" || user_choice == "2" || user_choice == "3" || user_choice == "4") {
+                    if (user_choice != "4") {
+                        if (user_choice == "1") {
+                            if (this->player->getMoney() >= 40) {
+                                if (this->player->getHp() - this->player->getMaxHp() >
+                                    this->player->getHpPotion10()) {
+                                    cout << "Vous buvez de l'eau " << this->player->getName() << " gagne "
+                                         << this->player->getHpPotion10() << " HP" << endl;
+                                    this->player->setHp(this->player->getHp() + this->player->getHpPotion10());
+                                    this->player->setMoney(this->player->getMoney() - 10);
+                                } else if (this->player->getHp() - this->player->getMaxHp() <
+                                           this->player->getHpPotion10()) {
+                                    cout << "Vous buvez de l'eau " << this->player->getName() << " gagne "
+                                         << this->player->getHp() - this->player->getMaxHp() << endl;
+                                    this->player->setHp(this->player->getMaxHp());
+                                    this->player->setMoney(this->player->getMoney() - 10);
+                                }
+                            } else {
+                                cout << RED << "$imiam$ insuffisant" << RESET << endl;
+                            }
+                        } else if (user_choice == "2") {
+                            if (this->player->getMoney() >= 40) {
+                                if (this->player->getHp() - this->player->getMaxHp() >
+                                    this->player->getHpPotion50()) {
+                                    cout << "Vous buvez de l'alcool " << this->player->getName() << " gagne "
+                                         << this->player->getHpPotion50() << " HP" << endl;
+                                    this->player->setHp(this->player->getHp() + this->player->getHpPotion50());
+                                    this->player->setMoney(this->player->getMoney() - 50);
+                                } else if (this->player->getHp() - this->player->getMaxHp() <
+                                           this->player->getHpPotion50()) {
+                                    cout << "Vous buvez de l'alcool " << this->player->getName() << " gagne "
+                                         << this->player->getHp() - this->player->getMaxHp() << endl;
+                                    this->player->setHp(this->player->getMaxHp());
+                                    this->player->setMoney(this->player->getMoney() - 50);
+                                }
+                            } else {
+                                cout << RED << "$imiam$ insuffisant" << RESET << endl;
+                            }
+                        } else if (user_choice == "3") {
+                            if (this->player->getMoney() >= this->player->getMaxHp() / 2) {
+                                cout << "Vous buvez beaucoup d'alcool" << this->player->getName() << " gagne "
+                                     << this->player->getHp() - this->player->getMaxHp() << " HP" << endl;
+                                this->player->setHp(this->player->getMaxHp());
+                                this->player->setMoney(this->player->getMoney() - this->player->getMaxHp() / 2);
+                            } else {
+                                cout << RED << "$imiam$ insuffisant" << RESET << endl;
+                            }
+                        }
+                    } else if (user_choice == "4") {
+                        invalid_syntaxte = true;
+                    }
+                } else {
+                    invalid_syntaxte = false;
+                }
+            }
+        } else if (user_choice == "3") {
+            invalid_syntaxte = false;
+            while (!invalid_syntaxte) {
+                cout << "Boutique " << this->player->getMoney() << " $imiam$" << endl << endl;
+                cout << "1 - ATTAQUE - " << champion->getAtt() * 100 << " $imiam$" << endl;
+                for (int i = 0; i < champion->getSpells().size(); ++i) {
+                    cout << i + 2 << " - Ameliorer " << champion->getSpells()[i]->getName() << " - "
+                         << count_vec(champion->getSpells()[i]->getRange()) * 2 << " $imiam$" << endl;
+                }
+                cout << "6 - Retour" << endl;
+                cin >> user_choice;
+                if (user_choice == "1") {
+                    if (this->player->getMoney() - champion->getAtt() * 100 >= 0) {
+                        champion->upgradeAtt();
+                        cout << champion->getName() << " gagne 1 point d'attaque // Att: " << champion->getAtt()
+                             << endl;
+                        this->player->setMoney(this->player->getMoney() - champion->getAtt() * 100);
+                    } else {
+                        cout << RED << "$imiam$ insuffisant" << RESET << endl;
+                    }
+                } else if (user_choice == "2" || user_choice == "3" || user_choice == "4" ||
+                           user_choice == "5") {
+                    if (this->player->getMoney() -
+                        count_square(champion->getSpells()[stoi(user_choice) - 2]->getRange()) * 2 >= 0) {
+                        champion->getSpells()[stoi(user_choice) - 2]->upgradeSpell();
+                        cout << "Vous ameliorez l'attaque de "
+                             << champion->getSpells()[stoi(user_choice) - 2]->getName()
+                             << endl;
+                        this->player->setMoney(this->player->getMoney() -
+                                               count_square(champion->getSpells()[stoi(user_choice) - 2]->getRange()) *
+                                               2);
+
+                    } else {
+                        cout << RED << "$imiam$ insuffisant" << RESET << endl;
+                    }
+                }else{
+                    invalid_syntaxte = true;
+                }
+            }
         } else {
-            invalid_syntaxte = true;
+            flag = true;
+            //mis a jour de la range quand on quitte le shop
+            this->player->rangeUpdate();
         }
     }
 }
@@ -409,12 +624,15 @@ void Game::playerTurn() {
             tmp = getMap();
             system("clear");
             this->draw();
-            cout << "Au tour de " << GREEN << this->player->getChampions()[i]->getName() << endl;
+            cout << "# Au tour de " << MAGENTA << this->player->getChampions()[i]->getName() << RESET << "            #"
+                 << endl;
+            cout << "##############################" << endl;
+            cout << "# 1 - Attaque                #" << endl;
+            cout << "# 2 - Boutique               #" << endl;
+            cout << "# 3 - Changer de position    #" << endl;
+            cout << "# 4 - Passer son tour        #" << endl;
+            cout << "##############################" << endl;
 
-            cout << "1 Attaque" << endl;
-            cout << "2 Boutique" << endl;
-            cout << "3 Changer de position" << endl;
-            cout << "4 Passer son tour" << endl;
             cin >> user_choice;
 
             if (user_choice == "1") { // Attaque

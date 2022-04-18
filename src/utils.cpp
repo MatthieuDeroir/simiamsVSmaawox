@@ -11,19 +11,19 @@ void print(string str) { // un print basique pour le debug
     cout << str << endl;
 }
 
-void wait(){ //fonction de pause mais ne fonctionne pas avec le terminal Clion
+void wait() { //fonction de pause mais ne fonctionne pas avec le terminal Clion
     cout << "Appuyez sur une touche pour continuer..." << endl;
-    system ("/bin/stty raw");
+    system("/bin/stty raw");
     getchar();
     system("/bin/stty cooked");
 }
 
 
-vector<vector<int> > rwVector(int index_multiplier, vector<vector<int> > cubic_vec){
-    vector<vector<int> > vec(9, vector<int> (9, 0));
-    for (int i = 0; i < cubic_vec.size(); i++){
-        for (int j = 0; j < cubic_vec[i].size(); j++){
-            vec[i][j+(3*index_multiplier)] = cubic_vec[i][j];
+vector<vector<int> > rwVector(int index_multiplier, vector<vector<int> > cubic_vec) {
+    vector<vector<int> > vec(9, vector<int>(9, 0));
+    for (int i = 0; i < cubic_vec.size(); i++) {
+        for (int j = 0; j < cubic_vec[i].size(); j++) {
+            vec[i][j + (3 * index_multiplier)] = cubic_vec[i][j];
         }
     }
     return vec;
@@ -88,19 +88,39 @@ void color(char p, string color) { //fonction d'affichage de couleur par ligne
     }
 }
 
-int count_vec(vector<vector<int> > vec){
+int count_vec(vector<vector<int> > vec) {
     int nb = 0;
 
-    for (int i = 0; i < vec.size() - 1; i++){
-        for (int j = 0; j < vec.size() - 1; j++){
+    for (int i = 0; i < vec.size(); i++) {
+        for (int j = 0; j < vec[i].size(); j++) {
             nb += vec[i][j];
         }
     }
-    return nb/3;
+    return nb;
 }
 
-void multiprint(string str, int nb){
-    for (int i = 0; i < nb; i++){
+int count_square(vector<vector<int> > vec) {
+    int nb = 0;
+
+    for (int i = 0; i < vec.size(); i++) {
+        for (int j = 0; j < vec[i].size(); j++) {
+            if (vec[i][j] > 0) {
+                nb += 1;
+            }
+        }
+    }
+    return nb;
+}
+
+int balanceManaCost(vector<vector<int> > vec) {
+    int manacost = 0;
+    manacost += count_square(vec);
+    manacost = manacost * 1 + (count_vec(vec) / 10);
+    return manacost;
+}
+
+void multiprint(string str, int nb) {
+    for (int i = 0; i < nb; i++) {
         cout << str;
     }
 }

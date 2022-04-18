@@ -45,6 +45,8 @@ void wait();
 void color(char p, string color);
 
 int count_vec(vector<vector<int> > vec);
+int count_square(vector<vector<int> > vec);
+int balanceManaCost(vector<vector<int> > vec);
 
 void multiprint(string str, int nb);
 

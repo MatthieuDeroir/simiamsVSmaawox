@@ -49,10 +49,11 @@ void Spell::setRange(vector<vector<int> > range) {
 }
 
 
-vector<vector<int> > Spell::getBaseRange(){
+vector<vector<int> > Spell::getBaseRange() {
     return this->base_range;
 }
-void Spell::setBaseRange(vector<vector<int> > base_range){
+
+void Spell::setBaseRange(vector<vector<int> > base_range) {
     this->base_range = base_range;
 }
 
@@ -63,12 +64,20 @@ void Spell::toString() {
 
 //Methods
 void Spell::upgradeSpell() {
-    for (int i = 0; i < this->getBaseRange().size() - 1; i++) {
-        for (int j = 0; j < this->getBaseRange()[i].size() - 1; j++) {
-            if (this->getBaseRange()[i][j] > 0)
-                this->getBaseRange()[i][j]++;
+    vector<vector<int> > newRange(9, vector<int>(3, 0));
+    for (int i = 0; i < this->getBaseRange().size(); i++) {
+        for (int j = 0; j < this->getBaseRange()[i].size(); j++) {
+            if (this->getBaseRange()[i][j] > 0){
+                newRange[i][j] = this->getBaseRange()[i][j] + 1;
+                cout << (i+1)*(j+1) << endl;
+            }
+            else {
+                newRange[i][j] = 0;
+            }
+
         }
     }
-    setManaCost(count_vec(this->getBaseRange()));
+    this->setBaseRange(newRange);
+    setManaCost(balanceManaCost(this->getBaseRange()));
 };
 
