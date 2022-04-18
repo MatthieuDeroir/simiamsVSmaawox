@@ -76,17 +76,17 @@ static vector<vector<vector<int> > > rangesInitialization() {
 
     vector<vector<int> > range_m_2 = {
             {0, 2, 0},
+            {0, 0, 2},
+            {0, 2, 0},
             {2, 0, 0},
             {0, 2, 0},
-            {0, 2, 0},
-            {0, 0, 2},
             {0, 0, 2},
             {0, 2, 0},
             {2, 0, 0},
             {0, 2, 0},
     };
     vector<vector<int> > range_m_3 = {
-            {0, 0, 0},
+            {2, 3, 2},
             {0, 2, 0},
             {0, 2, 0},
             {2, 3, 2},
@@ -115,15 +115,15 @@ static vector<vector<vector<int> > > rangesInitialization() {
 
     //range sorts warrior
     vector<vector<int> > range_w_1 = {
-            {0, 3, 0},
-            {0, 3, 0},
-            {0, 3, 0},
-            {0, 3, 0},
-            {0, 3, 0},
-            {0, 3, 0},
-            {0, 3, 0},
-            {0, 3, 0},
-            {0, 3, 0},
+            {1, 2, 1},
+            {0, 2, 0},
+            {0, 2, 0},
+            {0, 2, 0},
+            {0, 2, 0},
+            {0, 2, 0},
+            {0, 2, 0},
+            {0, 2, 0},
+            {1, 2, 1},
     };
     vector<vector<int> > range_w_2 = {
             {0, 0, 0},
@@ -137,15 +137,15 @@ static vector<vector<vector<int> > > rangesInitialization() {
             {5, 5, 5},
     };
     vector<vector<int> > range_w_3 = {
+            {3, 3, 3},
+            {0, 0, 0},
+            {3, 3, 3},
+            {0, 0, 0},
+            {3, 3, 3},
+            {0, 0, 0},
+            {3, 3, 3},
             {0, 0, 0},
             {0, 0, 0},
-            {0, 0, 0},
-            {0, 0, 0},
-            {0, 0, 0},
-            {0, 0, 0},
-            {0, 0, 0},
-            {0, 5, 0},
-            {7, 7, 7},
     };
     vector<vector<int> > range_w_4 = {
             {0, 0, 0},
@@ -302,7 +302,7 @@ static vector<vector<Spell *> > spellInitialization() {
     //warrior spells
     Spell *spell_w_1 = new Spell("Berzerk", 100, balanceManaCost(ranges[i]), ranges[i++]);
     Spell *spell_w_2 = new Spell("Tournoiement de hache", 100, balanceManaCost(ranges[i]), ranges[i++]);
-    Spell *spell_w_3 = new Spell("Coup de boule", 100, balanceManaCost(ranges[i]), ranges[i++]);
+    Spell *spell_w_3 = new Spell("Onde de choc", 100, balanceManaCost(ranges[i]), ranges[i++]);
     Spell *spell_w_4 = new Spell("Furie sanguinaire", 100, balanceManaCost(ranges[i]), ranges[i++]);
 
     spells_w.push_back(spell_w_1);
@@ -381,7 +381,7 @@ Player *playerInitialization() {
         champs.erase(find(champs.begin(), champs.end(), champs[stoi(user_choice) - 1]));
     }
 
-    Player *player = new Player(username, 30, 10000, 200, 1, 0, user_champs);
+    Player *player = new Player(username, 30, 100, 100, 10, 0, user_champs);
 
     return player;
 

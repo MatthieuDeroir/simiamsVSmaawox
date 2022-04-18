@@ -5,9 +5,8 @@
 #include "../include/header.h"
 #include "../include/Game.h"
 
-//TODO Create a Level Object which will contains all specificity of a given level
-// (difficulty, terrain type, enemy type etc...)
-// this would allow us to create a level selector, or even a campaign;
+//TODO Bug when upgrading attack with the first character,
+// it spend twice the amount of simiams and switch to the next champ (maybe upgrading his attack to)
 
 
 
@@ -150,7 +149,8 @@ bool Game::gameOverMenu() {
     cout << ":!!   !!:  !!:  !!!  !!:     !!:  !!:          !!:  !!!  :!:  !!:  !!:       !!: :!!" << endl;
     cout << ":!:   !::  :!:  !:!  :!:     :!:  :!:          :!:  !:!   ::!!:!   :!:       :!:  !:!" << endl;
     cout << "::: ::::  ::   :::  :::     ::    :: ::::     ::::: ::    ::::     :: ::::  ::   :::" << endl;
-    cout << " :: :: :    :   : :   :      :    : :: ::       : :  :      :      : :: ::    :   : :" << RESET << endl;
+    cout << ":: :: :    :   : :   :      :    : :: ::       : :  :      :      : :: ::    :   : :" << RESET << endl;
+
     cout << endl << "Voulez vous rejouer ?(y/n)" << endl;
     cin >> user_input;
 
@@ -404,7 +404,7 @@ vector<vector<int> > Game::applyDamage(vector<vector<int> > map, Champion *champ
                     dmg_alea = map[i][j];
                 }
                 map[i][j] -= dmg_alea;
-                this->player->setMoney(this->player->getMoney() + (dmg_alea * this->round));
+                this->player->setMoney(this->player->getMoney() + (dmg_alea * (1+(this->round/10))));
                 if (dmg_alea) {
                     cout << "Attaque réussie en " << GREEN << "[" << i << "," << j << "]" << RESET << " !" << endl;
                     cout << "Vous infligez " << GREEN << dmg_alea << " dégats ! " << RESET << " !" << endl;
@@ -419,12 +419,12 @@ vector<vector<int> > Game::applyDamage(vector<vector<int> > map, Champion *champ
     return map;
 }
 
-
 void Game::shop(Champion *champion) {
     string user_choice;
     bool flag = false;
     bool invalid_syntaxte = false;
     while (!flag) {
+        this->draw();
         cout << "Boutique " << this->player->getMoney() << " $imiam$" << endl << endl;
         cout << "1 - Stat" << endl;
         cout << "2 - Potions" << endl;
