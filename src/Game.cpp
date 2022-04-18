@@ -429,6 +429,7 @@ void Game::shop(Champion *champion) {
         cout << "1 - Stat" << endl;
         cout << "2 - Potions" << endl;
         cout << "3 - Champion" << endl;
+        cout << "4 - Retour" << endl;
         cin >> user_choice;
 
         if (user_choice == "1") {
@@ -456,8 +457,9 @@ void Game::shop(Champion *champion) {
                                                   this->player->getManaRegenBaseCost() * 2 << "$imiam$  "
                          << this->player->getManaRegen() << " Manawox/Tour" << endl;
                 }
-                if (this->player->getMaxHp() == this->player->getHpBase()) {
-                    cout << "3 - MaxHP - " << this->player->getMaxHpBaseCost() << "$imiam$  "
+                cout << this->player->getMaxHp() << " caca  "<< this->player->getHpBase() << endl;
+                if (this->player->getMaxHp() == this->player->getHpBase()){
+                    cout << "3 - MaxHHHHHHHHP - " << this->player->getMaxHpBaseCost() << "$imiam$  "
                          << this->player->getMaxHp()
                          << " Hp Max." << endl;
                 } else {
@@ -523,12 +525,8 @@ void Game::shop(Champion *champion) {
                                                 this->player->getMaxHpBaseUp() *
                                                 this->player->getMaxHpBaseCost() * 2));
                         this->player->setMaxHp(this->player->getMaxHp() + this->player->getMaxHpBaseUp());
-                    } else if (this->player->getMaxHp() == this->player->getHpBase() && this->player->getMoney() -
-                                                                                        ((this->player->getMaxHp() -
-                                                                                          this->player->getHpBase()) /
-                                                                                         this->player->getMaxHpBaseUp() *
-                                                                                         this->player->getMaxHpBaseCost() *
-                                                                                         2) >= 0) {
+                    } else if (this->player->getMaxHp() == this->player->getHpBase() && this->player->getMoney() >= this->player->getMaxHpBaseCost() *
+                                                                                         2) {
                         this->player->setMoney(this->player->getMoney() - this->player->getMaxHpBaseCost());
                         this->player->setMaxHp(this->player->getMaxHp() + this->player->getMaxHpBaseUp());
                     } else {
@@ -545,6 +543,7 @@ void Game::shop(Champion *champion) {
         } else if (user_choice == "2") {
             invalid_syntaxte = false;
             while (!invalid_syntaxte) {
+                this->draw();
                 cout << "Boutique " << this->player->getMoney() << " $imiam$" << endl << endl;
                 cout << this->player->getHp() << "/" << this->player->getMaxHp() << " Hp / "
                      << this->player->getMoney() << " $imiam$" << endl;
@@ -554,6 +553,7 @@ void Game::shop(Champion *champion) {
                      << "50 $imiam$" << endl;
                 cout << "3 - Potion regen au max " << this->player->getHpPotionMax() << " HP / "
                      << this->player->getMaxHp() / 2 << "$imiam$" << endl;
+                cout << "4 - Retour" << endl;
                 cin >> user_choice;
 
                 if (user_choice == "1" || user_choice == "2" || user_choice == "3" || user_choice == "4") {
@@ -614,6 +614,7 @@ void Game::shop(Champion *champion) {
         } else if (user_choice == "3") {
             invalid_syntaxte = false;
             while (!invalid_syntaxte) {
+                this->draw();
                 cout << "Boutique " << this->player->getMoney() << " $imiam$" << endl << endl;
                 cout << "1 - ATTAQUE - " << champion->getAtt() * 100 << " $imiam$" << endl;
                 for (int i = 0; i < champion->getSpells().size(); ++i) {
@@ -633,6 +634,7 @@ void Game::shop(Champion *champion) {
                     }
                 } else if (user_choice == "2" || user_choice == "3" || user_choice == "4" ||
                            user_choice == "5") {
+                    int spell_index = stoi(user_choice) - 2;
                     if (this->player->getMoney() -
                         count_square(champion->getSpells()[spell_index]->getRange()) * 2 >= 0) {
 
@@ -663,8 +665,6 @@ void Game::shop(Champion *champion) {
             }
         } else {
             flag = true;
-            //mis a jour de la range quand on quitte le shop
-            this->player->rangeUpdate();
         }
     }
 }
