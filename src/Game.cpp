@@ -448,10 +448,11 @@ void Game::shop(Champion *champion) {
 
                 } else if (user_choice == "2") {
                     if (this->player->getMoney() -
-                        ((this->player->getManaRegen() - this->player->getManaRegenBase()) / this->player->getManaRegenBaseUp() * this->player->getManaRegenBaseCost() * 2) >= 0 && this->player->getManaRegen() > this->player->getManaRegenBase())                        this->player->setMoney(this->player->getMoney() -
+                        ((this->player->getManaRegen() - this->player->getManaRegenBase()) / this->player->getManaRegenBaseUp() * this->player->getManaRegenBaseCost() * 2) >= 0 && this->player->getManaRegen() > this->player->getManaRegenBase()){
+                                                this->player->setMoney(this->player->getMoney() -
                                                ((this->player->getManaRegen() - this->player->getManaRegenBase()) /
                                                 this->player->getManaRegenBaseUp() *
-                                                this->player->getManaRegenBaseCost() * 2)){
+                                                this->player->getManaRegenBaseCost() * 2));
                         this->player->setManaRegen(this->player->getManaRegen() + this->player->getManaRegenBaseUp());
                     } else if (this->player->getManaRegen() == this->player->getManaRegenBase() && this->player->getMoney() >= this->player->getManaRegenBaseCost() * 2) {
                         cout << "acac";
