@@ -25,10 +25,10 @@
 #define CYAN        "\033[36m"      /* Cyan */
 #define WHITE       "\033[37m"      /* White */
 
-#define BGBLACK     "\[\033[40m\]"       # Black
+#define BGBLACK     "\033[40m"       /* Black */
 #define BGRED       "\033[41m"         /* Red */
 #define BGGREEN     "\033[42m"       /* Green */
-#define BGYELLOW    "\[\033[43m\]"      # Yellow
+#define BGYELLOW    "\033[43m"      /* Yellow */
 #define BGBLUE      "\[\033[44m\]"        # Blue
 #define BGMAGENTA    "\033[45m"      /* Purple */
 #define BGCYAN      "\[\033[46m\]"        # Cyan

@@ -21,15 +21,16 @@ int main() {
         string usr_input = " ";
         system("clear");
 
-        string welcome_msg = "Bienvenue sur Maawox versus Simsim : le retour du Roi de la coline d'à côté de la montagne verte";
 
-        cout << welcome_msg << endl;
 
         Player *player = playerInitialization();
 
         Game *game = new Game(9, 9, player);
 
-        game->init();
+        game->startMenu();
+        string welcome_msg = "Bienvenue sur Maawox versus Simsim : le retour du Roi de la coline d'à côté de la montagne verte";
+        cout << welcome_msg << endl;
+
         while (!game->getPlayer()->getGameOver()) {
             game->update();
         }

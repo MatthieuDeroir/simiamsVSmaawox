@@ -177,19 +177,19 @@ static vector<vector<Spell*> > spellInitialization()
     vector<Spell*> spells_a;
 
     //mage spells
-    Spell* spell_m_1 = new Spell("Boule de feu", 100, 0, ranges[0]);
+    Spell* spell_m_1 = new Spell("Boule de feu", 100, count_vec(ranges[0]), ranges[0]);
     Spell* spell_m_2 = new Spell("Foudroiement", 100, count_vec(ranges[1]), ranges[1]);
     Spell* spell_m_3 = new Spell("Blizzard", 100, count_vec(ranges[2]), ranges[2]);
     Spell* spell_m_4 = new Spell("Raz-de-Marée", 100, count_vec(ranges[3]), ranges[3]);
 
     //warrior spells
-    Spell* spell_w_1 = new Spell("Berzerk", 100, 0, ranges[4]);
+    Spell* spell_w_1 = new Spell("Berzerk", 100, count_vec(ranges[4]), ranges[4]);
     Spell* spell_w_2 = new Spell("Tournoiement de hache", 100, count_vec(ranges[5]), ranges[5]);
     Spell* spell_w_3 = new Spell("Coup de boule", 100, count_vec(ranges[6]), ranges[6]);
     Spell* spell_w_4 = new Spell("Furie sanguinaire", 100, count_vec(ranges[7]), ranges[7]);
 
     //archer spells
-    Spell* spell_a_1 = new Spell("Volée de fleches", 100, 0, ranges[8]);
+    Spell* spell_a_1 = new Spell("Volée de fleches", 100, count_vec(ranges[8]), ranges[8]);
     Spell* spell_a_2 = new Spell("Tir de précision", 100, count_vec(ranges[9]), ranges[9]);
     Spell* spell_a_3 = new Spell("Coup de dague", 100, count_vec(ranges[10]), ranges[10]);
     Spell* spell_a_4 = new Spell("Fleches enflammées", 100, count_vec(ranges[11]), ranges[11]);
@@ -238,9 +238,7 @@ Player* playerInitialization(){
     vector<Champion*> champs = champInitialization();
 
     string username;
-    cout << "Saisissez un nom : " << endl;
-    cin >> username;
-    Player* player = new Player(username, 30, 0,  200, 1, 0, champs);
+    Player* player = new Player("Maawox", 30, 0,  200, 1, 0, champs);
 
     return player;
 

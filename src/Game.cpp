@@ -18,15 +18,73 @@ Game::Game(int w, int h, Player *player) {
     this->player = player;
 }
 
-//main func
+//game menu displays
 
-void Game::startMenu(){
+void Game::startMenu() {
+    string user_input = "\0";
+    system("clear");
+    while (user_input != "1" && user_input != "2"){
+        cout << BGBLACK << "###############################################################################################" << RESET << endl;
+        cout << MAGENTA << BGBLACK << "#    __| _)             _)          "<< RESET << BGBLACK <<"\\\\   /  __|     "<< YELLOW <<"\\   |                                     #" <<  RESET << endl;
+        cout << MAGENTA << BGBLACK <<"#  \\__ \\  |   ` \\  (_-<  |   ` \\    " << RESET << BGBLACK << " \\ \\ / \\__ \\ "<< YELLOW <<"   |\\/ |   _` |   _` | \\ \\  \\ /  _ \\ \\ \\ /   #" << RESET << endl;
+        cout << MAGENTA << BGBLACK << "#  ____/ _| _|_|_| ___/ _| _|_|_|    " << RESET << BGBLACK << " \\_/  ____/   "<< YELLOW <<"_|  _| \\__,_| \\__,_|  \\_/\\_/ \\___/  _\\_\\   #" << RESET << endl;
+        cout << BGBLACK << "###############################################################################################" << RESET << endl;
+        cout << BGBLACK << "#                                    1 - Nouvelle Partie                                      #" << RESET << endl;
+        cout << BGBLACK << "#                                    2 - Charger une Partie                                   #" << RESET << endl;
+        cout << BGBLACK << "#                                    3 - Aide                                                 #" << RESET << endl;
+        cout << BGBLACK << "#                                    4 - Options                                              #" << RESET << endl;
+        cout << BGBLACK << "#                                    5 - Quitter                                              #" << RESET << endl;
+        cout << BGBLACK << "###############################################################################################" << RESET << endl;
+        cin >> user_input;
+        if (user_input == "3"){
+            this->helpMenu();
+        }
+        else if (user_input == "4"){
+            this->optionsMenu();
+        }
 
-
+    }
     this->init();
 }
 
-bool Game::gameOverMenu(){
+void Game::helpMenu(){
+    system("clear");
+    string user_input = "\0";
+    cout << BGBLACK << "###############################################################################################" << RESET << endl;
+    cout << BGBLACK << "#                                 Bienvenue dans " << MAGENTA << "Simsim" << RESET << BGBLACK << " vs " << YELLOW << BGBLACK << "Maawox" << RESET << BGBLACK << "                             #" << RESET << endl;
+    cout << BGBLACK << "###############################################################################################" << RESET << endl;
+    cout << BGBLACK << "# Vous êtes sur le point d'entrer dans un univers plein de dangers...#" << RESET << endl;
+    cout << BGBLACK << "# Les Simsims, petites créatures aussi têtues qu'hostiles ont décidées d'envahir le Royaume #" << RESET << endl;
+    cout << BGBLACK << "# Vous êtes chargés de l'organisation de la défense du royaume à l'aide des champions du Roi #" << RESET << endl;
+    cout << BGBLACK << "# Vous devrez tout d'abord selectionner 3 champions parmi ceux disponibles #" << RESET << endl;
+    cout << BGBLACK << "# A chaque round un nombre aléatoire de Simsim apparaitra #" << RESET << endl;
+    cout << BGBLACK << "# Mais attention, ce nombre s'accroit en fonction du nombre de round écoulé #" << RESET << endl;
+    cout << BGBLACK << "# Vous perdrez des" << GREEN << BGBLACK <<  " Points de Vies " << RESET << BGBLACK << "à chaque fois qu'un Simsim parviendra à passer vos défenses #" << RESET << endl;
+    cout << BGBLACK << "# Vous perdez lorsque vous n'avez plus de" << GREEN << BGBLACK <<  " Points de Vies " << RESET << BGBLACK << "!" << RESET << endl;
+    cout << BGBLACK << "# Un round se décompose en trois parties qui correspondent au tour de chaque champion #" << RESET << endl;
+    cout << BGBLACK << "# Chaque champion pourra effectuer une action parmi 4 : #" << RESET << endl;
+    cout << BGBLACK << "# " << RED << "Attaquer " << RESET << BGBLACK << " : selection d'un sort à utiliser #" << RESET << endl;
+    cout << BGBLACK << "# " << RED << "Boutique " << RESET << BGBLACK << " : selection d'un sort ou d'une caracteristique à améliorer #" << RESET << endl;
+    cout << BGBLACK << "# " << RED << "Changer de position " << RESET << BGBLACK << " : selection d'un champion avec lequel échanger sa place #" << RESET << endl;
+    cout << BGBLACK << "# " << RED << "Passer son tour " << RESET << BGBLACK << " : passe le tour du champion #" << RESET << endl;
+    cout << BGBLACK << "# Chaque sort coute du" << BLUE << BGBLACK << " Manawox " << RESET << BGBLACK << "en fonction de sa puissance #" << RESET << endl;
+    cout << BGBLACK << "# Vous récupérez des point de" << BLUE << BGBLACK << " Manawox " << RESET << BGBLACK << " à chaque round #" << RESET << endl;
+    cout << BGBLACK << "# Vous gagnez des" << YELLOW << BGBLACK << " $imiams " << RESET << BGBLACK << ", la monnaie du jeu, en fonction du nombre des dégats infligés #" << RESET << endl;
+    cout << BGBLACK << "# Ces" << YELLOW << BGBLACK << " $imiams " << RESET << BGBLACK << ", vous permettront d'acheter des améliorations dans la boutique #" << RESET << endl;
+    cout << BGBLACK << "###############################################################################################" << RESET << endl;
+    cout << "Appuyer sur une touche puis sur Entrer pour revenir au menu principal..." << endl;
+    cin >> user_input;
+}
+
+void Game::optionsMenu(){
+    system("clear");
+    string user_input = "\0";
+    cout << "WORK IN PROGRESS" << endl;
+    cout << "Appuyer sur une touche puis sur Entrer pour revenir au menu principal..." << endl;
+    cin >> user_input;
+}
+
+bool Game::gameOverMenu() {
     string user_input;
     system("clear");
     cout << "GAME OVER" << endl << "Voulez vous rejouer ?(y/n)" << endl;
@@ -35,9 +93,11 @@ bool Game::gameOverMenu(){
     return (user_input == "y");
 }
 
+//main game loop functions
+
 void Game::init() {
     vector<vector<int> > map(this->MAP_HEIGHT, vector<int>(this->MAP_WIDTH, 0));
-    setMap(map);
+    this->setMap(map);
 }
 
 void Game::update() {
@@ -139,20 +199,21 @@ void
 Game::displayFUI() { //affichage du bas de l'UI //TODO : faire les bordures à droite pour qu'elles soient dynamiques avec la valeur d'affichage des stats
 
 
-    if (this->player->getChampions()[0]->getCurrentChamp()){
+    if (this->player->getChampions()[0]->getCurrentChamp()) {
         cout << RESET << "      " << "  " << this->player->getChampions()[0]->getSprite() << MAGENTA << "     "
              << this->player->getChampions()[1]->getSprite() << "     " << this->player->getChampions()[2]->getSprite()
              << RESET << endl;
-    }else if (this->player->getChampions()[1]->getCurrentChamp()){
+    } else if (this->player->getChampions()[1]->getCurrentChamp()) {
         cout << MAGENTA << "      " << "  " << this->player->getChampions()[0]->getSprite() << RESET << "     "
-             << this->player->getChampions()[1]->getSprite() << MAGENTA << "     " << this->player->getChampions()[2]->getSprite()
+             << this->player->getChampions()[1]->getSprite() << MAGENTA << "     "
+             << this->player->getChampions()[2]->getSprite()
              << RESET << endl;
-    }else if (this->player->getChampions()[2]->getCurrentChamp()){
+    } else if (this->player->getChampions()[2]->getCurrentChamp()) {
         cout << MAGENTA << "      " << "  " << this->player->getChampions()[0]->getSprite() << "     "
-             << this->player->getChampions()[1]->getSprite() << "     " << RESET << this->player->getChampions()[2]->getSprite()
+             << this->player->getChampions()[1]->getSprite() << "     " << RESET
+             << this->player->getChampions()[2]->getSprite()
              << RESET << endl;
-    }
-    else{
+    } else {
         cout << RESET << "      " << "  " << this->player->getChampions()[0]->getSprite() << MAGENTA << "     "
              << this->player->getChampions()[1]->getSprite() << "     " << this->player->getChampions()[2]->getSprite()
              << RESET << endl;
@@ -248,7 +309,7 @@ vector<vector<int> > Game::applyDamage(vector<vector<int> > map, Champion *champ
         for (int j = 0; j < range[i].size(); j++) {
             if (range[i][j] > 0 && map[i][j] > 0) {
                 dmg_alea = rand() % ((range[i][j] * champ->getAtt()) + 1);
-                if (dmg_alea > map[i][j]){
+                if (dmg_alea > map[i][j]) {
                     dmg_alea = map[i][j];
                 }
                 map[i][j] -= dmg_alea;
@@ -267,55 +328,66 @@ vector<vector<int> > Game::applyDamage(vector<vector<int> > map, Champion *champ
     return map;
 }
 
-void Game::shop (Champion* champion){
+void Game::shop(Champion *champion) {
     string user_choice;
     bool invalid_syntaxte = false;
     cout << "Ame" << endl;
-    cout << "1 - MaxMANA - " << (this->player->getMaxMana()-200)/this->player->getMaxManaBaseUp()*this->player->getMaxManaBaseCost()*2 << "$imiam$" << endl;
-    cout << "2 - REGENMANA - " << (this->player->getManaRegen()-200)/this->player->getManaRegenBaseUp()*this->player->getManaRegenBaseCost()*2 << "$imiam$" << endl;
+    cout << "1 - MaxMANA - "
+         << (this->player->getMaxMana() - 200) / this->player->getMaxManaBaseUp() * this->player->getMaxManaBaseCost() *
+            2 << "$imiam$" << endl;
+    cout << "2 - REGENMANA - " << (this->player->getManaRegen() - 200) / this->player->getManaRegenBaseUp() *
+                                  this->player->getManaRegenBaseCost() * 2 << "$imiam$" << endl;
     cout << "3 - MAXHP" << endl;
     cout << "4 - REGENHP" << endl;
     cout << "5 - ATTAQUE" << endl;
-    for(int i = 0; i < champion->getSpells().size(); ++i){
-        cout << i+6 << " - Ameliorer " << champion->getSpells()[i]->getName() << endl;
+    for (int i = 0; i < champion->getSpells().size(); ++i) {
+        cout << i + 6 << " - Ameliorer " << champion->getSpells()[i]->getName() << endl;
     }
     cin >> user_choice;
 
-    while(!invalid_syntaxte){
+    while (!invalid_syntaxte) {
         if (user_choice == "1" || user_choice == "2" || user_choice == "3" || user_choice == "4" ||
-            user_choice == "5" || user_choice == "6" || user_choice == "7" || user_choice == "8" || user_choice == "9"){
-            if (user_choice == "1"){
-                if (this->player->getMoney()-((this->player->getMaxMana()-200)/this->player->getMaxManaBaseUp()*this->player->getMaxManaBaseCost()*2)>=0){
+            user_choice == "5" || user_choice == "6" || user_choice == "7" || user_choice == "8" ||
+            user_choice == "9") {
+            if (user_choice == "1") {
+                if (this->player->getMoney() - ((this->player->getMaxMana() - 200) / this->player->getMaxManaBaseUp() *
+                                                this->player->getMaxManaBaseCost() * 2) >= 0) {
                     this->player->setMaxMana(this->player->getMaxMana() + this->player->getMaxManaBaseUp());
-                    this->player->setMoney(this->player->getMoney()-((this->player->getMaxMana()-200)/this->player->getMaxManaBaseUp()*this->player->getMaxManaBaseCost()*2));
-                }else{
-                    cout << RED << "$imiam$ insuffisant" << RESET <<endl;
+                    this->player->setMoney(this->player->getMoney() -
+                                           ((this->player->getMaxMana() - 200) / this->player->getMaxManaBaseUp() *
+                                            this->player->getMaxManaBaseCost() * 2));
+                } else {
+                    cout << RED << "$imiam$ insuffisant" << RESET << endl;
                 }
-            }else if (user_choice == "2"){
-                if (this->player->getMoney()-((this->player->getManaRegen()-200)/this->player->getManaRegenBaseUp()*this->player->getManaRegenBaseCost()*2)>=0){
+            } else if (user_choice == "2") {
+                if (this->player->getMoney() -
+                    ((this->player->getManaRegen() - 200) / this->player->getManaRegenBaseUp() *
+                     this->player->getManaRegenBaseCost() * 2) >= 0) {
                     this->player->setManaRegen(this->player->getManaRegen() + this->player->getManaRegenBaseUp());
-                    this->player->setMoney(this->player->getMoney()-((this->player->getManaRegen()-200)/this->player->getManaRegenBaseUp()*this->player->getManaRegenBaseCost()*2));
-                }else{
-                    cout << RED << "$imiam$ insuffisant" << RESET <<endl;
+                    this->player->setMoney(this->player->getMoney() -
+                                           ((this->player->getManaRegen() - 200) / this->player->getManaRegenBaseUp() *
+                                            this->player->getManaRegenBaseCost() * 2));
+                } else {
+                    cout << RED << "$imiam$ insuffisant" << RESET << endl;
                 }
 
-            }else if (user_choice == "3"){
+            } else if (user_choice == "3") {
 
-            }else if (user_choice == "4"){
+            } else if (user_choice == "4") {
 
-            }else if (user_choice == "5"){
+            } else if (user_choice == "5") {
 
-            }else if (user_choice == "6"){
+            } else if (user_choice == "6") {
 
-            }else if (user_choice == "7"){
+            } else if (user_choice == "7") {
 
-            }else if (user_choice == "8"){
+            } else if (user_choice == "8") {
 
-            }else if (user_choice == "9"){
+            } else if (user_choice == "9") {
 
             }
 
-        }else{
+        } else {
             invalid_syntaxte = true;
         }
     }
@@ -432,6 +504,10 @@ void Game::playerTurn() {
                     setMap(this->applyDamage(this->getMap(), this->player->getChampions()[i],
                                              this->player->getChampions()[i]->getSpells()[spell_choice]->getRange()));
                     this->drawEnemyKilled(tmp);
+                    if (i != 2){
+                        cout << "Appuyer sur une touche puis sur Entrer pour passer au tour du champion suivant..." << endl;
+                        cin >> user_choice;
+                    }
                 } else if (spell_choice == 4) {
                     invalid_syntax = true;
                 }

@@ -45,12 +45,17 @@ private:
 public:
     Game(int w, int h, Player* player);
 
-    //main game loop functionalities
-    void draw();
-
+    //menu
     void startMenu();
 
+    void helpMenu();
+
+    void optionsMenu();
+
     bool gameOverMenu();
+
+    //main game loop functionalities
+    void draw();
 
     void init();
 
