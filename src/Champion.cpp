@@ -61,5 +61,5 @@ void Champion::toString(){
 
 //method
 void Champion::upgradeAtt(){
-    setAtt(this->att++);
+    setAtt(this->att+1);
 }

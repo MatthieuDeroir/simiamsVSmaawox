@@ -348,6 +348,33 @@ void Game::drawSpellDamage(vector<vector<int> > range) { //affiche les dégats m
     displayFUI();
 }
 
+void Game::drawSpellDamageShop(vector<vector<int> > range) { //affiche les dégats maximum des sorts
+    system("clear");
+    for (int i = 0; i < range.size(); i++) {
+        cout << "      ";
+        for (int j = 0; j < range[i].size(); j++) {
+            if (range[i][j] > 0) {
+                cout << BGWHITE << BLACK << this->enemy_dict[range[i][j]] << RESET << " ";
+            } else {
+                cout << WHITE << range[i][j] << " " << RESET;
+
+            }
+        }
+        cout << GREEN << "    =======>     " << RESET;
+        for (int j = 0; j < range[i].size(); j++) {
+            if (range[i][j] > 0) {
+                cout << BGGREEN << enemy_dict[range[i][j] + 1] << RESET << " ";
+            } else {
+                cout << WHITE << range[i][j] << " " << RESET;
+
+            }
+        }
+
+        cout << endl;
+    }
+    displayFUI();
+}
+
 vector<vector<int> > Game::applyDamage(vector<vector<int> > map, Champion *champ, vector<vector<int> > range) {
     int dmg_alea;
     for (int i = 0; i < range.size(); i++) {
@@ -387,7 +414,8 @@ void Game::shop(Champion *champion) {
 
         if (user_choice == "1") {
             invalid_syntaxte = false;
-            while(!invalid_syntaxte) {
+            while (!invalid_syntaxte) {
+                this->draw();
                 cout << "Boutique " << this->player->getMoney() << " $imiam$" << endl << endl;
                 if (this->player->getMaxMana() == this->player->getManaBase()) {
                     cout << "1 - MaxMANA - " << this->player->getMaxManaBaseCost() << " $imiam$  "
@@ -448,14 +476,16 @@ void Game::shop(Champion *champion) {
 
                 } else if (user_choice == "2") {
                     if (this->player->getMoney() -
-                        ((this->player->getManaRegen() - this->player->getManaRegenBase()) / this->player->getManaRegenBaseUp() * this->player->getManaRegenBaseCost() * 2) >= 0 && this->player->getManaRegen() > this->player->getManaRegenBase()){
-                                                this->player->setMoney(this->player->getMoney() -
+                        ((this->player->getManaRegen() - this->player->getManaRegenBase()) /
+                         this->player->getManaRegenBaseUp() * this->player->getManaRegenBaseCost() * 2) >= 0 &&
+                        this->player->getManaRegen() > this->player->getManaRegenBase()) {
+                        this->player->setMoney(this->player->getMoney() -
                                                ((this->player->getManaRegen() - this->player->getManaRegenBase()) /
                                                 this->player->getManaRegenBaseUp() *
                                                 this->player->getManaRegenBaseCost() * 2));
                         this->player->setManaRegen(this->player->getManaRegen() + this->player->getManaRegenBaseUp());
-                    } else if (this->player->getManaRegen() == this->player->getManaRegenBase() && this->player->getMoney() >= this->player->getManaRegenBaseCost() * 2) {
-                        cout << "acac";
+                    } else if (this->player->getManaRegen() == this->player->getManaRegenBase() &&
+                               this->player->getMoney() >= this->player->getManaRegenBaseCost() * 2) {
                         this->player->setMoney(this->player->getMoney() - this->player->getManaRegenBaseCost());
                         this->player->setManaRegen(this->player->getManaRegen() + this->player->getManaRegenBaseUp());
                     } else {
@@ -585,19 +615,30 @@ void Game::shop(Champion *champion) {
                 } else if (user_choice == "2" || user_choice == "3" || user_choice == "4" ||
                            user_choice == "5") {
                     if (this->player->getMoney() -
-                        count_square(champion->getSpells()[stoi(user_choice) - 2]->getRange()) * 2 >= 0) {
-                        champion->getSpells()[stoi(user_choice) - 2]->upgradeSpell();
-                        cout << "Vous ameliorez l'attaque de "
-                             << champion->getSpells()[stoi(user_choice) - 2]->getName()
-                             << endl;
-                        this->player->setMoney(this->player->getMoney() -
-                                               count_square(champion->getSpells()[stoi(user_choice) - 2]->getRange()) *
-                                               2);
+                        count_square(champion->getSpells()[spell_index]->getRange()) * 2 >= 0) {
 
+                        this->drawSpellDamageShop(champion->getSpells()[stoi(user_choice) - 2]->getRange());
+                        cout << "1 - confirmer l'amelioration de "
+                             << champion->getSpells()[stoi(user_choice) - 2]->getName() << endl;
+                        cout << "2 - Retour" << endl;
+                        cin >> user_choice;
+                        if (user_choice == "1") {
+                            champion->getSpells()[spell_index]->upgradeSpell();
+                            cout << "Vous ameliorez l'attaque de "
+                                 << champion->getSpells()[spell_index]->getName()
+                                 << endl;
+                            this->player->setMoney(this->player->getMoney() -
+                                                   count_square(
+                                                           champion->getSpells()[spell_index]->getRange()) *
+                                                   2);
+
+                            //mis a jour de la range quand on quitte le shop
+                            this->player->rangeUpdate();
+                        }
                     } else {
                         cout << RED << "$imiam$ insuffisant" << RESET << endl;
                     }
-                }else{
+                } else {
                     invalid_syntaxte = true;
                 }
             }

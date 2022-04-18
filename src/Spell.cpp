@@ -69,7 +69,6 @@ void Spell::upgradeSpell() {
         for (int j = 0; j < this->getBaseRange()[i].size(); j++) {
             if (this->getBaseRange()[i][j] > 0){
                 newRange[i][j] = this->getBaseRange()[i][j] + 1;
-                cout << (i+1)*(j+1) << endl;
             }
             else {
                 newRange[i][j] = 0;

@@ -381,7 +381,7 @@ Player *playerInitialization() {
         champs.erase(find(champs.begin(), champs.end(), champs[stoi(user_choice) - 1]));
     }
 
-    Player *player = new Player(username, 30, 0, 200, 1, 0, user_champs);
+    Player *player = new Player(username, 30, 10000, 200, 1, 0, user_champs);
 
     return player;
 

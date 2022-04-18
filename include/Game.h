@@ -91,6 +91,7 @@ public:
     void drawRange(vector<vector<int> > range, Champion* champ);
 
     void drawSpellDamage(vector<vector<int> > range);
+    void drawSpellDamageShop(vector<vector<int> > range);
 
     void drawEnemyKilled(vector<vector<int> > prev_map);
 

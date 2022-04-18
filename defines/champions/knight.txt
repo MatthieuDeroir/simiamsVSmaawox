@@ -8,9 +8,19 @@ champ_s3_range:
 champ_s3_name:
 
 champ_s4_range:
-champ_s4_name:
+0,0,0;
+0,0,0;
+0,0,0;
+0,0,0;
+0,0,0;
+0,0,0;
+0,0,0;
+0,0,0;
+0,0,0;
 
-champ_name:
-champ_sprite:
-champ_attack:
+champ_s4_name:Epee de la Justice;
+
+champ_name:Knight;
+champ_sprite:K;
+champ_attack:1;
 
