@@ -19,6 +19,7 @@ Game::Game(int w, int h, Player *player) {
 
 //game menu displays
 
+
 void Game::startMenu() {
     string user_input = "\0";
     system("clear");
@@ -140,6 +141,7 @@ void Game::optionsMenu() {
 bool Game::gameOverMenu() {
     string user_input;
     system("clear");
+
     cout << RED << "@@@@@@@@   @@@@@@   @@@@@@@@@@   @@@@@@@@      @@@@@@   @@@  @@@  @@@@@@@@  @@@@@@@" << endl;
     cout << "@@@@@@@@@  @@@@@@@@  @@@@@@@@@@@  @@@@@@@@     @@@@@@@@  @@@  @@@  @@@@@@@@  @@@@@@@@" << endl;
     cout << "!@@        @@!  @@@  @@! @@! @@!  @@!          @@!  @@@  @@!  @@@  @@!       @@!  @@@" << endl;
@@ -457,15 +459,14 @@ void Game::shop(Champion *champion) {
                                                   this->player->getManaRegenBaseCost() * 2 << "$imiam$  "
                          << this->player->getManaRegen() << " Manawox/Tour" << endl;
                 }
-                cout << this->player->getMaxHp() << " caca  "<< this->player->getHpBase() << endl;
                 if (this->player->getMaxHp() == this->player->getHpBase()){
-                    cout << "3 - MaxHHHHHHHHP - " << this->player->getMaxHpBaseCost() << "$imiam$  "
+                    cout << "3 - MaxHP - " << this->player->getMaxHpBaseCost() << "$imiam$  "
                          << this->player->getMaxHp()
                          << " Hp Max." << endl;
                 } else {
                     cout << "3 - MaxHP - "
-                         << (this->player->getMaxHp() - (this->player->getHpBase() / this->player->getMaxHpBaseUp()) *
-                                                        this->player->getMaxHpBaseCost() * 2) << "$imiam$  "
+                         << (this->player->getMaxHp() - this->player->getHpBase()) / this->player->getMaxHpBaseUp() *
+                                                        this->player->getMaxHpBaseCost() * 2 << "$imiam$  "
                          << this->player->getMaxHp()
                          << " Hp Max." << endl;
                 }
@@ -525,6 +526,7 @@ void Game::shop(Champion *champion) {
                                                 this->player->getMaxHpBaseUp() *
                                                 this->player->getMaxHpBaseCost() * 2));
                         this->player->setMaxHp(this->player->getMaxHp() + this->player->getMaxHpBaseUp());
+                        this->player->setHp(this->player->getHp()+this->player->getMaxManaBaseUp());
                     } else if (this->player->getMaxHp() == this->player->getHpBase() && this->player->getMoney() >= this->player->getMaxHpBaseCost() *
                                                                                          2) {
                         this->player->setMoney(this->player->getMoney() - this->player->getMaxHpBaseCost());

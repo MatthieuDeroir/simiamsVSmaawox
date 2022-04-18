@@ -93,7 +93,7 @@ int Player::getManaRegenBase(){
 }
 
 int Player::getHpBase(){
-    return this->MANA_BASE;
+    return this->HP_BASE;
 }
 
 int Player::getHpPotion10() {
