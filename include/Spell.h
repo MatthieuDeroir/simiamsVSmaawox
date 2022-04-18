@@ -13,10 +13,11 @@ private:
     int price;
     int manaCost;
     vector<vector<int> > range;
+    vector<vector<int> > base_range;
 
 public:
     //Class constructor
-    Spell(string name, int price, int mana_cost, vector<vector<int> > range);
+    Spell(string name, int price, int mana_cost, vector<vector<int> > base_range);
 
     //Getter & Setter
     string getName();
@@ -30,6 +31,9 @@ public:
 
     vector<vector<int> > getRange();
     void setRange(vector<vector<int> > range);
+
+    vector<vector<int> > getBaseRange();
+    void setBaseRange(vector<vector<int> > base_range);
 
     //toString
     void toString();

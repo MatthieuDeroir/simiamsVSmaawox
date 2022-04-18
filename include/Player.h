@@ -19,6 +19,7 @@ private:
     int max_mana;
     int mana;
     int mana_regen;
+    int gameOver;
 
     int score;
     vector<Champion*> champs;
@@ -70,6 +71,9 @@ public:
     int getScore();
     void setScore(int score);
 
+    int getGameOver();
+    void setGameOver(int gameOver);
+
     vector<Champion*> getChampions();
     void setChampions(vector<Champion*> champs);
 
@@ -80,7 +84,7 @@ public:
     void takeDamage(int damage, int round);
     void spendMoney(int price);
     void spendMana(int mana);
-    void rangeUpdate(Champion* champ1, Champion* champ2);
+    void rangeUpdate();
     void swapChamp(char champ1, char champ2);
 
     //Upgrades

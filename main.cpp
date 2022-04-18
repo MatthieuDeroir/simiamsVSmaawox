@@ -13,24 +13,27 @@
 
 
 int main() {
+    bool retry = true;
 
+    while (retry) {
+        srand(time(0));
 
-    srand(time(NULL));
+        string usr_input = " ";
+        system("clear");
 
-    string usr_input = " ";
-    system("clear");
+        string welcome_msg = "Bienvenue sur Maawox versus Simsim : le retour du Roi de la coline d'à côté de la montagne verte";
 
-    string welcome_msg = "Bienvenue sur Maawox versus Simsim : le retour du Roi de la coline d'à côté de la montagne verte";
+        cout << welcome_msg << endl;
 
-    cout << welcome_msg << endl;
+        Player *player = playerInitialization();
 
-    Player *player = playerInitialization();
+        Game *game = new Game(9, 9, player);
 
-    Game *game = new Game(9, 9, player);
-
-    game->init();
-    while (usr_input != "q!") {
-        game->update();
+        game->init();
+        while (!game->getPlayer()->getGameOver()) {
+            game->update();
+        }
+        retry = game->gameOverMenu();
     }
     return 0;
 }

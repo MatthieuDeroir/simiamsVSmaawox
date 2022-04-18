@@ -5,11 +5,12 @@
 #include "../include/Spell.h"
 #include "../include/header.h"
 
-Spell::Spell(string name, int price, int manaCost, vector<vector<int> > range) {
+Spell::Spell(string name, int price, int manaCost, vector<vector<int> > base_range) {
     this->name = name;
     this->price = price;
     this->manaCost = manaCost;
-    this->range = range;
+    this->base_range = base_range;
+    this->range = rwVector(0, base_range);
 }
 
 //Getter & Setter
@@ -47,6 +48,14 @@ void Spell::setRange(vector<vector<int> > range) {
     this->range = range;
 }
 
+
+vector<vector<int> > Spell::getBaseRange(){
+    return this->base_range;
+}
+void Spell::setBaseRange(vector<vector<int> > base_range){
+    this->base_range = base_range;
+}
+
 //To String
 void Spell::toString() {
     cout << "Name : " << this->name << "// Price: " << this->price << "$imiam$// Mana cost: " << this->manaCost << endl;
@@ -54,12 +63,12 @@ void Spell::toString() {
 
 //Methods
 void Spell::upgradeSpell() {
-    for (int i = 0; i < this->getRange().size() - 1; i++) {
-        for (int j = 0; j < this->getRange()[i].size() - 1; j++) {
-            if (this->getRange()[i][j] > 0)
-                this->getRange()[i][j]++;
+    for (int i = 0; i < this->getBaseRange().size() - 1; i++) {
+        for (int j = 0; j < this->getBaseRange()[i].size() - 1; j++) {
+            if (this->getBaseRange()[i][j] > 0)
+                this->getBaseRange()[i][j]++;
         }
     }
-    setManaCost(count_vec(this->getRange()));
+    setManaCost(count_vec(this->getBaseRange()));
 };
 

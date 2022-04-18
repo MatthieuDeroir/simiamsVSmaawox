@@ -48,6 +48,10 @@ public:
     //main game loop functionalities
     void draw();
 
+    void startMenu();
+
+    bool gameOverMenu();
+
     void init();
 
     void update();

@@ -20,6 +20,21 @@ Game::Game(int w, int h, Player *player) {
 
 //main func
 
+void Game::startMenu(){
+
+
+    this->init();
+}
+
+bool Game::gameOverMenu(){
+    string user_input;
+    system("clear");
+    cout << "GAME OVER" << endl << "Voulez vous rejouer ?(y/n)" << endl;
+    cin >> user_input;
+
+    return (user_input == "y");
+}
+
 void Game::init() {
     vector<vector<int> > map(this->MAP_HEIGHT, vector<int>(this->MAP_WIDTH, 0));
     setMap(map);
@@ -35,10 +50,8 @@ void Game::update() {
     setRound((getRound()) + 1);
     //spawn les enemies
     setMap(spawner(getMap(), getRound()));
-    this->player->takeDamage(dmg, this->round);
-    draw();
     playerTurn(); //TODO PLAYER TURN
-
+    this->player->takeDamage(dmg, this->round);
 }
 
 void Game::draw() {
@@ -97,13 +110,13 @@ vector<vector<int> > Game::push_row(vector<vector<int> > vec) {
 }
 
 vector<vector<int> > Game::spawner(vector<vector<int> > vec, int round) {
-    int en_nb = (1 + round) * round;
+    int en_nb = (rand() % ((1 + round) * round)) + 1;
 
     cout << en_nb << endl;
 
     // growing ennemy nb mecanic in functions of round nb =
-    if (en_nb > MAP_WIDTH * 60)
-        en_nb = MAP_WIDTH * 60;
+    if (en_nb > MAP_WIDTH * (MAX_ENEMY - 1))
+        en_nb = MAP_WIDTH * (MAX_ENEMY - 1);
     while (en_nb) {
         int rnb = rand() % this->MAP_WIDTH;
         if (vec[0][rnb] < this->MAX_ENEMY) {
@@ -231,12 +244,13 @@ void Game::drawSpellDamage(vector<vector<int> > range) { //affiche les dégats m
 
 vector<vector<int> > Game::applyDamage(vector<vector<int> > map, Champion *champ, vector<vector<int> > range) {
     int dmg_alea;
-//    auto it = find(this->player->getChampions().begin(), this->player->getChampions().end(), champ);
-//    int mul = distance(this->player->getChampions().begin(), it) + 1;
     for (int i = 0; i < range.size(); i++) {
         for (int j = 0; j < range[i].size(); j++) {
             if (range[i][j] > 0 && map[i][j] > 0) {
                 dmg_alea = rand() % ((range[i][j] * champ->getAtt()) + 1);
+                if (dmg_alea > map[i][j]){
+                    dmg_alea = map[i][j];
+                }
                 map[i][j] -= dmg_alea;
                 this->player->setMoney(this->player->getMoney() + dmg_alea);
                 if (dmg_alea) {
@@ -315,6 +329,7 @@ void Game::playerTurn() {
     for (int i = 0; i < this->player->getChampions().size(); ++i) { // Pour chaque champion
         bool invalid_syntax = true;
         //set current_champ to true when its the champion turn to change color on display
+        this->player->rangeUpdate();
         this->player->getChampions()[i]->setCurrentChamp(true);
 
 

@@ -48,6 +48,8 @@ int count_vec(vector<vector<int> > vec);
 
 void multiprint(string str, int nb);
 
+vector<vector<int> > rwVector(int index_multiplier, vector<vector<int> > cubic_vec);
+
 #endif //SIMIAMSVSMAAWOX_HEADER_H
 
 /*
