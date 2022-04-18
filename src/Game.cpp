@@ -23,23 +23,42 @@ Game::Game(int w, int h, Player *player) {
 void Game::startMenu() {
     string user_input = "\0";
     system("clear");
-    while (user_input != "1" && user_input != "2"){
-        cout << BGBLACK << "###############################################################################################" << RESET << endl;
-        cout << MAGENTA << BGBLACK << "#    __| _)             _)          "<< RESET << BGBLACK <<"\\\\   /  __|     "<< YELLOW <<"\\   |                                     #" <<  RESET << endl;
-        cout << MAGENTA << BGBLACK <<"#  \\__ \\  |   ` \\  (_-<  |   ` \\    " << RESET << BGBLACK << " \\ \\ / \\__ \\ "<< YELLOW <<"   |\\/ |   _` |   _` | \\ \\  \\ /  _ \\ \\ \\ /   #" << RESET << endl;
-        cout << MAGENTA << BGBLACK << "#  ____/ _| _|_|_| ___/ _| _|_|_|    " << RESET << BGBLACK << " \\_/  ____/   "<< YELLOW <<"_|  _| \\__,_| \\__,_|  \\_/\\_/ \\___/  _\\_\\   #" << RESET << endl;
-        cout << BGBLACK << "###############################################################################################" << RESET << endl;
-        cout << BGBLACK << "#                                    1 - Nouvelle Partie                                      #" << RESET << endl;
-        cout << BGBLACK << "#                                    2 - Charger une Partie                                   #" << RESET << endl;
-        cout << BGBLACK << "#                                    3 - Aide                                                 #" << RESET << endl;
-        cout << BGBLACK << "#                                    4 - Options                                              #" << RESET << endl;
-        cout << BGBLACK << "#                                    5 - Quitter                                              #" << RESET << endl;
-        cout << BGBLACK << "###############################################################################################" << RESET << endl;
+    while (user_input != "1" && user_input != "2") {
+        cout << BGBLACK
+             << "###############################################################################################"
+             << RESET << endl;
+        cout << MAGENTA << BGBLACK << "#    __| _)             _)          " << RESET << BGBLACK << "\\\\   /  __|     "
+             << YELLOW << "\\   |                                     #" << RESET << endl;
+        cout << MAGENTA << BGBLACK << "#  \\__ \\  |   ` \\  (_-<  |   ` \\    " << RESET << BGBLACK
+             << " \\ \\ / \\__ \\ " << YELLOW << "   |\\/ |   _` |   _` | \\ \\  \\ /  _ \\ \\ \\ /   #" << RESET
+             << endl;
+        cout << MAGENTA << BGBLACK << "#  ____/ _| _|_|_| ___/ _| _|_|_|    " << RESET << BGBLACK << " \\_/  ____/   "
+             << YELLOW << "_|  _| \\__,_| \\__,_|  \\_/\\_/ \\___/  _\\_\\   #" << RESET << endl;
+        cout << BGBLACK
+             << "###############################################################################################"
+             << RESET << endl;
+        cout << BGBLACK
+             << "#                                    1 - Nouvelle Partie                                      #"
+             << RESET << endl;
+        cout << BGBLACK
+             << "#                                    2 - Charger une Partie                                   #"
+             << RESET << endl;
+        cout << BGBLACK
+             << "#                                    3 - Aide                                                 #"
+             << RESET << endl;
+        cout << BGBLACK
+             << "#                                    4 - Options                                              #"
+             << RESET << endl;
+        cout << BGBLACK
+             << "#                                    5 - Quitter                                              #"
+             << RESET << endl;
+        cout << BGBLACK
+             << "###############################################################################################"
+             << RESET << endl;
         cin >> user_input;
-        if (user_input == "3"){
+        if (user_input == "3") {
             this->helpMenu();
-        }
-        else if (user_input == "4"){
+        } else if (user_input == "4") {
             this->optionsMenu();
         }
 
@@ -47,7 +66,7 @@ void Game::startMenu() {
     this->init();
 }
 
-void Game::helpMenu(){
+void Game::helpMenu() {
     system("clear");
     string user_input = "\0";
     cout << BGBLACK << "###############################################################################################"
@@ -111,7 +130,7 @@ void Game::helpMenu(){
     cin >> user_input;
 }
 
-void Game::optionsMenu(){
+void Game::optionsMenu() {
     system("clear");
     string user_input = "\0";
     cout << "WORK IN PROGRESS" << endl;
@@ -764,8 +783,9 @@ void Game::playerTurn() {
                     setMap(this->applyDamage(this->getMap(), this->player->getChampions()[i],
                                              this->player->getChampions()[i]->getSpells()[spell_choice]->getRange()));
                     this->drawEnemyKilled(tmp);
-                    if (i != 2){
-                        cout << "Appuyer sur une touche puis sur Entrer pour passer au tour du champion suivant..." << endl;
+                    if (i != 2) {
+                        cout << "Appuyer sur une touche puis sur Entrer pour passer au tour du champion suivant..."
+                             << endl;
                         cin >> user_choice;
                     }
                 } else if (spell_choice == 4) {
@@ -776,7 +796,7 @@ void Game::playerTurn() {
             } else if (user_choice == "2") {
                 //Banque
                 this->shop(this->player->getChampions()[i]);
-                invalid_syntax = false;
+
             } else if (user_choice == "3") {
 
 

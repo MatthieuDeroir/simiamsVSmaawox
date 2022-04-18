@@ -26,10 +26,22 @@ private:
 
     //upgrades base cost const
     int UPGRADE_COST_COEFF; //for all upgrades
+    int MANA_BASE;
+    int MANA_REGEN_BASE;
     int MANA_REGEN_BASE_COST;
     int MANA_BASE_COST;
     int MANA_REGEN_BASE_UP;
     int MANA_BASE_UP;
+
+    int HP_BASE;
+    int HP_REGEN_BASE_COST;
+    int HP_BASE_COST;
+    int HP_REGEN_BASE_UP;
+    int HP_BASE_UP;
+
+    int HP_POTION_10;
+    int HP_POTION_50;
+    int HP_POTION_MAX;
 
 public:
     //Class Constructor
@@ -44,6 +56,25 @@ public:
 
     int getMaxHp();
     void setMaxHp(int max_hp);
+
+    int getHpRegen();
+    void setHpRegen(int hp_regen);
+
+    int getMaxHpBaseCost();
+
+    int getHpRegenBaseCost();
+
+    int getMaxHpBaseUp();
+
+    int getHpRegenBaseUp();
+
+    int getManaBase();
+    int getManaRegenBase();
+    int getHpBase();
+
+    int getHpPotion10();
+    int getHpPotion50();
+    int getHpPotionMax();
 
     int getDef();
     void setDef(int def);

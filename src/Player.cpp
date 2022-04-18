@@ -20,10 +20,25 @@ Player::Player(string name, int hp, int money, int mana, int mana_regen, int sco
     this->gameOver = 0;
 
     //const definition
+    this->MANA_BASE = mana;
+    this->MANA_REGEN_BASE = mana_regen;
+
     this->MANA_BASE_COST = 10;
     this->MANA_REGEN_BASE_COST = 10;
     this->MANA_BASE_UP = 10;
     this->MANA_REGEN_BASE_UP = 10;
+
+    this->HP_BASE = hp;
+
+    this->HP_BASE_COST = 10;
+    this->HP_REGEN_BASE_COST = 10;
+    this->HP_BASE_UP = 10;
+    this->HP_REGEN_BASE_UP = 10;
+
+    //potion cost
+    this->HP_POTION_10 = 10;
+    this->HP_POTION_50 = 50;
+    this->HP_POTION_MAX = this->max_hp;
 }
 
 
@@ -52,6 +67,43 @@ void Player::setMaxHp(int max_hp) {
     this->max_hp = max_hp;
 }
 
+
+int Player::getMaxHpBaseCost() {
+    return this->HP_BASE_COST;
+}
+
+int Player::getHpRegenBaseCost() {
+    return this->HP_REGEN_BASE_COST;
+}
+
+int Player::getMaxHpBaseUp() {
+    return this->HP_BASE_UP;
+}
+
+int Player::getHpRegenBaseUp() {
+    return this->HP_REGEN_BASE_UP;
+}
+
+int Player::getManaBase(){
+    return this->HP_BASE;
+}
+
+int Player::getManaRegenBase(){
+    return this->MANA_REGEN_BASE;
+}
+
+int Player::getHpBase(){
+    return this->MANA_BASE;
+}
+
+int Player::getHpPotion10() {
+    return this->HP_POTION_10;
+}int Player::getHpPotion50() {
+    return this->HP_POTION_50;
+}int Player::getHpPotionMax() {
+    return this->HP_POTION_MAX;
+}
+
 int Player::getDef() {
     return this->def;
 }
@@ -76,21 +128,20 @@ void Player::setMana(int mana) {
     this->mana = mana;
 }
 
+int Player::getManaRegen() {
+    return this->mana_regen;
+}
+void Player::setManaRegen(int mana_regen) {
+    this->mana_regen = mana_regen;
+}
+
 int Player::getMaxMana() {
     return this->max_mana;
 }
-
 void Player::setMaxMana(int max_mana) {
     this->max_mana = max_mana;
 }
 
-int Player::getManaRegen() {
-    return this->mana_regen;
-}
-
-void Player::setManaRegen(int mana_regen) {
-    this->mana = mana_regen;
-}
 
 int Player::getMaxManaBaseCost() {
     return this->MANA_BASE_COST;
