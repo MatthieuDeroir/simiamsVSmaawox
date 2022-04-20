@@ -1,16 +1,14 @@
 // TO COMPILE
-// g++ main.cpp src/* include/*
+// g++ -std=c++11 main.cpp src/* include/*.h defines/defines.cpp
 
 // TO RUN
 // ./a.out
 
 #include "include/header.h"
 #include "include/Player.h"
-#include "include/Enemy.h"
 #include "include/Game.h"
 #include "include/Spell.h"
 #include "include/defines.h"
-
 
 int main() {
     bool retry = true;
@@ -21,11 +19,13 @@ int main() {
         string usr_input = " ";
         system("clear");
 
-        Player *player = playerInitialization();
+        Player *player = new Player();
 
         Game *game = new Game(9, 9, player);
 
         game->startMenu();
+        player = playerInitialization();
+        game->setPlayer(player);
         string welcome_msg = "Bienvenue sur Maawox versus Simsim : le retour du Roi de la coline d'à côté de la montagne verte";
         cout << welcome_msg << endl;
 

@@ -17,6 +17,7 @@ private:
     int base_cost;
     bool current_champ;
 public:
+    Champion();
     Champion(string name, char sprite, int att, vector<Spell*> spells);
 
     //Getter & Setter

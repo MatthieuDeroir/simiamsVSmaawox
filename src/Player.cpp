@@ -5,6 +5,9 @@
 #include "../include/header.h"
 #include "../include/Player.h"
 
+Player::Player(){
+
+}
 
 Player::Player(string name, int hp, int money, int mana, int mana_regen, int score, vector<Champion *> champs) {
     this->name = name;
@@ -39,6 +42,8 @@ Player::Player(string name, int hp, int money, int mana, int mana_regen, int sco
     this->HP_POTION_10 = 10;
     this->HP_POTION_50 = 50;
     this->HP_POTION_MAX = this->max_hp;
+
+    this->MANA_POTION_MAX = this->max_mana;
 }
 
 
@@ -102,6 +107,10 @@ int Player::getHpPotion10() {
     return this->HP_POTION_50;
 }int Player::getHpPotionMax() {
     return this->HP_POTION_MAX;
+}
+
+int Player::getManaPotion(){
+    return this->MANA_POTION_MAX;
 }
 
 int Player::getDef() {

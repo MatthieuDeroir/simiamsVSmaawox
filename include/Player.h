@@ -43,7 +43,11 @@ private:
     int HP_POTION_50;
     int HP_POTION_MAX;
 
+    int MANA_POTION_MAX;
+
 public:
+    //default constructor
+    Player();
     //Class Constructor
     Player(string name, int hp, int money, int mana, int mana_regen, int score, vector<Champion*> champs);
 
@@ -75,6 +79,8 @@ public:
     int getHpPotion10();
     int getHpPotion50();
     int getHpPotionMax();
+
+    int getManaPotion();
 
     int getDef();
     void setDef(int def);

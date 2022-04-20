@@ -4,6 +4,10 @@
 
 #include "../include/Champion.h"
 
+Champion::Champion(){
+
+}
+
 Champion::Champion(string name, char sprite, int att, vector<Spell*> spells) {
     this->sprite = sprite;
     this->att = att;

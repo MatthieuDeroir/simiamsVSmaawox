@@ -161,25 +161,28 @@ bool Game::gameOverMenu() {
 
 //main game loop functions
 
+//initialisation de la map de jeu en fonction des constante établies
 void Game::init() {
     vector<vector<int> > map(this->MAP_HEIGHT, vector<int>(this->MAP_WIDTH, 0));
     this->setMap(map);
 }
 
+//boucle principale du jeu
 void Game::update() {
 
-    int dmg;
-    vector<int> tmp_map = getMap()[getMap().size() - 1];
-
-    dmg = count_line(tmp_map);
+    //fais avancer les enemis
     setMap(push_row(getMap()));
+    //incremente le nb de round par 1
     setRound((getRound()) + 1);
     //spawn les enemies
     setMap(spawner(getMap(), getRound()));
+    //tour du joueur
     playerTurn(); //TODO PLAYER TURN
-    this->player->takeDamage(dmg, this->round);
+    //applique les degats infligés au joueur s'il y en a
+    this->player->takeDamage(count_line(getMap()[getMap().size() - 1]), this->round);
 }
 
+//fonction principal d'affichage de la map
 void Game::draw() {
     system("clear");
     displayHUI();
@@ -206,6 +209,8 @@ void Game::draw() {
 }
 
 //base game func
+//permet d'additionner les valeurs d'un vecteur
+//utile pour compter les dégats infligés au joueur
 int Game::count_line(vector<int> map) {
     int i = 0;
     int count = 0;
@@ -217,6 +222,7 @@ int Game::count_line(vector<int> map) {
     return count;
 }
 
+//fonction qui permet de faire avancer les valeurs d'un vector à deux dimensions d'une ligne à la suivante
 vector<vector<int> > Game::push_row(vector<vector<int> > vec) {
     //pushes the rows to row+1, beginning with penultimate
     // i = row
@@ -235,6 +241,7 @@ vector<vector<int> > Game::push_row(vector<vector<int> > vec) {
     return vec;
 }
 
+//fait apparaître les enemis au début de chaque round à la première ligne du vector
 vector<vector<int> > Game::spawner(vector<vector<int> > vec, int round) {
     int en_nb = (rand() % ((1 + round))) + 1;
 
@@ -256,14 +263,11 @@ vector<vector<int> > Game::spawner(vector<vector<int> > vec, int round) {
 
 //Game UI
 void Game::displayHUI() { //affichage de l'entête de l'UI
-    color('f', "pink");
-
     cout << BGMAGENTA << BLACK << "######## ROUND N. : " << getRound() << " ########" << RESET << endl;
 }
 
 void
-Game::displayFUI() { //affichage du bas de l'UI //TODO : faire les bordures à droite pour qu'elles soient dynamiques avec la valeur d'affichage des stats
-
+Game::displayFUI() { //affichage du bas de l'UI
 
     if (this->player->getChampions()[0]->getCurrentChamp()) {
         cout << RESET << "      " << "  " << this->player->getChampions()[0]->getSprite() << MAGENTA << "     "
@@ -297,6 +301,16 @@ Game::displayFUI() { //affichage du bas de l'UI //TODO : faire les bordures à d
     multiprint(" ", 12 - to_string(this->player->getMoney()).length());
     cout << "#" << endl;
     cout << "##############################" << endl;
+    cout << "# " << MAGENTA << this->player->getChampions()[0]->getName() << RESET <<  " - Attaque : " << this->player->getChampions()[0]->getAtt() << RESET;
+    multiprint(" ", 14-(this->player->getChampions()[0]->getName().length() + to_string(this->player->getChampions()[0]->getAtt()).length()));
+    cout << "#" << endl;
+    cout << "# " << MAGENTA << this->player->getChampions()[1]->getName() << RESET << " - Attaque : " << this->player->getChampions()[1]->getAtt() << RESET;
+    multiprint(" ", 14-(this->player->getChampions()[1]->getName().length() + to_string(this->player->getChampions()[0]->getAtt()).length()));
+    cout << "#" << endl;
+    cout << "# " << MAGENTA << this->player->getChampions()[2]->getName() << RESET << " - Attaque : " << this->player->getChampions()[2]->getAtt() << RESET;
+    multiprint(" ", 14-(this->player->getChampions()[2]->getName().length() + to_string(this->player->getChampions()[0]->getAtt()).length()));
+    cout << "#" << endl;
+    cout << "##############################" << endl;
 
 }
 
@@ -305,9 +319,6 @@ Game::displayFUI() { //affichage du bas de l'UI //TODO : faire les bordures à d
 void Game::drawRange(vector<vector<int> > range, Champion *champ) { // affiche les cases visées par une attaque
     system("clear");
     displayHUI();
-
-//    auto it = find(this->player->getChampions().begin(), this->player->getChampions().end(), champ);
-//    int mul = distance(this->player->getChampions().begin(), it);
 
     for (int i = 0; i < range.size(); i++) {
         cout << "      ";
@@ -369,7 +380,7 @@ void Game::drawSpellDamage(vector<vector<int> > range) { //affiche les dégats m
     displayFUI();
 }
 
-void Game::drawSpellDamageShop(vector<vector<int> > range) { //affiche les dégats maximum des sorts
+void Game::drawSpellDamageShop(vector<vector<int> > range) { //affiche les dégats maximum des sorts ainsi que leur amélioration potentielle
     system("clear");
     for (int i = 0; i < range.size(); i++) {
         cout << "      ";
@@ -396,6 +407,7 @@ void Game::drawSpellDamageShop(vector<vector<int> > range) { //affiche les déga
     displayFUI();
 }
 
+//applique les dégats d'un sort donné (via sa caractéristique range) sur une map =
 vector<vector<int> > Game::applyDamage(vector<vector<int> > map, Champion *champ, vector<vector<int> > range) {
     int dmg_alea;
     for (int i = 0; i < range.size(); i++) {
@@ -406,7 +418,7 @@ vector<vector<int> > Game::applyDamage(vector<vector<int> > map, Champion *champ
                     dmg_alea = map[i][j];
                 }
                 map[i][j] -= dmg_alea;
-                this->player->setMoney(this->player->getMoney() + (dmg_alea * (1+(this->round/10))));
+                this->player->setMoney(this->player->getMoney() + (dmg_alea * (1 + (this->round / 10))));
                 if (dmg_alea) {
                     cout << "Attaque réussie en " << GREEN << "[" << i << "," << j << "]" << RESET << " !" << endl;
                     cout << "Vous infligez " << GREEN << dmg_alea << " dégats ! " << RESET << " !" << endl;
@@ -430,7 +442,7 @@ void Game::shop(Champion *champion) {
         cout << "Boutique " << this->player->getMoney() << " $imiam$" << endl << endl;
         cout << "1 - Stat" << endl;
         cout << "2 - Potions" << endl;
-        cout << "3 - Champion" << endl;
+        cout << "3 - Champion/Sorts" << endl;
         cout << "4 - Retour" << endl;
         cin >> user_choice;
 
@@ -459,14 +471,14 @@ void Game::shop(Champion *champion) {
                                                   this->player->getManaRegenBaseCost() * 2 << "$imiam$  "
                          << this->player->getManaRegen() << " Manawox/Tour" << endl;
                 }
-                if (this->player->getMaxHp() == this->player->getHpBase()){
+                if (this->player->getMaxHp() == this->player->getHpBase()) {
                     cout << "3 - MaxHP - " << this->player->getMaxHpBaseCost() << "$imiam$  "
                          << this->player->getMaxHp()
                          << " Hp Max." << endl;
                 } else {
                     cout << "3 - MaxHP - "
                          << (this->player->getMaxHp() - this->player->getHpBase()) / this->player->getMaxHpBaseUp() *
-                                                        this->player->getMaxHpBaseCost() * 2 << "$imiam$  "
+                            this->player->getMaxHpBaseCost() * 2 << "$imiam$  "
                          << this->player->getMaxHp()
                          << " Hp Max." << endl;
                 }
@@ -526,9 +538,10 @@ void Game::shop(Champion *champion) {
                                                 this->player->getMaxHpBaseUp() *
                                                 this->player->getMaxHpBaseCost() * 2));
                         this->player->setMaxHp(this->player->getMaxHp() + this->player->getMaxHpBaseUp());
-                        this->player->setHp(this->player->getHp()+this->player->getMaxManaBaseUp());
-                    } else if (this->player->getMaxHp() == this->player->getHpBase() && this->player->getMoney() >= this->player->getMaxHpBaseCost() *
-                                                                                         2) {
+                        this->player->setHp(this->player->getHp() + this->player->getMaxManaBaseUp());
+                    } else if (this->player->getMaxHp() == this->player->getHpBase() &&
+                               this->player->getMoney() >= this->player->getMaxHpBaseCost() *
+                                                           2) {
                         this->player->setMoney(this->player->getMoney() - this->player->getMaxHpBaseCost());
                         this->player->setMaxHp(this->player->getMaxHp() + this->player->getMaxHpBaseUp());
                     } else {
@@ -558,7 +571,8 @@ void Game::shop(Champion *champion) {
                 cout << "4 - Retour" << endl;
                 cin >> user_choice;
 
-                if (user_choice == "1" || user_choice == "2" || user_choice == "3" || user_choice == "4") {
+                if (user_choice == "1" || user_choice == "2" || user_choice == "3" || user_choice == "4" ||
+                    user_choice == "5") {
                     if (user_choice != "4") {
                         if (user_choice == "1") {
                             if (this->player->getMoney() >= 40) {
@@ -606,6 +620,25 @@ void Game::shop(Champion *champion) {
                                 cout << RED << "$imiam$ insuffisant" << RESET << endl;
                             }
                         }
+                        if (user_choice == "5") {
+                            if (this->player->getMoney() >= this->player->getMaxMana() / 2) {
+                                if (this->player->getMana() - this->player->getMaxMana() >
+                                    this->player->getManaPotion()) {
+                                    cout << "Vous buvez un elixir : " << this->player->getName() << " gagne "
+                                         << this->player->getManaPotion() << " Manawox" << endl;
+                                    this->player->setHp(this->player->getMana() + this->player->getManaPotion());
+                                    this->player->setMoney(this->player->getMaxMana() / 2);
+                                } else if (this->player->getMana() - this->player->getMaxMana() <
+                                           this->player->getManaPotion()) {
+                                    cout << "Vous buvez un elixir : " << this->player->getName() << " gagne "
+                                         << this->player->getMana() - this->player->getMaxMana() << "Manawox" << endl;
+                                    this->player->setMana(this->player->getMaxMana());
+                                    this->player->setMoney(this->player->getMoney() - this->player->getMaxMana() / 2);
+                                }
+                            } else {
+                                cout << RED << "$imiam$ insuffisant" << RESET << endl;
+                            }
+                        }
                     } else if (user_choice == "4") {
                         invalid_syntaxte = true;
                     }
@@ -630,7 +663,7 @@ void Game::shop(Champion *champion) {
                         champion->upgradeAtt();
                         cout << champion->getName() << " gagne 1 point d'attaque // Att: " << champion->getAtt()
                              << endl;
-                        this->player->setMoney(this->player->getMoney() - champion->getAtt() * 100);
+                        this->player->setMoney(this->player->getMoney() - (champion->getAtt() - 1) * 100);
                     } else {
                         cout << RED << "$imiam$ insuffisant" << RESET << endl;
                     }
@@ -638,7 +671,7 @@ void Game::shop(Champion *champion) {
                            user_choice == "5") {
                     int spell_index = stoi(user_choice) - 2;
                     if (this->player->getMoney() -
-                        count_square(champion->getSpells()[spell_index]->getRange()) * 2 >= 0) {
+                        count_square(champion->getSpells()[spell_index]->getRange()) >= 0) {
 
                         this->drawSpellDamageShop(champion->getSpells()[stoi(user_choice) - 2]->getRange());
                         cout << "1 - confirmer l'amelioration de "
@@ -652,8 +685,7 @@ void Game::shop(Champion *champion) {
                                  << endl;
                             this->player->setMoney(this->player->getMoney() -
                                                    count_square(
-                                                           champion->getSpells()[spell_index]->getRange()) *
-                                                   2);
+                                                           champion->getSpells()[spell_index]->getRange()));
 
                             //mis a jour de la range quand on quitte le shop
                             this->player->rangeUpdate();
@@ -687,13 +719,15 @@ void Game::playerTurn() {
             tmp = getMap();
             system("clear");
             this->draw();
-            cout << "# Au tour de " << MAGENTA << this->player->getChampions()[i]->getName() << RESET << "            #"
+            cout << "# Au tour de " << MAGENTA << this->player->getChampions()[i]->getName() << RESET;
+            multiprint(" ", 16 - this->player->getChampions()[i]->getName().length());
+            cout << "#"
                  << endl;
             cout << "##############################" << endl;
-            cout << "# 1 - Attaque                #" << endl;
-            cout << "# 2 - Boutique               #" << endl;
-            cout << "# 3 - Changer de position    #" << endl;
-            cout << "# 4 - Passer son tour        #" << endl;
+            cout << "# 1 - "<< BLUE << "Sorts"<< RESET <<"                  #" << endl;
+            cout << "# 2 - "<< YELLOW << "Boutique"<< RESET <<"               #" << endl;
+            cout << "# 3 - "<< MAGENTA << "Changer de position"<< RESET <<"    #" << endl;
+            cout << "# 4 - "<< RED << "Passer son tour"<< RESET <<"        #" << endl;
             cout << "##############################" << endl;
 
             cin >> user_choice;
@@ -821,9 +855,12 @@ void Game::playerTurn() {
                 invalid_syntax = true;
             }
             //setting the current champ to false
-            this->player->getChampions()[i]->setCurrentChamp(false);
+            for (int i = 0; i < this->player->getChampions().size(); i++){
+                this->player->getChampions()[i]->setCurrentChamp(false);
+            }
         }
     }
+
     cout << "Appuyez sur une touche puis sur Enter pour passer au round suivant.." << endl;
     this->player->regenMana();
     cin >> user_choice;
