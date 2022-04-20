@@ -14,6 +14,7 @@
 #include <ctime>
 #include <typeinfo>
 #include <map>
+#include <algorithm>
 
 #define RESET       "\033[0m"
 #define BLACK       "\033[30m"      /* Black */
@@ -29,9 +30,9 @@
 #define BGRED       "\033[41m"         /* Red */
 #define BGGREEN     "\033[42m"       /* Green */
 #define BGYELLOW    "\033[43m"      /* Yellow */
-#define BGBLUE      "\[\033[44m\]"        # Blue
+#define BGBLUE      "\033[44m"        # Blue
 #define BGMAGENTA    "\033[45m"      /* Purple */
-#define BGCYAN      "\[\033[46m\]"        # Cyan
+#define BGCYAN      "\033[46m"        # Cyan
 #define BGWHITE     "\033[47m"       /* White */
 
 

@@ -13,7 +13,7 @@ private:
     int MAP_HEIGHT;
     int MAP_WIDTH;
 
-
+    char os;
 
 
     Player* player;
@@ -103,6 +103,9 @@ public:
 
     //Player implementation
     void playerTurn();
+
+    //clear
+    void clear(char os);
 
 };
 

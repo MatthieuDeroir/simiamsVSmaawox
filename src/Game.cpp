@@ -14,6 +14,7 @@ Game::Game(int w, int h, Player *player) {
     this->MAP_WIDTH = w;
     this->MAP_HEIGHT = h;
     this->MAX_ENEMY = 61;
+    this->os = 'm';
     this->player = player;
 }
 
@@ -22,7 +23,7 @@ Game::Game(int w, int h, Player *player) {
 
 void Game::startMenu() {
     string user_input = "\0";
-    system("clear");
+    clear(os);
     while (user_input != "1" && user_input != "2") {
         cout << BGBLACK
              << "###############################################################################################"
@@ -67,7 +68,8 @@ void Game::startMenu() {
 }
 
 void Game::helpMenu() {
-    system("clear");
+    clear(os);
+
     string user_input = "\0";
     cout << BGBLACK << "###############################################################################################"
          << RESET << endl;
@@ -131,7 +133,8 @@ void Game::helpMenu() {
 }
 
 void Game::optionsMenu() {
-    system("clear");
+    clear(os);
+
     string user_input = "\0";
     cout << "WORK IN PROGRESS" << endl;
     cout << "Appuyer sur une touche puis sur Entrer pour revenir au menu principal..." << endl;
@@ -140,7 +143,8 @@ void Game::optionsMenu() {
 
 bool Game::gameOverMenu() {
     string user_input;
-    system("clear");
+    clear(os);
+
 
     cout << RED << "@@@@@@@@   @@@@@@   @@@@@@@@@@   @@@@@@@@      @@@@@@   @@@  @@@  @@@@@@@@  @@@@@@@" << endl;
     cout << "@@@@@@@@@  @@@@@@@@  @@@@@@@@@@@  @@@@@@@@     @@@@@@@@  @@@  @@@  @@@@@@@@  @@@@@@@@" << endl;
@@ -184,7 +188,8 @@ void Game::update() {
 
 //fonction principal d'affichage de la map
 void Game::draw() {
-    system("clear");
+    clear(os);
+
     displayHUI();
     color('f', "lblue");
     for (int i = 0; i < this->map.size(); i++) {
@@ -317,7 +322,8 @@ Game::displayFUI() { //affichage du bas de l'UI
 // vector comparison
 
 void Game::drawRange(vector<vector<int> > range, Champion *champ) { // affiche les cases visées par une attaque
-    system("clear");
+    clear(os);
+
     displayHUI();
 
     for (int i = 0; i < range.size(); i++) {
@@ -338,7 +344,8 @@ void Game::drawRange(vector<vector<int> > range, Champion *champ) { // affiche l
 
 void Game::drawEnemyKilled(
         vector<vector<int> > prev_map) { // affiche en surbrillance les cases enemies touchées après une attaque
-    system("clear");
+    clear(os);
+
     displayHUI();
     int e_nb;
 
@@ -362,7 +369,8 @@ void Game::drawEnemyKilled(
 }
 
 void Game::drawSpellDamage(vector<vector<int> > range) { //affiche les dégats maximum des sorts
-    system("clear");
+    clear(os);
+
     displayHUI();
 
     for (int i = 0; i < range.size(); i++) {
@@ -381,7 +389,8 @@ void Game::drawSpellDamage(vector<vector<int> > range) { //affiche les dégats m
 }
 
 void Game::drawSpellDamageShop(vector<vector<int> > range) { //affiche les dégats maximum des sorts ainsi que leur amélioration potentielle
-    system("clear");
+    clear(os);
+
     for (int i = 0; i < range.size(); i++) {
         cout << "      ";
         for (int j = 0; j < range[i].size(); j++) {
@@ -717,14 +726,15 @@ void Game::playerTurn() {
 
         while (invalid_syntax) {
             tmp = getMap();
-            system("clear");
+            clear(os);
+
             this->draw();
-            cout << "# Au tour de " << MAGENTA << this->player->getChampions()[i]->getName() << RESET;
+            cout << "# Au tour de " << GREEN << this->player->getChampions()[i]->getName() << RESET;
             multiprint(" ", 16 - this->player->getChampions()[i]->getName().length());
             cout << "#"
                  << endl;
             cout << "##############################" << endl;
-            cout << "# 1 - "<< BLUE << "Sorts"<< RESET <<"                  #" << endl;
+            cout << "# 1 - "<< CYAN << "Sorts"<< RESET <<"                  #" << endl;
             cout << "# 2 - "<< YELLOW << "Boutique"<< RESET <<"               #" << endl;
             cout << "# 3 - "<< MAGENTA << "Changer de position"<< RESET <<"    #" << endl;
             cout << "# 4 - "<< RED << "Passer son tour"<< RESET <<"        #" << endl;
@@ -737,7 +747,8 @@ void Game::playerTurn() {
                 int spell_choice_back = 6;
                 int spell_choice;
                 bool confirm_spell_choice;
-                system("clear");
+                clear(os);
+
                 this->draw();
                 do {
 
@@ -800,7 +811,8 @@ void Game::playerTurn() {
 
 
                     if (spell_choice_back != spell_choice && spell_choice != 4) { // Si tu choisi un sort different
-                        system("clear");
+                        clear(os);
+
                         this->drawRange(this->player->getChampions()[i]->getSpells()[spell_choice]->getRange(),
                                         this->player->getChampions()[i]); // Dessine la range
                         confirm_spell_choice = false;
@@ -864,6 +876,15 @@ void Game::playerTurn() {
     cout << "Appuyez sur une touche puis sur Enter pour passer au round suivant.." << endl;
     this->player->regenMana();
     cin >> user_choice;
+}
+
+void Game::clear(char os){
+    if (os == 'm'){
+        system("clear");
+    }
+    else if (os == 'w'){
+        system("cls");
+    }
 }
 
 
