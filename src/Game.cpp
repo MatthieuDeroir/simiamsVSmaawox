@@ -10,11 +10,11 @@
 
 
 
-Game::Game(int w, int h, Player *player) {
+Game::Game(int w, int h, Player *player, char os) {
     this->MAP_WIDTH = w;
     this->MAP_HEIGHT = h;
     this->MAX_ENEMY = 61;
-    this->os = 'm';
+    this->os = os;
     this->player = player;
 }
 

@@ -42,7 +42,7 @@ private:
 //    vector<Player*> players;
 //    vector<Enemy*> enemies;
 public:
-    Game(int w, int h, Player* player);
+    Game(int w, int h, Player* player, char os);
 
     //menu
     void startMenu();

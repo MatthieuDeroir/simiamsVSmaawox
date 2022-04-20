@@ -10,8 +10,11 @@
 #include "include/Spell.h"
 #include "include/defines.h"
 
-int main() {
+int main(int argc, char** argv) {
     bool retry = true;
+    char os;
+    cout << "Windows ou Mac ? (w/m)" << endl;
+    cin >> os;
 
     while (retry) {
         srand(time(0));
@@ -21,7 +24,7 @@ int main() {
 
         Player *player = new Player();
 
-        Game *game = new Game(9, 9, player);
+        Game *game = new Game(9, 9, player, os);
 
         game->startMenu();
         player = playerInitialization();
