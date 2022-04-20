@@ -577,78 +577,102 @@ void Game::shop(Champion *champion) {
                      << "50 $imiam$" << endl;
                 cout << "3 - Maxi Potion" << this->player->getHpPotionMax() << " HP / "
                      << this->player->getMaxHp() / 2 << "$imiam$" << endl;
-                cout << "4 - Retour" << endl;
+                cout << "4 - Manawoxide " << this->player->getMaxMana() << " Ø / " << this->player->getMaxMana() / 2 << endl;
+                cout << "5 - Retour" << endl;
                 cin >> user_choice;
 
                 if (user_choice == "1" || user_choice == "2" || user_choice == "3" || user_choice == "4" ||
                     user_choice == "5") {
-                    if (user_choice != "4") {
+                    if (user_choice != "5") {
                         if (user_choice == "1") {
-                            if (this->player->getMoney() >= 40) {
+                            if (this->player->getMoney() >= 10) {
+                                if (this->player->getHp() < this->player->getMaxHp()) {
                                 if (this->player->getHp() - this->player->getMaxHp() >
                                     this->player->getHpPotion10()) {
-                                    cout << this->player->getName() << " prend une potion" << this->player->getName() << " gagne "
+                                    cout << this->player->getName() << " boit une potion" << this->player->getName() << " gagne "
                                          << this->player->getHpPotion10() << " HP" << endl;
                                     this->player->setHp(this->player->getHp() + this->player->getHpPotion10());
                                     this->player->setMoney(this->player->getMoney() - 10);
                                 } else if (this->player->getHp() - this->player->getMaxHp() <
                                            this->player->getHpPotion10()) {
-                                    cout << this->player->getName() << " prend une potion " << this->player->getName() << " gagne "
+                                    cout << this->player->getName() << " boit une potion " << this->player->getName() << " gagne "
                                          << this->player->getHp() - this->player->getMaxHp() << "HP" << endl;
                                     this->player->setHp(this->player->getMaxHp());
                                     this->player->setMoney(this->player->getMoney() - 10);
                                 }
                             } else {
-                                cout << RED << "$imiam$ insuffisant" << RESET << endl;
+                                    cout << RED << "$imiam$ insuffisant" << RESET << endl;
+                                }
+                            }else{
+                                cout << RED << "Hp au déjà au max" << endl << endl;
                             }
                         } else if (user_choice == "2") {
-                            if (this->player->getMoney() >= 40) {
-                                if (this->player->getHp() - this->player->getMaxHp() >
-                                    this->player->getHpPotion50()) {
-                                    cout << this->player->getName() << " prend une super potion " << this->player->getName() << " gagne "
-                                         << this->player->getHpPotion50() << " HP" << endl;
-                                    this->player->setHp(this->player->getHp() + this->player->getHpPotion50());
-                                    this->player->setMoney(this->player->getMoney() - 50);
-                                } else if (this->player->getHp() - this->player->getMaxHp() <
-                                           this->player->getHpPotion50()) {
-                                    cout << "Vous buvez de l'alcool " << this->player->getName() << " gagne "
-                                         << this->player->getHp() - this->player->getMaxHp() << endl;
-                                    this->player->setHp(this->player->getMaxHp());
-                                    this->player->setMoney(this->player->getMoney() - 50);
+                            if (this->player->getHp() < this->player->getMaxHp()) {
+                                if (this->player->getMoney() >= 40) {
+                                    if (this->player->getHp() - this->player->getMaxHp() >
+                                        this->player->getHpPotion50()) {
+                                        cout << this->player->getName() << " boit une super potion "
+                                             << this->player->getName() << " gagne "
+                                             << this->player->getHpPotion50() << " HP" << endl;
+                                        this->player->setHp(this->player->getHp() + this->player->getHpPotion50());
+                                        this->player->setMoney(this->player->getMoney() - 50);
+                                    } else if (this->player->getHp() - this->player->getMaxHp() <
+                                               this->player->getHpPotion50()) {
+                                        cout << this->player->getName() << " boit une super potion "
+                                             << this->player->getName() << " gagne "
+                                             << this->player->getHp() - this->player->getMaxHp() << "HP" << endl;
+                                        this->player->setHp(this->player->getMaxHp());
+                                        this->player->setMoney(this->player->getMoney() - 50);
+                                    }
+                                } else {
+                                    cout << RED << "$imiam$ insuffisant" << RESET << endl;
                                 }
-                            } else {
-                                cout << RED << "$imiam$ insuffisant" << RESET << endl;
+                            }else{
+                                cout << RED << "Hp au déjà au max" << endl << endl;
                             }
                         } else if (user_choice == "3") {
-                            if (this->player->getMoney() >= this->player->getMaxHp() / 2) {
-                                cout << "Vous buvez beaucoup d'alcool" << this->player->getName() << " gagne "
-                                     << this->player->getHp() - this->player->getMaxHp() << " HP" << endl;
-                                this->player->setHp(this->player->getMaxHp());
-                                this->player->setMoney(this->player->getMoney() - this->player->getMaxHp() / 2);
-                            } else {
-                                cout << RED << "$imiam$ insuffisant" << RESET << endl;
-                            }
-                        }
-                        if (user_choice == "5") {
-                            if (this->player->getMoney() >= this->player->getMaxMana() / 2) {
-                                if (this->player->getMana() - this->player->getMaxMana() >
-                                    this->player->getManaPotion()) {
-                                    cout << "Vous buvez un elixir : " << this->player->getName() << " gagne "
-                                         << this->player->getManaPotion() << " Manawox" << endl;
-                                    this->player->setHp(this->player->getMana() + this->player->getManaPotion());
-                                    this->player->setMoney(this->player->getMaxMana() / 2);
-                                } else if (this->player->getMana() - this->player->getMaxMana() <
-                                           this->player->getManaPotion()) {
-                                    cout << "Vous buvez un elixir : " << this->player->getName() << " gagne "
-                                         << this->player->getMana() - this->player->getMaxMana() << "Manawox" << endl;
-                                    this->player->setMana(this->player->getMaxMana());
-                                    this->player->setMoney(this->player->getMoney() - this->player->getMaxMana() / 2);
+                            if (this->player->getHp() < this->player->getMaxHp()) {
+                                if (this->player->getMoney() >= this->player->getMaxHp() / 2) {
+                                    cout << this->player->getName() << " boit une maxi potion "
+                                         << this->player->getName()
+                                         << " gagne "
+                                         << this->player->getHp() - this->player->getMaxHp() << " HP" << endl;
+                                    this->player->setHp(this->player->getMaxHp());
+                                    this->player->setMoney(this->player->getMoney() - this->player->getMaxHp() / 2);
+                                } else {
+                                    cout << RED << "$imiam$ insuffisant" << RESET << endl;
                                 }
-                            } else {
-                                cout << RED << "$imiam$ insuffisant" << RESET << endl;
+                            }else{
+                                cout << RED << "Hp au déjà au max" << endl << endl;
                             }
                         }
-                    } else if (user_choice == "4") {
+                        if (user_choice == "4") {
+                            if (this->player->getMana() < this->player->getMaxMana()) {
+                                if (this->player->getMoney() >= this->player->getMaxMana() / 2) {
+                                    if (this->player->getMana() - this->player->getMaxMana() >
+                                        this->player->getManaPotion()) {
+                                        cout << this->player->getName() << " boit un manawoxide : "
+                                             << this->player->getName() << " gagne "
+                                             << this->player->getManaPotion() << " Ø" << endl;
+                                        this->player->setHp(this->player->getMana() + this->player->getManaPotion());
+                                        this->player->setMoney(this->player->getMaxMana() / 2);
+                                    } else if (this->player->getMana() - this->player->getMaxMana() <
+                                               this->player->getManaPotion()) {
+                                        cout << this->player->getName() << " boit un manawoxide : "
+                                             << this->player->getName() << " gagne "
+                                             << this->player->getMana() - this->player->getMaxMana() << "Ø" << endl;
+                                        this->player->setMana(this->player->getMaxMana());
+                                        this->player->setMoney(
+                                                this->player->getMoney() - this->player->getMaxMana() / 2);
+                                    }
+                                } else {
+                                    cout << RED << "$imiam$ insuffisant" << RESET << endl;
+                                }
+                            }else{
+                                cout << RED << "Manawox déjà au max" << endl << endl;
+                            }
+                        }
+                    } else if (user_choice == "5") {
                         invalid_syntaxte = true;
                     }
                 } else {
