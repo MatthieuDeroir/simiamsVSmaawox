@@ -571,11 +571,11 @@ void Game::shop(Champion *champion) {
                 cout << "Boutique " << this->player->getMoney() << " $imiam$" << endl << endl;
                 cout << this->player->getHp() << "/" << this->player->getMaxHp() << " Hp / "
                      << this->player->getMoney() << " $imiam$" << endl;
-                cout << "1 - Potion vie minime " << this->player->getHpPotion10() << " HP / " << "10 $imiam$"
+                cout << "1 - Potion " << this->player->getHpPotion10() << " HP / " << "10 $imiam$"
                      << endl;
-                cout << "2  -Potion vie Un peu cool " << this->player->getHpPotion50() << " HP / "
+                cout << "2 - Super Potion " << this->player->getHpPotion50() << " HP / "
                      << "50 $imiam$" << endl;
-                cout << "3 - Potion regen au max " << this->player->getHpPotionMax() << " HP / "
+                cout << "3 - Maxi Potion" << this->player->getHpPotionMax() << " HP / "
                      << this->player->getMaxHp() / 2 << "$imiam$" << endl;
                 cout << "4 - Retour" << endl;
                 cin >> user_choice;
@@ -587,14 +587,14 @@ void Game::shop(Champion *champion) {
                             if (this->player->getMoney() >= 40) {
                                 if (this->player->getHp() - this->player->getMaxHp() >
                                     this->player->getHpPotion10()) {
-                                    cout << "Vous buvez de l'eau " << this->player->getName() << " gagne "
+                                    cout << this->player->getName() << " prend une potion" << this->player->getName() << " gagne "
                                          << this->player->getHpPotion10() << " HP" << endl;
                                     this->player->setHp(this->player->getHp() + this->player->getHpPotion10());
                                     this->player->setMoney(this->player->getMoney() - 10);
                                 } else if (this->player->getHp() - this->player->getMaxHp() <
                                            this->player->getHpPotion10()) {
-                                    cout << "Vous buvez de l'eau " << this->player->getName() << " gagne "
-                                         << this->player->getHp() - this->player->getMaxHp() << endl;
+                                    cout << this->player->getName() << " prend une potion " << this->player->getName() << " gagne "
+                                         << this->player->getHp() - this->player->getMaxHp() << "HP" << endl;
                                     this->player->setHp(this->player->getMaxHp());
                                     this->player->setMoney(this->player->getMoney() - 10);
                                 }
@@ -605,7 +605,7 @@ void Game::shop(Champion *champion) {
                             if (this->player->getMoney() >= 40) {
                                 if (this->player->getHp() - this->player->getMaxHp() >
                                     this->player->getHpPotion50()) {
-                                    cout << "Vous buvez de l'alcool " << this->player->getName() << " gagne "
+                                    cout << this->player->getName() << " prend une super potion " << this->player->getName() << " gagne "
                                          << this->player->getHpPotion50() << " HP" << endl;
                                     this->player->setHp(this->player->getHp() + this->player->getHpPotion50());
                                     this->player->setMoney(this->player->getMoney() - 50);
