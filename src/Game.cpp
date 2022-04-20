@@ -13,6 +13,7 @@ Game::Game(int w, int h, Player *player, char os) {
     this->MAX_ENEMY = 61;
     this->os = os;
     this->player = player;
+    this->round = 0;
 }
 
 //game menu displays
