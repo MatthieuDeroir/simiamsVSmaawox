@@ -249,9 +249,6 @@ vector<vector<int> > Game::push_row(vector<vector<int> > vec) {
 //fait apparaître les enemis au début de chaque round à la première ligne du vector
 vector<vector<int> > Game::spawner(vector<vector<int> > vec, int round) {
     int en_nb = (rand() % ((1 + round))) + 1;
-
-    cout << en_nb << endl;
-
     // growing ennemy nb mecanic in functions of round nb =
     if (en_nb > MAP_WIDTH * (MAX_ENEMY - 1))
         en_nb = MAP_WIDTH * (MAX_ENEMY - 1);
@@ -845,7 +842,6 @@ void Game::playerTurn() {
                     }
 
                     spell_choice_back = spell_choice;
-                    cout << confirm_spell_choice << endl;
 
                 } while (!confirm_spell_choice);
 

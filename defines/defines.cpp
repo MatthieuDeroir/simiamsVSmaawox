@@ -704,6 +704,7 @@ Player *playerInitialization() {
     system("clear");
     cout << "Veuillez saisir un" << MAGENTA << " pseudo " << RESET << ": " << endl;
     cin >> username;
+    getline(cin, username);
     system("clear");
     for (int i = 0; i < MAX_CHAMP; i++) {
         do  {
