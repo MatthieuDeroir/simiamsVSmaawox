@@ -5,9 +5,6 @@
 #include "../include/header.h"
 #include "../include/Game.h"
 
-//TODO Bug when upgrading attack with the first character,
-// it spend twice the amount of simiams and switch to the next champ (maybe upgrading his attack to)
-
 
 
 Game::Game(int w, int h, Player *player, char os) {
@@ -883,7 +880,6 @@ void Game::playerTurn() {
                      << endl;
                 cout << "Appuyez sur une touche puis sur Enter pour passer au champion suivant.." << endl;
                 invalid_syntax = false;
-
 
             } else {
                 cout << RED << "Invalid syntaxe !" << RESET << endl;

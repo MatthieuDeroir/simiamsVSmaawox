@@ -34,8 +34,12 @@ int main(int argc, char** argv) {
         while (!game->getPlayer()->getGameOver()) {
             game->update();
         }
+        delete(game);
+        delete(player);
         retry = game->gameOverMenu();
     }
+
+
     return 0;
 }
 
