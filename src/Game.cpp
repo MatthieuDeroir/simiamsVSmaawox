@@ -191,7 +191,6 @@ void Game::draw() {
     clear(os);
 
     displayHUI();
-    color('f', "lblue");
     for (int i = 0; i < this->map.size(); i++) {
         cout << "      ";
         for (int j = 0; j < this->map[i].size(); j++) {
@@ -871,12 +870,16 @@ void Game::playerTurn() {
                 char sprite_choice;
                 cout << "Avec quel champion souhaitez vous changer de position ?" << endl;
                 cin >> sprite_choice;
-                this->player->swapChamp(this->player->getChampions()[i]->getSprite(), sprite_choice);
-                invalid_syntax = false;
-
+                if (this->player->getChampions()[i]->getSprite() != sprite_choice){
+                    this->player->swapChamp(this->player->getChampions()[i]->getSprite(), sprite_choice);
+                    invalid_syntax = false;
+                }
+                else {
+                    invalid_syntax = true;
+                }
             } else if (user_choice == "4") {
 
-                cout << YELLOW << this->player->getChampions()[i]->getName() << RESET << " passe son tour de pise (lol)"
+                cout << YELLOW << this->player->getChampions()[i]->getName() << RESET << " passe son tour !"
                      << endl;
                 cout << "Appuyez sur une touche puis sur Enter pour passer au champion suivant.." << endl;
                 invalid_syntax = false;

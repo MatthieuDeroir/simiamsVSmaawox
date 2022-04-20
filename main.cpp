@@ -20,7 +20,6 @@ int main(int argc, char** argv) {
         srand(time(0));
 
         string usr_input = " ";
-        system("clear");
 
         Player *player = new Player();
 

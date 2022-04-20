@@ -701,11 +701,10 @@ Player *playerInitialization() {
     vector<Champion *> user_champs;
     string username;
 
-    system("clear");
     cout << "Veuillez saisir un" << MAGENTA << " pseudo " << RESET << ": " << endl;
     cin >> username;
     getline(cin, username);
-    system("clear");
+
     for (int i = 0; i < MAX_CHAMP; i++) {
         do  {
             cout << "Selectonner votre champion numéro " << i + 1 << " : " << endl;
