@@ -51,6 +51,8 @@ public:
     //Class Constructor
     Player(string name, int hp, int money, int mana, int mana_regen, int score, vector<Champion*> champs);
 
+    Player* playerInitialization();
+
     // Getter & Setter
     string getName();
     void setName(string name);

@@ -7,6 +7,6 @@
 
 #include "Player.h"
 
-Player* playerInitialization();
+vector<Champion *> champInitialization();
 
 #endif //SIMIAMSVSMAAWOX_DEFINES_H

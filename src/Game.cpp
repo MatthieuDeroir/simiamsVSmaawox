@@ -5,7 +5,7 @@
 #include "../include/header.h"
 #include "../include/Game.h"
 
-
+//TODO:Créer une classe boutique ?
 
 Game::Game(int w, int h, Player *player, char os) {
     this->MAP_WIDTH = w;
@@ -16,9 +16,18 @@ Game::Game(int w, int h, Player *player, char os) {
     this->round = 0;
 }
 
+//appelle la fonction system clear en fonction de l'OS de l'utilisateur pour plus de compatibilité
+void Game::clear(char os){
+    if (os == 'm'){
+        system("clear");
+    }
+    else if (os == 'w'){
+        system("cls");
+    }
+}
+
 //game menu displays
-
-
+//affichage du menu principal
 void Game::startMenu() {
     string user_input = "\0";
     clear(os);
@@ -65,6 +74,8 @@ void Game::startMenu() {
     this->init();
 }
 
+
+//affichage du menu d'aide
 void Game::helpMenu() {
     clear(os);
 
@@ -130,6 +141,8 @@ void Game::helpMenu() {
     cin >> user_input;
 }
 
+
+//affichage du meu option
 void Game::optionsMenu() {
     clear(os);
 
@@ -139,6 +152,7 @@ void Game::optionsMenu() {
     cin >> user_input;
 }
 
+//affichage de l'ecran de grame over
 bool Game::gameOverMenu() {
     string user_input;
     clear(os);
@@ -163,7 +177,7 @@ bool Game::gameOverMenu() {
 
 //main game loop functions
 
-//initialisation de la map de jeu en fonction des constante établies
+//initialisation de la map de jeu en fonction des constantes établies
 void Game::init() {
     vector<vector<int> > map(this->MAP_HEIGHT, vector<int>(this->MAP_WIDTH, 0));
     this->setMap(map);
@@ -179,12 +193,12 @@ void Game::update() {
     //spawn les enemies
     setMap(spawner(getMap(), getRound()));
     //tour du joueur
-    playerTurn(); //TODO PLAYER TURN
+    playerTurn();
     //applique les degats infligés au joueur s'il y en a
     this->player->takeDamage(count_line(getMap()[getMap().size() - 1]), this->round);
 }
 
-//fonction principal d'affichage de la map
+//fonction principale d'affichage de la map
 void Game::draw() {
     clear(os);
 
@@ -898,14 +912,6 @@ void Game::playerTurn() {
     cin >> user_choice;
 }
 
-void Game::clear(char os){
-    if (os == 'm'){
-        system("clear");
-    }
-    else if (os == 'w'){
-        system("cls");
-    }
-}
 
 
 //getters and setters

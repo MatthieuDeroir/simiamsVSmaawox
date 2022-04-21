@@ -16,6 +16,8 @@
 #include <map>
 #include <algorithm>
 
+
+//déclaration des macro de changement de couleurs dans la console
 #define RESET       "\033[0m"
 #define BLACK       "\033[30m"      /* Black */
 #define RED         "\033[31m"      /* Red */
@@ -39,15 +41,13 @@
 
 using namespace std;
 
-void print(string str);
 
-void wait();
-
-void color(char p, string color);
-
+//
 int count_vec(vector<vector<int> > vec);
 int count_square(vector<vector<int> > vec);
 int balanceManaCost(vector<vector<int> > vec);
+
+//fonction qui permet de print une chaine de caractère nb fois
 
 void multiprint(string str, int nb);
 
@@ -55,13 +55,3 @@ vector<vector<int> > rwVector(int index_multiplier, vector<vector<int> > cubic_v
 
 #endif //SIMIAMSVSMAAWOX_HEADER_H
 
-/*
- * 0 = black
- * 1 = red
- * 2 = green
- * 3 = yellow
- * 4 = dark blue
- * 5 = pink
- * 6 = light blue
- * 7 = white
- */

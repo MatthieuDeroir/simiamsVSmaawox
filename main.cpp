@@ -13,6 +13,8 @@
 int main(int argc, char** argv) {
     bool retry = true;
     char os;
+
+    //
     cout << "Windows ou Mac ? (w/m)" << endl;
     cin >> os;
 
@@ -26,8 +28,7 @@ int main(int argc, char** argv) {
         Game *game = new Game(9, 9, player, os);
 
         game->startMenu();
-        player = playerInitialization();
-        game->setPlayer(player);
+        game->setPlayer(player->playerInitialization());
         string welcome_msg = "Bienvenue sur Maawox versus Simsim : le retour du Roi de la coline d'à côté de la montagne verte";
         cout << welcome_msg << endl;
 

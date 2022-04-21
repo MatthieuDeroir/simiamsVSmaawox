@@ -4,6 +4,7 @@
 
 #include "../include/header.h"
 #include "../include/Player.h"
+#include "../include/defines.h"
 
 Player::Player(){
 
@@ -44,6 +45,36 @@ Player::Player(string name, int hp, int money, int mana, int mana_regen, int sco
     this->HP_POTION_MAX = this->max_hp;
 
     this->MANA_POTION_MAX = this->max_mana;
+}
+
+Player* Player::playerInitialization() {
+    int MAX_CHAMP = 3;
+    string user_choice = "0";
+    vector<Champion *> champs = champInitialization();
+    vector<Champion *> user_champs;
+    string username;
+
+    cout << "Veuillez saisir un" << MAGENTA << " pseudo " << RESET << ": " << endl;
+    cin >> username;
+    getline(cin, username);
+
+    for (int i = 0; i < MAX_CHAMP; i++) {
+        do  {
+            cout << "Selectonner votre champion numéro " << i + 1 << " : " << endl;
+            for (int j = 0; j < champs.size(); j++) {
+                cout << j + 1 << " - " << champs[j]->getName() << endl;
+            }
+            cin >> user_choice;
+        } while (!isdigit(user_choice[0]));
+        user_champs.push_back(champs[stoi(user_choice) - 1]);
+        champs.erase(find(champs.begin(), champs.end(), champs[stoi(user_choice) - 1]));
+        user_choice = "0";
+    }
+
+    Player *player = new Player(username, 30, 100, 100, 10, 0, user_champs);
+
+    return player;
+
 }
 
 
