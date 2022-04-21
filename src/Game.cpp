@@ -451,11 +451,12 @@ vector<vector<int> > Game::applyDamage(vector<vector<int> > map, Champion *champ
 }
 
 void Game::shop(Champion *champion) {
+    // Boutique du jeu
     string user_choice;
-    bool flag = false;
-    bool invalid_syntaxte = false;
+    bool flag = false; // Notre flag qui permet de sortir des boucles
+    bool invalid_syntaxte = false; // Erreur de syntaxte = refais certaine boucle
     while (!flag) {
-        this->draw();
+        this->draw(); // Redessine la carte
         cout << "Boutique " << this->player->getMoney() << " $imiam$" << endl << endl;
         cout << "1 - Stat" << endl;
         cout << "2 - Potions" << endl;
@@ -464,6 +465,7 @@ void Game::shop(Champion *champion) {
         cin >> user_choice;
 
         if (user_choice == "1") {
+            // Le joueur choisi d'ameliorer les stat du joueur (vie, manawox...)
             invalid_syntaxte = false;
             while (!invalid_syntaxte) {
                 this->draw();
@@ -501,8 +503,10 @@ void Game::shop(Champion *champion) {
                 }
                 cout << "4 - retour" << endl;
                 cin >> user_choice;
+                // l-458 à l-490: affichage des stats a ameliorer et leurs prix et le resultat de l'aemelioration
 
                 if (user_choice == "1") {
+                    // Le joueur veux ameliorer la max mana
                     if (this->player->getMoney() -
                         ((this->player->getMaxMana() - this->player->getManaBase()) / this->player->getMaxManaBaseUp() *
                          this->player->getMaxManaBaseCost() * 2) >= 0 &&
@@ -510,7 +514,8 @@ void Game::shop(Champion *champion) {
                         this->player->setMoney(this->player->getMoney() -
                                                ((this->player->getMaxMana() - this->player->getManaBase()) /
                                                 this->player->getMaxManaBaseUp() *
-                                                this->player->getMaxManaBaseCost() * 2));
+                                                this->player->getMaxManaBaseCost() * 2)); // set la money du joueur, calculer par le nombre de fois que le joueur à deja amelioré le bail multiplier par le prix de l'amelioration x 2
+                        // Verifi que le joueur à de l'argent et que la mana n'es pas deja au max
                         this->player->setMaxMana(this->player->getMaxMana() + this->player->getMaxManaBaseUp());
                     } else if (this->player->getMaxMana() == this->player->getManaBase() && this->player->getMoney() -
                                                                                             ((this->player->getMaxMana() -
@@ -518,14 +523,16 @@ void Game::shop(Champion *champion) {
                                                                                              this->player->getMaxManaBaseUp() *
                                                                                              this->player->getMaxManaBaseCost() *
                                                                                              2) >= 0) {
-                        this->player->setMoney(this->player->getMoney() - this->player->getMaxManaBaseCost());
+                        this->player->setMoney(this->player->getMoney() - this->player->getMaxManaBaseCost() * 2);
                         this->player->setMaxMana(this->player->getMaxMana() + this->player->getMaxManaBaseUp());
                     } else {
                         cout << RED << "$imiam$ insuffisant" << RESET << endl;
                         invalid_syntaxte = false;
+                        // Si le joueur n'as pas assez de $imiam$
                     }
 
                 } else if (user_choice == "2") {
+                    // Le joueur veu ameliorer la regeneration de mana
                     if (this->player->getMoney() -
                         ((this->player->getManaRegen() - this->player->getManaRegenBase()) /
                          this->player->getManaRegenBaseUp() * this->player->getManaRegenBaseCost() * 2) >= 0 &&
@@ -534,10 +541,11 @@ void Game::shop(Champion *champion) {
                                                ((this->player->getManaRegen() - this->player->getManaRegenBase()) /
                                                 this->player->getManaRegenBaseUp() *
                                                 this->player->getManaRegenBaseCost() * 2));
+                        // Si le joueur a assez de $imiam$
                         this->player->setManaRegen(this->player->getManaRegen() + this->player->getManaRegenBaseUp());
                     } else if (this->player->getManaRegen() == this->player->getManaRegenBase() &&
                                this->player->getMoney() >= this->player->getManaRegenBaseCost() * 2) {
-                        this->player->setMoney(this->player->getMoney() - this->player->getManaRegenBaseCost());
+                        this->player->setMoney(this->player->getMoney() - this->player->getManaRegenBaseCost() * 2);
                         this->player->setManaRegen(this->player->getManaRegen() + this->player->getManaRegenBaseUp());
                     } else {
                         cout << RED << "$imiam$ insuffisant" << RESET << endl;
@@ -546,6 +554,7 @@ void Game::shop(Champion *champion) {
 
 
                 } else if (user_choice == "3") {
+                    // Amelioration de la max HP
                     if (this->player->getMoney() -
                         ((this->player->getMaxHp() - this->player->getHpBase()) / this->player->getMaxHpBaseUp() *
                          this->player->getMaxHpBaseCost() * 2) >= 0 &&
@@ -559,7 +568,7 @@ void Game::shop(Champion *champion) {
                     } else if (this->player->getMaxHp() == this->player->getHpBase() &&
                                this->player->getMoney() >= this->player->getMaxHpBaseCost() *
                                                            2) {
-                        this->player->setMoney(this->player->getMoney() - this->player->getMaxHpBaseCost());
+                        this->player->setMoney(this->player->getMoney() - this->player->getMaxHpBaseCost() * 2);
                         this->player->setMaxHp(this->player->getMaxHp() + this->player->getMaxHpBaseUp());
                     } else {
                         cout << RED << "$imiam$ insuffisant" << RESET << endl;
@@ -573,6 +582,7 @@ void Game::shop(Champion *champion) {
                 }
             }
         } else if (user_choice == "2") {
+            // Les Potions
             invalid_syntaxte = false;
             while (!invalid_syntaxte) {
                 this->draw();
@@ -595,20 +605,20 @@ void Game::shop(Champion *champion) {
                         if (user_choice == "1") {
                             if (this->player->getMoney() >= 10) {
                                 if (this->player->getHp() < this->player->getMaxHp()) {
-                                if (this->player->getHp() - this->player->getMaxHp() >
-                                    this->player->getHpPotion10()) {
-                                    cout << this->player->getName() << " boit une potion" << this->player->getName() << " gagne "
-                                         << this->player->getHpPotion10() << " HP" << endl;
-                                    this->player->setHp(this->player->getHp() + this->player->getHpPotion10());
-                                    this->player->setMoney(this->player->getMoney() - 10);
-                                } else if (this->player->getHp() - this->player->getMaxHp() <
-                                           this->player->getHpPotion10()) {
-                                    cout << this->player->getName() << " boit une potion " << this->player->getName() << " gagne "
-                                         << this->player->getHp() - this->player->getMaxHp() << "HP" << endl;
-                                    this->player->setHp(this->player->getMaxHp());
-                                    this->player->setMoney(this->player->getMoney() - 10);
-                                }
-                            } else {
+                                    if (this->player->getHp() - this->player->getMaxHp() >
+                                        this->player->getHpPotion10()) {
+                                        cout << this->player->getName() << " boit une potion" << this->player->getName() << " gagne "
+                                             << this->player->getHpPotion10() << " HP" << endl;
+                                        this->player->setHp(this->player->getHp() + this->player->getHpPotion10());
+                                        this->player->setMoney(this->player->getMoney() - 10);
+                                    } else if (this->player->getHp() - this->player->getMaxHp() <
+                                               this->player->getHpPotion10()) {
+                                        cout << this->player->getName() << " boit une potion " << this->player->getName() << " gagne "
+                                             << this->player->getHp() - this->player->getMaxHp() << "HP" << endl;
+                                        this->player->setHp(this->player->getMaxHp());
+                                        this->player->setMoney(this->player->getMoney() - 10);
+                                    }
+                                } else {
                                     cout << RED << "$imiam$ insuffisant" << RESET << endl;
                                 }
                             }else{
@@ -688,6 +698,7 @@ void Game::shop(Champion *champion) {
                 }
             }
         } else if (user_choice == "3") {
+            // Le attaque du sort, on se sert de la fonciton upgradeSpells et draw spell pour avoir un apercu de l'amelioration
             invalid_syntaxte = false;
             while (!invalid_syntaxte) {
                 this->draw();
@@ -743,7 +754,6 @@ void Game::shop(Champion *champion) {
         }
     }
 }
-
 
 //Player implementation
 void Game::playerTurn() {
